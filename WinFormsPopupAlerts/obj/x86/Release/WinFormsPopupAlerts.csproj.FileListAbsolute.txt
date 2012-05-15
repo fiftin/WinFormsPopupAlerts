@@ -1,0 +1,9 @@
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Release\WinFormsPopupAlerts.dll.config
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Release\WinFormsPopupAlerts.dll
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Release\WinFormsPopupAlerts.pdb
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Release\WinFormsPopupAlerts.dll
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Release\WinFormsPopupAlerts.pdb
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Release\WinFormsPopupAlerts.PopupAlert.resources
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Release\GenerateResource-ResGen.read.1.tlog
+C:\Documents and Settings\Denis\мои документы\visual studio 2010\Projects\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Release\GenerateResource-ResGen.write.1.tlog

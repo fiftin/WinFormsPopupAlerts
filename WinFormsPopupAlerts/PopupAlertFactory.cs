@@ -22,11 +22,22 @@ namespace WinFormsPopupAlerts
         {
         }
 
-        public virtual PopupAlertBase CreateAlert(object[] args)
+        public virtual PopupAlert CreateAlert(object[] args)
         {
-            return new PopupAlertBase(args);
+            PopupAlert ret = new PopupAlert(args);
+            ret.HiddingDelay = DefaultHiddingDelay;
+            return ret;
         }
 
-        
+        private int hiddingDelay = DefaultHiddingDelay;
+
+        [DefaultValue(DefaultHiddingDelay)]
+        public int HiddingDelay
+        {
+            get { return hiddingDelay; }
+            set { hiddingDelay = value; }
+        }
+
+        internal const int DefaultHiddingDelay = 5000;
     }
 }

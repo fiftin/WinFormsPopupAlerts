@@ -19,9 +19,7 @@ C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\ResolveAssemblyReference.cache
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.PopupAlert.resources
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
-D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.read.1.tlog
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
-D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.write.1.tlog
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.dll
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll.config
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll

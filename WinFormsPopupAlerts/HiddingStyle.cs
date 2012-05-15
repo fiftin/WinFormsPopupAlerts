@@ -8,5 +8,6 @@ namespace WinFormsPopupAlerts
     {
         Simple,
         Fade,
+        Slide,
     }
 }

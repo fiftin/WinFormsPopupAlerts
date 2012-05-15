@@ -28,9 +28,17 @@ namespace WinFormsPopupAlerts
             {
                 if (args[2] == null)
                     throw new ArgumentNullException("args[2]", "Popup alert icon can not be null");
-                if (args[2].GetType() != typeof(ToolTipIcon))
-                    throw new ArgumentException("Popup alert icon can be ToolTipIcon only", "args[2]");
-                Icon = (TooltipAlertIcon)args[2];
+                if (args[2].GetType() == typeof(ToolTipIcon))
+                    Icon = (TooltipAlertIcon)args[2];
+                else if (args[2] is Image)
+                {
+                    Icon = TooltipAlertIcon.Custom;
+                    CustomIcon = (Image)args[2];
+                }
+                else
+                    throw new ArgumentException("Popup alert icon can be ToolTipIcon or Image", "args[2]");
+                
+                
             }
             Title = args[0].ToString();
             Text = args[1].ToString();
@@ -45,6 +53,19 @@ namespace WinFormsPopupAlerts
         private string title;
         private string text;
         private TooltipAlertIcon icon;
+        private Image customIcon;
+
+        public Image CustomIcon
+        {
+            get
+            {
+                return customIcon;
+            }
+            set
+            {
+                customIcon = value;
+            }
+        }
 
         public new virtual TooltipAlertIcon Icon
         {
@@ -141,7 +162,7 @@ namespace WinFormsPopupAlerts
             Rectangle rect = new Rectangle(0, 0, MinimumSize.Width, MinimumSize.Height);
             using (Graphics g = CreateGraphics())
             {
-                rect = Renderer.GetRect(g, Title, Text, Icon, null);
+                rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
                 Region = Renderer.GetRegion(g, rect);
                 closeButtonRect = Renderer.GetCloseButtonRect(g, rect, closeButtonState);
             }
@@ -156,8 +177,8 @@ namespace WinFormsPopupAlerts
 
         protected virtual void Draw(Graphics g)
         {
-            Rectangle rect = Renderer.GetRect(g, Title, Text, Icon, null);
-            Renderer.Draw(g, Title, Text, Icon, null);
+            Rectangle rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
+            Renderer.Draw(g, Title, Text, Icon, CustomIcon);
             Renderer.DrawCloseButton(g, rect, closeButtonState);
         }
 
@@ -229,6 +250,7 @@ namespace WinFormsPopupAlerts
             base.OnMouseMove(e);
             UpdateCloseButtonState(e);
         }
+
 
     }
 }

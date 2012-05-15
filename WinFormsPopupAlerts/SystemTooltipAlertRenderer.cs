@@ -11,139 +11,59 @@ namespace WinFormsPopupAlerts
     public class SystemTooltipAlertRenderer : TooltipAlertRenderer
     {
 
-
-        public enum RectangleCorners
-        {
-            None = 0, TopLeft = 1, TopRight = 2, BottomLeft = 4, BottomRight = 8,
-            All = TopLeft | TopRight | BottomLeft | BottomRight
-        }
-
-        public static GraphicsPath Create(int x, int y, int width, int height,
-                                          int radius, RectangleCorners corners)
-        {
-            int xw = x + width;
-            int yh = y + height;
-            int xwr = xw - radius;
-            int yhr = yh - radius;
-            int xr = x + radius;
-            int yr = y + radius;
-            int r2 = radius * 2;
-            int xwr2 = xw - r2;
-            int yhr2 = yh - r2;
-
-            GraphicsPath p = new GraphicsPath();
-            p.StartFigure();
-
-            //Top Left Corner
-            if ((RectangleCorners.TopLeft & corners) == RectangleCorners.TopLeft)
-            {
-                p.AddArc(x, y, r2, r2, 180, 90);
-            }
-            else
-            {
-                p.AddLine(x, yr, x, y);
-                p.AddLine(x, y, xr, y);
-            }
-
-            //Top Edge
-            p.AddLine(xr, y, xwr, y);
-
-            //Top Right Corner
-            if ((RectangleCorners.TopRight & corners) == RectangleCorners.TopRight)
-            {
-                p.AddArc(xwr2, y, r2, r2, 270, 90);
-            }
-            else
-            {
-                p.AddLine(xwr, y, xw, y);
-                p.AddLine(xw, y, xw, yr);
-            }
-
-            //Right Edge
-            p.AddLine(xw, yr, xw, yhr);
-
-            //Bottom Right Corner
-            if ((RectangleCorners.BottomRight & corners) == RectangleCorners.BottomRight)
-            {
-                p.AddArc(xwr2, yhr2, r2, r2, 0, 90);
-            }
-            else
-            {
-                p.AddLine(xw, yhr, xw, yh);
-                p.AddLine(xw, yh, xwr, yh);
-            }
-
-            //Bottom Edge
-            p.AddLine(xwr, yh, xr, yh);
-
-            //Bottom Left Corner
-            if ((RectangleCorners.BottomLeft & corners) == RectangleCorners.BottomLeft)
-            {
-                p.AddArc(x, yhr2, r2, r2, 90, 90);
-            }
-            else
-            {
-                p.AddLine(xr, yh, x, yh);
-                p.AddLine(x, yh, x, yhr);
-            }
-
-            //Left Edge
-            p.AddLine(x, yhr, x, yr);
-
-            p.CloseFigure();
-            return p;
-        }
-
-        public override void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Icon customIcon = null)
+        public override void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
         {
             Rectangle titleRect = GetTitleRect(dc, title, text, icon, customIcon);
             Rectangle bodyRect = GetBodyRect(dc, title, text, icon, customIcon);
             Rectangle rect = GetRect(dc, titleRect, bodyRect, icon, customIcon);
-            BufferedGraphicsContext currentContext;
-            BufferedGraphics myBuffer;
-            currentContext = BufferedGraphicsManager.Current;
-            myBuffer = currentContext.Allocate(dc, rect);
+
+            Image img = GetIcon(icon, customIcon);
+            int iconWidth = GetIconSize(icon, customIcon).Width;
 
             if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal) && IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
             {
                 VisualStyleRenderer titleRenderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.BalloonTitle.Normal);
                 VisualStyleRenderer balloonRenderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.Balloon.Normal);
-                balloonRenderer.DrawBackground(myBuffer.Graphics, rect);
-                if (icon == TooltipAlertIcon.None)
-                {
-                    titleRenderer.DrawText(myBuffer.Graphics, new Rectangle(Padding.Left, Padding.Top, rect.Width - (Padding.Left + Padding.Right), titleRect.Height),
-                        title, false, TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.VerticalCenter);
-                    Rectangle balloonTextBounds = new Rectangle(Padding.Left, Padding.Top + titleRect.Height, rect.Width - (Padding.Left + Padding.Right), rect.Height - (Padding.Top + titleRect.Height + Padding.Bottom));
-                    balloonRenderer.DrawText(myBuffer.Graphics, balloonTextBounds,
-                        text, false, TextFormatFlags.Left | TextFormatFlags.WordBreak | TextFormatFlags.VerticalCenter);
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
+                balloonRenderer.DrawBackground(dc, rect);
+
+
+                // drawing title
+                titleRenderer.DrawText(dc,
+                    new Rectangle(Padding.Left + iconWidth, Padding.Top, rect.Width - (Padding.Left + Padding.Right), titleRect.Height),
+                    title, false, TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.VerticalCenter);
+
+                // drawing text
+                Rectangle balloonTextBounds = new Rectangle(Padding.Left + iconWidth, Padding.Top + titleRect.Height, rect.Width - (Padding.Left + Padding.Right), rect.Height - (Padding.Top + titleRect.Height + Padding.Bottom));
+                balloonRenderer.DrawText(dc, balloonTextBounds,
+                    text, false, TextFormatFlags.Left | TextFormatFlags.WordBreak | TextFormatFlags.VerticalCenter);
+
+                
+
             }
             else
             {
-                myBuffer.Graphics.FillRectangle(SystemBrushes.Info, rect);
-                myBuffer.Graphics.DrawRectangle(Pens.Black, new Rectangle(0, 0, rect.Width - 1, rect.Height - 1));
-                if (icon == TooltipAlertIcon.None)
-                {
-                    myBuffer.Graphics.DrawString(title, new Font(SystemFonts.DefaultFont, FontStyle.Bold), SystemBrushes.InfoText,
-                        new PointF(Padding.Left, Padding.Top), new StringFormat(StringFormatFlags.NoWrap));
-                    myBuffer.Graphics.DrawString(text, SystemFonts.DefaultFont, SystemBrushes.InfoText,
-                        new RectangleF(Padding.Left, Padding.Top + titleRect.Height, bodyRect.Width, bodyRect.Height),
-                        new StringFormat());
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
+                dc.FillRectangle(SystemBrushes.Info, rect);
+                dc.DrawRectangle(Pens.Black, new Rectangle(0, 0, rect.Width - 1, rect.Height - 1));
+
+                dc.DrawString(title, new Font(SystemFonts.DefaultFont, FontStyle.Bold), SystemBrushes.InfoText,
+                    new PointF(Padding.Left + iconWidth, Padding.Top), new StringFormat(StringFormatFlags.NoWrap));
+                dc.DrawString(text, SystemFonts.DefaultFont, SystemBrushes.InfoText,
+                    new RectangleF(Padding.Left + iconWidth, Padding.Top + titleRect.Height, bodyRect.Width, bodyRect.Height),
+                    new StringFormat());
             }
-            myBuffer.Render();
+
+            // drawing icon
+            if (img != null)
+            {
+                dc.DrawImage(img, new Point(Padding.Left + IconPadding.Left, Padding.Top + IconPadding.Top));
+            }
         }
 
-        public override System.Drawing.Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Icon customIcon = null)
+        public override System.Drawing.Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
         {
+            if (icon != TooltipAlertIcon.None)
+            {
+            }
             Rectangle ret;
             if (text == null)
             {
@@ -152,7 +72,7 @@ namespace WinFormsPopupAlerts
             else
             {
                 ret = new Rectangle(new Point(0, 0), MaxSize);
-                ret.Width -= Padding.Horizontal;
+                ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
                 Rectangle rect;
                 if (IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
                 {
@@ -183,7 +103,31 @@ namespace WinFormsPopupAlerts
             return ret;
         }
 
-        public override System.Drawing.Rectangle GetTitleRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Icon customIcon = null)
+        private Size GetIconSize(TooltipAlertIcon icon, Image customIcon)
+        {
+            Image img = GetIcon(icon,customIcon);
+            if (img == null)
+                return new Size(0, 0);
+            else
+            {
+                return new Size(img.Size.Width + IconPadding.Horizontal, img.Height + IconPadding.Vertical);
+            }
+            
+        }
+
+        private Image GetIcon(TooltipAlertIcon icon, Image customIcon)
+        {
+            switch (icon)
+            {
+                case TooltipAlertIcon.Custom:
+                    return customIcon;
+                case TooltipAlertIcon.None:
+                default:
+                    return null;
+            }
+        }
+
+        public override System.Drawing.Rectangle GetTitleRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
         {
             Rectangle ret;
             if (title == null)
@@ -193,7 +137,7 @@ namespace WinFormsPopupAlerts
             else
             {
                 ret = new Rectangle(new Point(0, 0), MaxSize);
-                ret.Width -= Padding.Horizontal;
+                ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
 
                 Rectangle rect;
                 if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal))
@@ -224,9 +168,15 @@ namespace WinFormsPopupAlerts
             return ret;
         }
 
-        public override System.Drawing.Rectangle GetRect(Graphics dc, System.Drawing.Rectangle titleRect, System.Drawing.Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Icon customIcon = null)
+        public override System.Drawing.Rectangle GetRect(Graphics dc, System.Drawing.Rectangle titleRect, System.Drawing.Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
         {
-            return SystemTooltipRenderingHelper.GetRect(dc, MinSize, MaxSize, titleRect, bodyRect, icon, Padding);
+            Size iconSize = GetIconSize(icon, customIcon);
+            Rectangle ret = new Rectangle(0, 0, Math.Max(titleRect.Width, bodyRect.Width), titleRect.Height + bodyRect.Height);
+            ret.Width += Padding.Horizontal + iconSize.Width;
+            if (iconSize.Height > ret.Height)
+                ret.Height = iconSize.Height;
+            ret.Height += Padding.Vertical;
+            return ret;
         }
 
         public override System.Drawing.Rectangle GetCloseButtonRect(Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)

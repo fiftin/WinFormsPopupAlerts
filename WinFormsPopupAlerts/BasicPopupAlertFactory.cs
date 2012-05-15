@@ -20,7 +20,7 @@ namespace WinFormsPopupAlerts
 
         }
 
-        public override PopupAlertBase CreateAlert(object[] args)
+        public override PopupAlert CreateAlert(object[] args)
         {
             BasicPopupAlert alert = CreateAlertImpl(args);
 
@@ -61,7 +61,7 @@ namespace WinFormsPopupAlerts
 
         private HiddingStyle hiddingStyle = HiddingStyle.Fade;
         private ShowingStyle showingStyle = ShowingStyle.Fade;
-        private int hiddingDelay = 5000;
+        
         private int roundedCornerRadius = 5;
         private int showingDuration = 300;
         private int hiddingDuration = 300;
@@ -111,12 +111,6 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        [DefaultValue(5000)]
-        public int HiddingDelay
-        {
-            get { return hiddingDelay; }
-            set { hiddingDelay = value; }
-        }
 
         [DefaultValue(ShowingStyle.Fade)]
         public ShowingStyle ShowingStyle

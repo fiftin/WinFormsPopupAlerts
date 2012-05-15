@@ -10,6 +10,42 @@ namespace WinFormsPopupAlerts
 {
     public class PopupAlertManager : Component
     {
+        private class HiddenAlertCollection
+        {
+
+            public const int MaxCount = 50;
+
+            public void Add(PopupAlert alert)
+            {
+                if (items.Count > MaxCount)
+                {
+                    PopupAlert first = items.First.Value;
+                    first.Invoke(new CloseAlertDelegate(CloseAlert), first);
+                    first.Close();
+                    items.RemoveFirst();
+                }
+                items.AddLast(alert);
+            }
+
+            private delegate void CloseAlertDelegate(object obj);
+
+            private static void CloseAlert(object obj)
+            {
+                PopupAlert alert = (PopupAlert)obj;
+                if (!alert.IsDisposed)
+                {
+                    alert.Close();
+                }
+            }
+
+            public bool Contains(PopupAlert alert)
+            {
+                return items.Contains(alert);
+            }
+
+            LinkedList<PopupAlert> items = new LinkedList<PopupAlert>();
+        }
+
 
         public PopupAlertManager()
         {
@@ -58,17 +94,33 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        public PopupAlertBase Alert(params object[] args)
+        public PopupAlert Alert(params object[] args)
         {
-            PopupAlertBase alert = AlertFactory.CreateAlert(args);
+            PopupAlert alert = AlertFactory.CreateAlert(args);
 
             if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Simple)
             {
                 int vOffset = alert.Height + VGap;
-                foreach (PopupAlertBase x in alerts)
+                switch (AlertAlignment)
                 {
-                    x.Top -= vOffset;
+                    case PopupAlertAlignment.BottomRight:
+                    case PopupAlertAlignment.BottomLeft:
+                        foreach (PopupAlert x in alerts)
+                        {
+                            x.Top -= vOffset;
+                        }
+                        break;
+                    case PopupAlertAlignment.TopLeft:
+                    case PopupAlertAlignment.TopRight:
+                        foreach (PopupAlert x in alerts)
+                        {
+                            x.Top += vOffset;
+                        }
+                        break;
                 }
+
+
+
                 PushAlert(alert);
                 ShowAlertNormal(alert);
             }
@@ -84,20 +136,16 @@ namespace WinFormsPopupAlerts
         private bool completeForword = false;
         internal delegate void Proc(IAsyncResult prevAsyncRes);
 
-        private void ShowAlertSlide(PopupAlertBase alert)
+        private void ShowAlertSlide(PopupAlert alert)
         {
             
             Proc movingUp = delegate(IAsyncResult prevAsyncRes)
             {
 
-                //lock (movingUpLocker)
-                //{
                 if (prevAsyncRes != null && !prevAsyncRes.IsCompleted)
                 {
-                    //completeForword = true;
                     prevAsyncRes.AsyncWaitHandle.WaitOne();
                 }
-                //}
 
                 Rectangle rect = SafeNativeMethods.GetWorkArea();
                 ContainerControl.Invoke(new MethodInvoker(delegate()
@@ -111,11 +159,11 @@ namespace WinFormsPopupAlerts
                 int currentOffset = 0;
                 System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                 sw.Start();
-                float v = vOffset / 300f;
+                float v = vOffset / (float)PopupDuration;
                 
                 for (int i = 0; i < alerts.Count; i++)
                 {
-                    PopupAlertBase x = alerts[i];
+                    PopupAlert x = alerts[i];
                     x.Tag1 = x.Top;
                 }
                  
@@ -126,7 +174,7 @@ namespace WinFormsPopupAlerts
                         int currentTime = (int)sw.ElapsedMilliseconds;
                         currentOffset = (int)(currentTime * v);
 
-                        PopupAlertBase x = alerts[i];
+                        PopupAlert x = alerts[i];
                         x.Invoke(new MethodInvoker(delegate()
                         {
                             if (x.Tag1 == null)
@@ -137,50 +185,52 @@ namespace WinFormsPopupAlerts
                     System.Threading.Thread.Sleep(1);
                 }
 
-                /*
-                if (completeForword)
-                {
-                    for (int i = 0; i < alerts.Count; i++)
-                    {
-                        PopupAlert x = alerts[i];
-                        x.Invoke(new MethodInvoker(delegate()
-                        {
-                            x.Top -= vOffset - currentOffset;
-                        }));
-                    }
-
-                    completeForword = false;
-                }
-                 */
-
                 alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
             };
 
-            //lock (movingUpLocker)
-            //{
             movingUpAsyncResult = movingUp.BeginInvoke(movingUpAsyncResult, null, null);
-            //}
         }
 
-        List<PopupAlertBase> hiddenAlerts = new List<PopupAlertBase>();
+        HiddenAlertCollection hiddenAlerts = new HiddenAlertCollection();
 
 
-        public void ShowAlertNormal(PopupAlertBase alert)
+        public void ShowAlertNormal(PopupAlert alert)
         {
             Rectangle rect = SafeNativeMethods.GetWorkArea();
-            alert.Show(rect.Bottom - (alert.Height + VGap), rect.Right - (alert.Width + HGap));
+            alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
+            switch (AlertAlignment)
+            {
+                case PopupAlertAlignment.BottomRight:
+                    alert.Show(rect.Bottom - (alert.Height + VGap), rect.Right - (alert.Width + HGap));
+                    break;
+                case PopupAlertAlignment.BottomLeft:
+                    alert.Show(rect.Bottom - (alert.Height + VGap), HGap);
+                    break;
+                case PopupAlertAlignment.TopLeft:
+                    alert.Show(VGap, HGap);
+                    break;
+                case PopupAlertAlignment.TopRight:
+                    alert.Show(VGap, rect.Right - (alert.Width + HGap));
+                    break;
+            }
         }
 
-        private void PushAlert(PopupAlertBase alert)
+        private void PushAlert(PopupAlert alert)
         {
             if (alerts.Count >= AlertsMaxCount)
             {
                 for (int i = 0; i < alerts.Count - AlertsMaxCount + 1; i++)
                 {
-                    PopupAlertBase firstAlert = alerts[i];
+                    PopupAlert firstAlert = alerts[i];
                     if (!hiddenAlerts.Contains(firstAlert))
                     {
-                        firstAlert.Invoke(new MethodInvoker(delegate() { firstAlert.Hide(delegate(PopupAlertBase al) { alerts.Remove(al); }); }));
+                        firstAlert.Invoke(new MethodInvoker(delegate()
+                        {
+                            firstAlert.Hide(delegate(PopupAlert al)
+                            {
+                                alerts.Remove(al);
+                            });
+                        }));
                         hiddenAlerts.Add(firstAlert);
                     }
                 }
@@ -190,7 +240,7 @@ namespace WinFormsPopupAlerts
 
         private PopupAlertFactory alertFactory;
 
-        private List<PopupAlertBase> alerts = new List<PopupAlertBase>();
+        private List<PopupAlert> alerts = new List<PopupAlert>();
 
         public PopupAlertFactory AlertFactory
         {
@@ -199,38 +249,63 @@ namespace WinFormsPopupAlerts
         }
 
 
-        private int alertsMaxCount = 5;
-        private int vGap = 5;
-        private int hGap = 5;
+        private int alertsMaxCount = DefaultAlertsMaxCount;
+        private int vGap = DefaultVGap;
+        private int hGap = DefaultHGap;
 
-        [DefaultValue(5)]
+        [DefaultValue(DefaultHGap)]
         public int HGap
         {
             get { return hGap; }
             set { hGap = value; }
         }
 
-        [DefaultValue(5)]
+        [DefaultValue(DefaultVGap)]
         public int VGap
         {
             get { return vGap; }
             set { vGap = value; }
         }
 
-        [DefaultValue(5)]
+        [DefaultValue(DefaultAlertsMaxCount)]
         public int AlertsMaxCount
         {
             get { return alertsMaxCount; }
             set { alertsMaxCount = value; }
         }
 
-        private PopupStyle popupStyle = PopupStyle.Simple;
+        private PopupStyle popupStyle = DefaultPopupStyle;
 
-        [DefaultValue(PopupStyle.Simple)]
+        [DefaultValue(DefaultPopupStyle)]
         public PopupStyle PopupStyle
         {
             get { return popupStyle; }
             set { popupStyle = value; }
         }
+
+
+        private int popupDuration = DefualtPopupDuration;
+
+        [DefaultValue(DefualtPopupDuration)]
+        public int PopupDuration
+        {
+            get { return popupDuration; }
+            set { popupDuration = value; }
+        }
+        private PopupAlertAlignment alertAlignment = DefaultAlertAlignment;
+
+        [DefaultValue(DefaultAlertAlignment)]
+        public PopupAlertAlignment AlertAlignment
+        {
+            get { return alertAlignment; }
+            set { alertAlignment = value; }
+        }
+
+        private const int DefualtPopupDuration = 300;
+        private const int DefaultVGap = 5;
+        private const int DefaultHGap = 5;
+        private const int DefaultAlertsMaxCount = 10;
+        private const PopupStyle DefaultPopupStyle = PopupStyle.Simple;
+        private const PopupAlertAlignment DefaultAlertAlignment = PopupAlertAlignment.BottomRight;
     }
 }

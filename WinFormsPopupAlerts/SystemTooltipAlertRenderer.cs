@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Drawing;
 using System.Windows.Forms.VisualStyles;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
+using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
+    [System.ComponentModel.ToolboxItem(false)]
     public class SystemTooltipAlertRenderer : TooltipAlertRenderer
     {
 
-        public override void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
+        public override void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
         {
             Rectangle titleRect = GetTitleRect(dc, title, text, icon, customIcon);
             Rectangle bodyRect = GetBodyRect(dc, title, text, icon, customIcon);
@@ -59,7 +60,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        public override System.Drawing.Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
+        public override Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
         {
             if (icon != TooltipAlertIcon.None)
             {
@@ -127,7 +128,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        public override System.Drawing.Rectangle GetTitleRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
+        public override Rectangle GetTitleRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
         {
             Rectangle ret;
             if (title == null)
@@ -148,7 +149,7 @@ namespace WinFormsPopupAlerts
                 else
                 {
                     SizeF size = dc.MeasureString(title, new Font(SystemFonts.DefaultFont, FontStyle.Bold), ret.Size.Width,
-                        new StringFormat(System.Drawing.StringFormatFlags.NoWrap));
+                        new StringFormat(StringFormatFlags.NoWrap));
                     rect = new Rectangle(new Point(0, 0), Size.Ceiling(size));
                 }
 
@@ -168,7 +169,7 @@ namespace WinFormsPopupAlerts
             return ret;
         }
 
-        public override System.Drawing.Rectangle GetRect(Graphics dc, System.Drawing.Rectangle titleRect, System.Drawing.Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
+        public override Rectangle GetRect(Graphics dc, Rectangle titleRect, Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
         {
             Size iconSize = GetIconSize(icon, customIcon);
             Rectangle ret = new Rectangle(0, 0, Math.Max(titleRect.Width, bodyRect.Width), titleRect.Height + bodyRect.Height);
@@ -179,7 +180,7 @@ namespace WinFormsPopupAlerts
             return ret;
         }
 
-        public override System.Drawing.Rectangle GetCloseButtonRect(Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
+        public override Rectangle GetCloseButtonRect(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState)
         {
             VisualStyleElement btn = GetCloseButtonVS(buttonState);
             Size btnSize;
@@ -197,7 +198,7 @@ namespace WinFormsPopupAlerts
             return btnRect;
         }
 
-        public override void DrawCloseButton(Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
+        public override void DrawCloseButton(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState)
         {
             VisualStyleElement btn = GetCloseButtonVS(buttonState);
             Rectangle btnRect = GetCloseButtonRect(dc, rect, buttonState);
@@ -239,7 +240,7 @@ namespace WinFormsPopupAlerts
             return Application.RenderWithVisualStyles && SafeNativeMethods.IsThemePartDefined(element.ClassName, element.Part, element.State);
         }
 
-        public override System.Drawing.Region GetRegion(Graphics dc, System.Drawing.Rectangle rect)
+        public override Region GetRegion(Graphics dc, Rectangle rect)
         {
             Region ret;
             if (IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))

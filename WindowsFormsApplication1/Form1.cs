@@ -28,6 +28,9 @@ namespace WindowsFormsApplication1
                 
             //    SystemTooltipRenderingHelper.DrawCloseButton(g, new Rectangle(10, 10, 100, 100), new System.Windows.Forms.Padding(0, 0, 0, 0), TooltipCloseButtonState.Hot);
             //}
+            //PopupAlert al = new TooltipAlert();
+            //((TopFormBase)al).Show();
+
             popupAlertManager1.Alert("Informationon", "vvvvvvvvvvvvvHello World!!! Hello World!!! sdfgsdfgsdfg dsg dsfgsdfg sdfg", ToolTipIcon.None);
         }
 
@@ -41,7 +44,9 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            toolTip1.Show("Hllo", this);
+            TopFormBase f = new TopFormBase();
+            f.Show();
+            //toolTip1.Show("Hllo", this);
             //Region = SafeNativeMethods.GetRoundRectRegion(0, 0, Width, Height, 20, 20);
         }
     }

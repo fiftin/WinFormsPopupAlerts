@@ -25,8 +25,6 @@ D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.pdb
 D:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.pdb
-C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.read.1.tlog
-C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.write.1.tlog
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll.config
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.pdb
@@ -38,3 +36,4 @@ C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupA
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.write.1.tlog
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.dll
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.pdb
+C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.Properties.Resources.resources

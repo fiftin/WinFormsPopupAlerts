@@ -37,6 +37,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.popupAlertManager1 = new WinFormsPopupAlerts.PopupAlertManager(this.components);
             this.tooltipAlertFactory1 = new WinFormsPopupAlerts.TooltipAlertFactory(this.components);
+            this.popupAlertManager2 = new WinFormsPopupAlerts.PopupAlertManager(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -86,6 +87,7 @@
             this.popupAlertManager1.AlertFactory = this.tooltipAlertFactory1;
             this.popupAlertManager1.AlertsMaxCount = 12;
             this.popupAlertManager1.ContainerControl = this;
+            this.popupAlertManager1.PopupStyle = WinFormsPopupAlerts.PopupStyle.Slide;
             // 
             // tooltipAlertFactory1
             // 
@@ -93,6 +95,11 @@
             this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(500, 300);
             this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(150, 0);
             this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(5);
+            // 
+            // popupAlertManager2
+            // 
+            this.popupAlertManager2.AlertFactory = null;
+            this.popupAlertManager2.ContainerControl = this;
             // 
             // Form1
             // 
@@ -117,6 +124,7 @@
         private WinFormsPopupAlerts.TooltipAlertFactory tooltipAlertFactory1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ToolTip toolTip1;
+        private WinFormsPopupAlerts.PopupAlertManager popupAlertManager2;
     }
 }
 

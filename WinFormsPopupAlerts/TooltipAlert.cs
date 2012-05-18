@@ -6,7 +6,8 @@ using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
-    public class TooltipAlert : BasicPopupAlert
+    [System.ComponentModel.ToolboxItem(false)]
+    public class TooltipAlert : PopupAlert
     {
         public TooltipAlert()
         {
@@ -154,17 +155,23 @@ namespace WinFormsPopupAlerts
 
         TooltipCloseButtonState closeButtonState;
 
+
         protected virtual void ResetRegion()
         {
+            //return;
+
             Renderer.MaxSize = MaximumSize;
             Renderer.MinSize = MinimumSize;
             Renderer.Padding = Padding;
             Rectangle rect = new Rectangle(0, 0, MinimumSize.Width, MinimumSize.Height);
-            using (Graphics g = CreateGraphics())
+            using (Bitmap tempBitmap = new Bitmap(100, 100))
             {
-                rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
-                Region = Renderer.GetRegion(g, rect);
-                closeButtonRect = Renderer.GetCloseButtonRect(g, rect, closeButtonState);
+                using (Graphics g = Graphics.FromImage(tempBitmap))
+                {
+                    rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
+                    Region = Renderer.GetRegion(g, rect);
+                    closeButtonRect = Renderer.GetCloseButtonRect(g, rect, closeButtonState);
+                }
             }
             Size = rect.Size;
         }

@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
-    public class TooltipAlertFactory : BasicPopupAlertFactory
+    [ToolboxBitmapAttribute(@"C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\TooltipAlertFactory.bmp")]
+    [ToolboxItem(true)]
+    public class TooltipAlertFactory : PopupAlertFactory
     {
         public TooltipAlertFactory()
         {
@@ -18,7 +21,7 @@ namespace WinFormsPopupAlerts
 
         }
 
-        protected override BasicPopupAlert CreateAlertImpl(object[] args)
+        protected override PopupAlert CreateAlertImpl(object[] args)
         {
             TooltipAlert alert = new TooltipAlert(args);
             switch (AlertStyle)

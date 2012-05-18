@@ -8,6 +8,7 @@ using System.ComponentModel.Design;
 
 namespace WinFormsPopupAlerts
 {
+    [ToolboxBitmapAttribute(@"C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\PopupAlertManager.bmp")]
     public class PopupAlertManager : Component
     {
         private class HiddenAlertCollection
@@ -185,7 +186,7 @@ namespace WinFormsPopupAlerts
                     System.Threading.Thread.Sleep(1);
                 }
 
-                alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
+                //alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
             };
 
             movingUpAsyncResult = movingUp.BeginInvoke(movingUpAsyncResult, null, null);
@@ -197,7 +198,7 @@ namespace WinFormsPopupAlerts
         public void ShowAlertNormal(PopupAlert alert)
         {
             Rectangle rect = SafeNativeMethods.GetWorkArea();
-            alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
+            //alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
             switch (AlertAlignment)
             {
                 case PopupAlertAlignment.BottomRight:

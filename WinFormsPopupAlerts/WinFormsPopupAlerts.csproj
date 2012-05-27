@@ -38,6 +38,17 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CornerRadiusConverter.cs" />
+    <Compile Include="CornerRadiusEditor.cs" />
+    <Compile Include="CornerRadiusEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CornerRadiusEditorControl.Designer.cs">
+      <DependentUpon>CornerRadiusEditorControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomTooltipAlertRenderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PopupAlertAlignment.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -92,6 +103,9 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="CornerRadiusEditorControl.resx">
+      <DependentUpon>CornerRadiusEditorControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PopupAlert.resx">
       <DependentUpon>PopupAlert.cs</DependentUpon>
       <SubType>Designer</SubType>

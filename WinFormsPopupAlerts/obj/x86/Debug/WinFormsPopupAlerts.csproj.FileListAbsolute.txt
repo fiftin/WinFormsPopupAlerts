@@ -37,3 +37,6 @@ C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupA
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.dll
 C:\Documents and Settings\Denis\Мои документы\Dropbox\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.pdb
 C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.Properties.Resources.resources
+C:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.read.1.tlog
+C:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.write.1.tlog
+C:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.CornerRadiusEditorControl.resources

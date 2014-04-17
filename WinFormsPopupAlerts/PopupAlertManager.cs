@@ -8,7 +8,7 @@ using System.ComponentModel.Design;
 
 namespace WinFormsPopupAlerts
 {
-    [ToolboxBitmapAttribute(@"C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\PopupAlertManager.bmp")]
+    [ToolboxBitmapAttribute(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\PopupAlertManager.bmp")]
     public class PopupAlertManager : Component
     {
         private class HiddenAlertCollection
@@ -98,7 +98,6 @@ namespace WinFormsPopupAlerts
         public PopupAlert Alert(params object[] args)
         {
             PopupAlert alert = AlertFactory.CreateAlert(args);
-
             if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Simple)
             {
                 int vOffset = alert.Height + VGap;
@@ -119,9 +118,6 @@ namespace WinFormsPopupAlerts
                         }
                         break;
                 }
-
-
-
                 PushAlert(alert);
                 ShowAlertNormal(alert);
             }
@@ -139,10 +135,8 @@ namespace WinFormsPopupAlerts
 
         private void ShowAlertSlide(PopupAlert alert)
         {
-            
             Proc movingUp = delegate(IAsyncResult prevAsyncRes)
             {
-
                 if (prevAsyncRes != null && !prevAsyncRes.IsCompleted)
                 {
                     prevAsyncRes.AsyncWaitHandle.WaitOne();

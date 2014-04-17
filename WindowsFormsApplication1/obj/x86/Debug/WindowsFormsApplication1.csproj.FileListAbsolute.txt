@@ -38,3 +38,16 @@ D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResour
 D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.write.1.tlog
 C:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.read.1.tlog
 C:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.write.1.tlog
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\WinFormsPopupAlerts.dll
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\WinFormsPopupAlerts.pdb
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.exe
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.resx
+E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.Designer.cs

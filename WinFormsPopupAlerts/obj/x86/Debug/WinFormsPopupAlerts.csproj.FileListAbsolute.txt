@@ -40,3 +40,15 @@ C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts
 C:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.read.1.tlog
 C:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\ResGen.write.1.tlog
 C:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.CornerRadiusEditorControl.resources
+E:\src\winformspopupalerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll.config
+E:\src\winformspopupalerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll
+E:\src\winformspopupalerts\WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.pdb
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.CornerRadiusEditorControl.resources
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.PopupAlert.resources
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.Properties.Resources.resources
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.csproj.GenerateResource.Cache
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.dll
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.pdb
+E:\src\winformspopupalerts\WinFormsPopupAlerts\bin\Debug\Properties\Resources.resx
+E:\src\winformspopupalerts\WinFormsPopupAlerts\bin\Debug\Properties\Resources.Designer.cs
+E:\src\winformspopupalerts\WinFormsPopupAlerts\obj\x86\Debug\WinFormsPopupAlerts.csprojResolveAssemblyReference.cache

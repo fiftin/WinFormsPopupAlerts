@@ -24,7 +24,6 @@ namespace WinFormsPopupAlerts
                 edSvc.DropDownControl(control);
                 
             }
-            System.Windows.Forms.MessageBox.Show(value.GetType().Name);
             return value;
         }
     }

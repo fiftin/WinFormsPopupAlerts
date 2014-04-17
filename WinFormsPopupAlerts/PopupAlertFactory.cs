@@ -7,6 +7,7 @@ using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
+    //[ToolboxBitmapAttribute(typeof(PopupAlertFactory), @"PopupAlertFactory.bmp")]
     [System.ComponentModel.ToolboxItem(false)]
     public class PopupAlertFactory : Component
     {

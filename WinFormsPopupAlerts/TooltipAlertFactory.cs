@@ -3,22 +3,32 @@ using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
 using System.Drawing;
+using WinFormsPopupAlerts.Properties;
 
 namespace WinFormsPopupAlerts
 {
-    [ToolboxBitmapAttribute(@"C:\src\WinFormsPopupAlerts\WinFormsPopupAlerts\TooltipAlertFactory.bmp")]
+    internal class resfinder { }
+    [ToolboxBitmap(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\TooltipAlertFactory.bmp")]
     [ToolboxItem(true)]
     public class TooltipAlertFactory : PopupAlertFactory
     {
         public TooltipAlertFactory()
         {
 
+            string[] sa = this.GetType().Assembly.GetManifestResourceNames();
+
+            foreach (string s in sa)
+                System.Diagnostics.Trace.WriteLine(s);
         }
 
         public TooltipAlertFactory(System.ComponentModel.IContainer container)
             : base(container)
         {
 
+            string[] sa = this.GetType().Assembly.GetManifestResourceNames();
+
+            foreach (string s in sa)
+                System.Diagnostics.Trace.WriteLine(s);
         }
 
         protected override PopupAlert CreateAlertImpl(object[] args)

@@ -46,8 +46,9 @@ namespace WinFormsPopupAlerts
             get { return bottomLeft; }
             set { bottomLeft = value; }
         }
-	} 
+	}
 
+    [ToolboxBitmapAttribute(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\CustomTooltipAlertRenderer.bmp")]
     public class CustomTooltipAlertRenderer : TooltipAlertRenderer
     {
         public override void Draw(System.Drawing.Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)

@@ -98,33 +98,22 @@ namespace WinFormsPopupAlerts
         public PopupAlert Alert(params object[] args)
         {
             PopupAlert alert = AlertFactory.CreateAlert(args);
-            //if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Simple)
-            //{
             int vOffset = alert.Height + VGap;
             switch (AlertAlignment)
             {
                 case PopupAlertAlignment.BottomRight:
                 case PopupAlertAlignment.BottomLeft:
-                    foreach (PopupAlert x in alerts)
-                    {
+                    foreach (PopupAlert x in alerts.ToArray())
                         x.Top -= vOffset;
-                    }
                     break;
                 case PopupAlertAlignment.TopLeft:
                 case PopupAlertAlignment.TopRight:
-                    foreach (PopupAlert x in alerts)
-                    {
+                    foreach (PopupAlert x in alerts.ToArray())
                         x.Top += vOffset;
-                    }
                     break;
             }
             PushAlert(alert);
             ShowAlertNormal(alert);
-            //}
-            //else if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Slide)
-            //{
-            //    ShowAlertSlide(alert);
-            //}
             return alert;
         }
 
@@ -132,67 +121,11 @@ namespace WinFormsPopupAlerts
         private IAsyncResult movingUpAsyncResult = null;
         private bool completeForword = false;
         internal delegate void Proc(IAsyncResult prevAsyncRes);
-
-        private void ShowAlertSlide(PopupAlert alert)
-        {
-            Proc movingUp = delegate(IAsyncResult prevAsyncRes)
-            {
-                if (prevAsyncRes != null && !prevAsyncRes.IsCompleted)
-                {
-                    prevAsyncRes.AsyncWaitHandle.WaitOne();
-                }
-
-                Rectangle rect = SafeNativeMethods.GetWorkArea();
-                ContainerControl.Invoke(new MethodInvoker(delegate()
-                {
-                    alert.Show(rect.Bottom, rect.Right - (alert.Width + HGap));
-                }));
-                
-                int vOffset = alert.Height + VGap;
-                PushAlert(alert);
-
-                int currentOffset = 0;
-                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
-                sw.Start();
-                float v = vOffset / (float)PopupDuration;
-                
-                for (int i = 0; i < alerts.Count; i++)
-                {
-                    PopupAlert x = alerts[i];
-                    x.Tag1 = x.Top;
-                }
-                 
-                while (currentOffset < vOffset && !completeForword)
-                {
-                    for (int i = 0; i < alerts.Count; i++)
-                    {
-                        int currentTime = (int)sw.ElapsedMilliseconds;
-                        currentOffset = (int)(currentTime * v);
-
-                        PopupAlert x = alerts[i];
-                        x.Invoke(new MethodInvoker(delegate()
-                        {
-                            if (x.Tag1 == null)
-                                x.Tag1 = x.Top;
-                            x.Top = ((int)x.Tag1) - currentOffset;
-                        }));
-                    }
-                    System.Threading.Thread.Sleep(1);
-                }
-
-                //alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
-            };
-
-            movingUpAsyncResult = movingUp.BeginInvoke(movingUpAsyncResult, null, null);
-        }
-
         HiddenAlertCollection hiddenAlerts = new HiddenAlertCollection();
-
 
         public void ShowAlertNormal(PopupAlert alert)
         {
             Rectangle rect = SafeNativeMethods.GetWorkArea();
-            //alert.Invoke(new MethodInvoker(delegate() { alert.TopMost = true; }));
             switch (AlertAlignment)
             {
                 case PopupAlertAlignment.BottomRight:
@@ -269,16 +202,6 @@ namespace WinFormsPopupAlerts
             set { alertsMaxCount = value; }
         }
 
-        //private PopupStyle popupStyle = DefaultPopupStyle;
-        //
-        //[DefaultValue(DefaultPopupStyle)]
-        //public PopupStyle PopupStyle
-        //{
-        //    get { return popupStyle; }
-        //    set { popupStyle = value; }
-        //}
-
-
         private int popupDuration = DefualtPopupDuration;
 
         [DefaultValue(DefualtPopupDuration)]
@@ -300,7 +223,6 @@ namespace WinFormsPopupAlerts
         private const int DefaultVGap = 5;
         private const int DefaultHGap = 5;
         private const int DefaultAlertsMaxCount = 10;
-        //private const PopupStyle DefaultPopupStyle = PopupStyle.Simple;
         private const PopupAlertAlignment DefaultAlertAlignment = PopupAlertAlignment.BottomRight;
     }
 }

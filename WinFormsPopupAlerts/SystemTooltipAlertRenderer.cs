@@ -11,65 +11,47 @@ namespace WinFormsPopupAlerts
     [System.ComponentModel.ToolboxItem(false)]
     public class SystemTooltipAlertRenderer : TooltipAlertRenderer
     {
-
         public override void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
         {
             Rectangle titleRect = GetTitleRect(dc, title, text, icon, customIcon);
             Rectangle bodyRect = GetBodyRect(dc, title, text, icon, customIcon);
             Rectangle rect = GetRect(dc, titleRect, bodyRect, icon, customIcon);
-
             Image img = GetIcon(icon, customIcon);
             int iconWidth = GetIconSize(icon, customIcon).Width;
-
             if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal) && IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
             {
                 VisualStyleRenderer titleRenderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.BalloonTitle.Normal);
                 VisualStyleRenderer balloonRenderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.Balloon.Normal);
                 balloonRenderer.DrawBackground(dc, rect);
-
-
                 // drawing title
                 titleRenderer.DrawText(dc,
-                    new Rectangle(Padding.Left + iconWidth, Padding.Top, rect.Width - (Padding.Left + Padding.Right), titleRect.Height),
+                    new Rectangle(Padding.Left + iconWidth, Padding.Top, rect.Width - iconWidth - (Padding.Left + Padding.Right), titleRect.Height),
                     title, false, TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.VerticalCenter);
-
                 // drawing text
-                Rectangle balloonTextBounds = new Rectangle(Padding.Left + iconWidth, Padding.Top + titleRect.Height, rect.Width - (Padding.Left + Padding.Right), rect.Height - (Padding.Top + titleRect.Height + Padding.Bottom));
+                Rectangle balloonTextBounds = new Rectangle(Padding.Left + iconWidth, Padding.Top + titleRect.Height, rect.Width - iconWidth - (Padding.Left + Padding.Right), rect.Height - (Padding.Top + titleRect.Height + Padding.Bottom));
                 balloonRenderer.DrawText(dc, balloonTextBounds,
                     text, false, TextFormatFlags.Left | TextFormatFlags.WordBreak | TextFormatFlags.VerticalCenter);
-
-                
-
             }
             else
             {
                 dc.FillRectangle(SystemBrushes.Info, rect);
                 dc.DrawRectangle(Pens.Black, new Rectangle(0, 0, rect.Width - 1, rect.Height - 1));
-
                 dc.DrawString(title, new Font(SystemFonts.DefaultFont, FontStyle.Bold), SystemBrushes.InfoText,
                     new PointF(Padding.Left + iconWidth, Padding.Top), new StringFormat(StringFormatFlags.NoWrap));
                 dc.DrawString(text, SystemFonts.DefaultFont, SystemBrushes.InfoText,
                     new RectangleF(Padding.Left + iconWidth, Padding.Top + titleRect.Height, bodyRect.Width, bodyRect.Height),
                     new StringFormat());
             }
-
             // drawing icon
             if (img != null)
-            {
-                dc.DrawImage(img, new Point(Padding.Left + IconPadding.Left, Padding.Top + IconPadding.Top));
-            }
+                dc.DrawImage(img, new Point(Padding.Left + IconPadding.Left, Padding.Top + (titleRect.Height + bodyRect.Height) / 2 - (img.Height + IconPadding.Vertical) / 2));
         }
 
         public override Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
         {
-            if (icon != TooltipAlertIcon.None)
-            {
-            }
             Rectangle ret;
             if (text == null)
-            {
                 ret = new Rectangle(new Point(0, 0), MinSize);
-            }
             else
             {
                 ret = new Rectangle(new Point(0, 0), MaxSize);
@@ -85,7 +67,6 @@ namespace WinFormsPopupAlerts
                     SizeF size = dc.MeasureString(text, SystemFonts.DefaultFont, ret.Size.Width,
                         new StringFormat());
                     rect = new Rectangle(new Point(0, 0), Size.Ceiling(size));
-
                 }
 
                 if (rect.Width + Padding.Horizontal > MaxSize.Width)
@@ -99,7 +80,6 @@ namespace WinFormsPopupAlerts
                     ret.Height = MaxSize.Height;
                 else
                     ret.Height = rect.Height;
-
             }
             return ret;
         }
@@ -110,10 +90,7 @@ namespace WinFormsPopupAlerts
             if (img == null)
                 return new Size(0, 0);
             else
-            {
                 return new Size(img.Size.Width + IconPadding.Horizontal, img.Height + IconPadding.Vertical);
-            }
-            
         }
 
         private Image GetIcon(TooltipAlertIcon icon, Image customIcon)
@@ -132,14 +109,11 @@ namespace WinFormsPopupAlerts
         {
             Rectangle ret;
             if (title == null)
-            {
                 ret = new Rectangle(new Point(0, 0), MinSize);
-            }
             else
             {
                 ret = new Rectangle(new Point(0, 0), MaxSize);
                 ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
-
                 Rectangle rect;
                 if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal))
                 {
@@ -190,9 +164,7 @@ namespace WinFormsPopupAlerts
                 btnSize = renderer.GetPartSize(dc, ThemeSizeType.True);
             }
             else
-            {
                 btnSize = new Size(10, 10);
-            }
             Point btnPos = new Point(rect.Right - Padding.Right - btnSize.Width, rect.Top + Padding.Top);
             Rectangle btnRect = new Rectangle(btnPos, btnSize);
             return btnRect;
@@ -249,12 +221,7 @@ namespace WinFormsPopupAlerts
                 ret = renderer.GetBackgroundRegion(dc, rect);
             }
             else
-            {
                 ret = new Region(rect);
-                //var path = Create(0, 0, rect.Width, rect.Height, 10, RectangleCorners.All);
-                //ret = new Region(path);
-                //ret = WindowsNative.GetRoundRectRegion(0, 0, rect.Width, rect.Height, 20, 20);
-            }
             return ret;
         }
     }

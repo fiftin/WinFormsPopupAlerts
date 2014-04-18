@@ -15,22 +15,49 @@ namespace WinFormsPopupAlerts
             ResetRegion();
         }
 
+        private static Bitmap ErrorIcon = SystemIcons.Error.ToBitmap();
+        private static Bitmap WarningIcon = SystemIcons.Warning.ToBitmap();
+        private static Bitmap InformationIcon = SystemIcons.Information.ToBitmap();
+
+        private static Image GetSystemIcon(ToolTipIcon toolTipIcon)
+        {
+            switch (toolTipIcon)
+            {
+                case ToolTipIcon.Error:
+                    return ErrorIcon;
+                case ToolTipIcon.Info:
+                    return InformationIcon;
+                case ToolTipIcon.Warning:
+                    return WarningIcon;
+            }
+            return null;
+        }
+
         public TooltipAlert(object[] args)
             : base(args)
         {
             InitializeComponent();
             if (args.Length < 2 || args.Length > 3)
                 throw new ArgumentException("2 or 3 arguments required", "args");
-            if (args[0] == null)
-                throw new ArgumentNullException("args[0]", "Popup alert title can not be null");
+            //if (args[0] == null)
+            //    throw new ArgumentNullException("args[0]", "Popup alert title can not be null");
             if (args[1] == null)
                 throw new ArgumentNullException("args[1]", "Popup alert text can not be null");
             if (args.Length == 3)
             {
                 if (args[2] == null)
                     throw new ArgumentNullException("args[2]", "Popup alert icon can not be null");
-                if (args[2].GetType() == typeof(ToolTipIcon))
+                if (args[2].GetType() == typeof(TooltipAlertIcon))
                     Icon = (TooltipAlertIcon)args[2];
+                else if (args[2].GetType() == typeof(ToolTipIcon))
+                {
+                    Image sysIcon = GetSystemIcon((ToolTipIcon)args[2]);
+                    if (sysIcon != null)
+                    {
+                        Icon = TooltipAlertIcon.Custom;
+                        CustomIcon = sysIcon;
+                    }
+                }
                 else if (args[2] is Image)
                 {
                     Icon = TooltipAlertIcon.Custom;
@@ -41,7 +68,10 @@ namespace WinFormsPopupAlerts
                 
                 
             }
-            Title = args[0].ToString();
+            if (args[0] != null)
+                Title = args[0].ToString();
+            else
+                Title = null;
             Text = args[1].ToString();
 
             ResetRegion();

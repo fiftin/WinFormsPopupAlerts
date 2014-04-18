@@ -39,7 +39,6 @@
             this.popupAlertManager1 = new WinFormsPopupAlerts.PopupAlertManager(this.components);
             this.tooltipAlertFactory1 = new WinFormsPopupAlerts.TooltipAlertFactory(this.components);
             this.customTooltipAlertRenderer1 = new WinFormsPopupAlerts.CustomTooltipAlertRenderer();
-            this.tooltipAlertFactory2 = new WinFormsPopupAlerts.TooltipAlertFactory(this.components);
             this.SuspendLayout();
             // 
             // button1
@@ -86,21 +85,24 @@
             // 
             // timer1
             // 
+            this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // popupAlertManager1
             // 
             this.popupAlertManager1.AlertFactory = this.tooltipAlertFactory1;
-            this.popupAlertManager1.AlertsMaxCount = 12;
+            this.popupAlertManager1.AlertsMaxCount = 5;
             this.popupAlertManager1.ContainerControl = this;
             this.popupAlertManager1.PopupDuration = 100;
             // 
             // tooltipAlertFactory1
             // 
+            this.tooltipAlertFactory1.AlertStyle = WinFormsPopupAlerts.TooltipAlertStyle.System;
             this.tooltipAlertFactory1.CustomRenderer = this.customTooltipAlertRenderer1;
-            this.tooltipAlertFactory1.HiddingDuration = 200;
+            this.tooltipAlertFactory1.HiddingDuration = 100;
+            this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HiddingStyle.Slide;
             this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(300, 300);
-            this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(150, 0);
+            this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(250, 0);
             this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(5);
             this.tooltipAlertFactory1.ShowingDuration = 100;
             // 
@@ -116,12 +118,6 @@
             this.customTooltipAlertRenderer1.TitleBackColor = System.Drawing.Color.Green;
             this.customTooltipAlertRenderer1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.TitleForeColor = System.Drawing.Color.White;
-            // 
-            // tooltipAlertFactory2
-            // 
-            this.tooltipAlertFactory2.MaximumSize = new System.Drawing.Size(500, 300);
-            this.tooltipAlertFactory2.MinimumSize = new System.Drawing.Size(150, 0);
-            this.tooltipAlertFactory2.Padding = new System.Windows.Forms.Padding(5);
             // 
             // Form1
             // 
@@ -148,7 +144,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Timer timer1;
         private WinFormsPopupAlerts.CustomTooltipAlertRenderer customTooltipAlertRenderer1;
-        private WinFormsPopupAlerts.TooltipAlertFactory tooltipAlertFactory2;
     }
 }
 

@@ -49,39 +49,10 @@ namespace WinFormsPopupAlerts
 	}
 
     [ToolboxBitmapAttribute(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\CustomTooltipAlertRenderer.bmp")]
-    public class CustomTooltipAlertRenderer : TooltipAlertRenderer
+    public class CustomTooltipAlertRenderer : CustomTooltipAlertRendererBase
     {
-        public override void Draw(System.Drawing.Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override System.Drawing.Rectangle GetBodyRect(System.Drawing.Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
-        {
-            throw new NotImplementedException();
-        }
 
         public override System.Drawing.Rectangle GetTitleRect(System.Drawing.Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override System.Drawing.Rectangle GetRect(System.Drawing.Graphics dc, System.Drawing.Rectangle titleRect, System.Drawing.Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override System.Drawing.Rectangle GetCloseButtonRect(System.Drawing.Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void DrawCloseButton(System.Drawing.Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override System.Drawing.Region GetRegion(System.Drawing.Graphics dc, System.Drawing.Rectangle rect)
         {
             throw new NotImplementedException();
         }

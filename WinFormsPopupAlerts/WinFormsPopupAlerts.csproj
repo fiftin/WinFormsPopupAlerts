@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WinFormsPopupAlerts</RootNamespace>
     <AssemblyName>WinFormsPopupAlerts</AssemblyName>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -46,7 +46,8 @@
     <Compile Include="CornerRadiusEditorControl.Designer.cs">
       <DependentUpon>CornerRadiusEditorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomTooltipAlertRenderer.cs">
+    <Compile Include="CustomTooltipAlertRenderer.cs" />
+    <Compile Include="CustomTooltipAlertRendererBase.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PopupAlertAlignment.cs" />

@@ -111,12 +111,25 @@ namespace WinFormsPopupAlerts
             return ret;
         }
 
+        protected Size getCloseButtonSize(Graphics dc)
+        {
+            return new Size(10, 10);
+        }
+
         public override System.Drawing.Rectangle GetCloseButtonRect(System.Drawing.Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
         {
+            Size btnSize = getCloseButtonSize(dc);
+            Point btnPos = new Point(rect.Right - Padding.Right - btnSize.Width, rect.Top + Padding.Top);
+            Rectangle btnRect = new Rectangle(btnPos, btnSize);
+            return btnRect;
         }
 
         public override void DrawCloseButton(System.Drawing.Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
         {
+            Rectangle btnRect = GetCloseButtonRect(dc, rect, buttonState);
+            dc.DrawRectangle(Pens.Black, btnRect);
+            dc.DrawLine(Pens.Black, btnRect.Location, new Point(btnRect.Right, btnRect.Bottom));
+            dc.DrawLine(Pens.Black, new Point(btnRect.Right, btnRect.Top), new Point(btnRect.Left, btnRect.Bottom));
         }
 
         public override System.Drawing.Region GetRegion(System.Drawing.Graphics dc, System.Drawing.Rectangle rect)

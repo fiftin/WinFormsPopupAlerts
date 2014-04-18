@@ -98,33 +98,33 @@ namespace WinFormsPopupAlerts
         public PopupAlert Alert(params object[] args)
         {
             PopupAlert alert = AlertFactory.CreateAlert(args);
-            if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Simple)
+            //if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Simple)
+            //{
+            int vOffset = alert.Height + VGap;
+            switch (AlertAlignment)
             {
-                int vOffset = alert.Height + VGap;
-                switch (AlertAlignment)
-                {
-                    case PopupAlertAlignment.BottomRight:
-                    case PopupAlertAlignment.BottomLeft:
-                        foreach (PopupAlert x in alerts)
-                        {
-                            x.Top -= vOffset;
-                        }
-                        break;
-                    case PopupAlertAlignment.TopLeft:
-                    case PopupAlertAlignment.TopRight:
-                        foreach (PopupAlert x in alerts)
-                        {
-                            x.Top += vOffset;
-                        }
-                        break;
-                }
-                PushAlert(alert);
-                ShowAlertNormal(alert);
+                case PopupAlertAlignment.BottomRight:
+                case PopupAlertAlignment.BottomLeft:
+                    foreach (PopupAlert x in alerts)
+                    {
+                        x.Top -= vOffset;
+                    }
+                    break;
+                case PopupAlertAlignment.TopLeft:
+                case PopupAlertAlignment.TopRight:
+                    foreach (PopupAlert x in alerts)
+                    {
+                        x.Top += vOffset;
+                    }
+                    break;
             }
-            else if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Slide)
-            {
-                ShowAlertSlide(alert);
-            }
+            PushAlert(alert);
+            ShowAlertNormal(alert);
+            //}
+            //else if (PopupStyle == WinFormsPopupAlerts.PopupStyle.Slide)
+            //{
+            //    ShowAlertSlide(alert);
+            //}
             return alert;
         }
 
@@ -269,14 +269,14 @@ namespace WinFormsPopupAlerts
             set { alertsMaxCount = value; }
         }
 
-        private PopupStyle popupStyle = DefaultPopupStyle;
-
-        [DefaultValue(DefaultPopupStyle)]
-        public PopupStyle PopupStyle
-        {
-            get { return popupStyle; }
-            set { popupStyle = value; }
-        }
+        //private PopupStyle popupStyle = DefaultPopupStyle;
+        //
+        //[DefaultValue(DefaultPopupStyle)]
+        //public PopupStyle PopupStyle
+        //{
+        //    get { return popupStyle; }
+        //    set { popupStyle = value; }
+        //}
 
 
         private int popupDuration = DefualtPopupDuration;
@@ -300,7 +300,7 @@ namespace WinFormsPopupAlerts
         private const int DefaultVGap = 5;
         private const int DefaultHGap = 5;
         private const int DefaultAlertsMaxCount = 10;
-        private const PopupStyle DefaultPopupStyle = PopupStyle.Simple;
+        //private const PopupStyle DefaultPopupStyle = PopupStyle.Simple;
         private const PopupAlertAlignment DefaultAlertAlignment = PopupAlertAlignment.BottomRight;
     }
 }

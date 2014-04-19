@@ -125,20 +125,20 @@ namespace WinFormsPopupAlerts
 
         public void ShowAlertNormal(PopupAlert alert)
         {
-            Rectangle rect = SafeNativeMethods.GetWorkArea();
+            Rectangle workingRect = Screen.PrimaryScreen.WorkingArea;
             switch (AlertAlignment)
             {
                 case PopupAlertAlignment.BottomRight:
-                    alert.Show(rect.Bottom - (alert.Height + VGap), rect.Right - (alert.Width + HGap));
+                    alert.Show(workingRect.Bottom - (alert.Height + VGap), workingRect.Right - (alert.Width + HGap));
                     break;
                 case PopupAlertAlignment.BottomLeft:
-                    alert.Show(rect.Bottom - (alert.Height + VGap), HGap);
+                    alert.Show(workingRect.Bottom - (alert.Height + VGap), workingRect.Left + HGap);
                     break;
                 case PopupAlertAlignment.TopLeft:
-                    alert.Show(VGap, HGap);
+                    alert.Show(workingRect.Top + VGap, workingRect.Left + HGap);
                     break;
                 case PopupAlertAlignment.TopRight:
-                    alert.Show(VGap, rect.Right - (alert.Width + HGap));
+                    alert.Show(workingRect.Top + VGap, workingRect.Right - (alert.Width + HGap));
                     break;
             }
         }

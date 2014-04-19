@@ -19,28 +19,14 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //using (var g = CreateGraphics())
-            //{
-                //VisualStyleElement btn = ToolTipBalloonDrawingHelper.GetCloseButtonVS(ToolTipBalloonCloseButtonState.Hot);
-                //VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.Standard.Normal);
-                //renderer.Get
-                //var btnRect = ToolTipBalloonDrawingHelper.GetCloseButtonRect(g, new Rectangle(10, 10, 10, 10), new System.Windows.Forms.Padding(0, 0, 0, 0), ToolTipBalloonCloseButtonState.Hot);
-                
-            //    SystemTooltipRenderingHelper.DrawCloseButton(g, new Rectangle(10, 10, 100, 100), new System.Windows.Forms.Padding(0, 0, 0, 0), TooltipCloseButtonState.Hot);
-            //}
-            //PopupAlert al = new TooltipAlert();
-            //((TopFormBase)al).Show();
-
             ToolTipIcon icon = icons[r.Next(icons.Length)];
             popupAlertManager1.Alert(null, texts[r.Next(texts.Length)], icon);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            notifyIcon1.ShowBalloonTip(10, "ddd", "ffffffffffffffffffffffffffgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggffffffffffffffffffffffffffffffffffffff", ToolTipIcon.Error);
-            //IntPtr ptr = WindowsNative.FindWindowEx(IntPtr.Zero, IntPtr.Zero, "Shell_TrayWnd", null);
-
-            this.Icon = SystemIcons.Warning;
+            ToolTipIcon icon = icons[r.Next(icons.Length)];
+            notifyIcon1.ShowBalloonTip(10, titles[r.Next(titles.Length)], texts[r.Next(texts.Length)], icon);
         }
 
         private void button3_Click(object sender, EventArgs e)

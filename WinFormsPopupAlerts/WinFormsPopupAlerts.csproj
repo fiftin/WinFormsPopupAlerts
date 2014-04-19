@@ -46,7 +46,9 @@
     <Compile Include="CornerRadiusEditorControl.Designer.cs">
       <DependentUpon>CornerRadiusEditorControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomTooltipAlertRenderer.cs" />
+    <Compile Include="CustomTooltipAlertRenderer.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CustomTooltipAlertRendererBase.cs">
       <SubType>Component</SubType>
     </Compile>

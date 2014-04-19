@@ -29,13 +29,8 @@ D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\bin\Debug\WindowsFormsApplic
 D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
 D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\bin\Debug\WinFormsPopupAlerts.dll
 D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\bin\Debug\WinFormsPopupAlerts.pdb
-D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
 D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
 D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
-D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
-D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.read.1.tlog
-D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
-D:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.write.1.tlog
 C:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.read.1.tlog
 C:\src\WinFormsPopupAlerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.write.1.tlog
 E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
@@ -56,3 +51,7 @@ E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.read.1.
 E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
 E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
 E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.write.1.tlog
+d:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.resx
+d:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.Designer.cs
+d:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+d:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache

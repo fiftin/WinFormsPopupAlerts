@@ -64,7 +64,5 @@ namespace WinFormsPopupAlerts
             get { return alertStyle; }
             set { alertStyle = value; }
         }
-
-
     }
 }

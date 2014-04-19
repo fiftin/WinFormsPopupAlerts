@@ -9,15 +9,47 @@ using System.Drawing;
 namespace WinFormsPopupAlerts
 {
     [System.ComponentModel.ToolboxItem(false)]
-    public class SystemTooltipAlertRenderer : TooltipAlertRenderer
+    public class SystemTooltipAlertRenderer : CustomTooltipAlertRendererBase
     {
-        public override void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
+        private static bool IsDefined(VisualStyleElement element)
         {
-            Rectangle titleRect = GetTitleRect(dc, title, text, icon, customIcon);
-            Rectangle bodyRect = GetBodyRect(dc, title, text, icon, customIcon);
-            Rectangle rect = GetRect(dc, titleRect, bodyRect, icon, customIcon);
-            Image img = GetIcon(icon, customIcon);
-            int iconWidth = GetIconSize(icon, customIcon).Width;
+            return Application.RenderWithVisualStyles && SafeNativeMethods.IsThemePartDefined(element.ClassName, element.Part, element.State);
+        }
+
+        public static VisualStyleElement GetCloseButtonVS(TooltipCloseButtonState buttonState)
+        {
+            VisualStyleElement btn;
+            switch (buttonState)
+            {
+                case TooltipCloseButtonState.Hot:
+                    btn = VisualStyleElement.ToolTip.Close.Hot;
+                    break;
+                case TooltipCloseButtonState.Pressed:
+                    btn = VisualStyleElement.ToolTip.Close.Pressed;
+                    break;
+                case TooltipCloseButtonState.Normal:
+                default:
+                    btn = VisualStyleElement.ToolTip.Close.Normal;
+                    break;
+            }
+            return btn;
+        }
+
+        public override void DrawCloseButton(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState)
+        {            
+            VisualStyleElement btn = GetCloseButtonVS(buttonState);
+            Rectangle btnRect = GetCloseButtonRect(dc, rect, buttonState);
+            if (IsDefined(btn))
+            {
+                VisualStyleRenderer renderer = new VisualStyleRenderer(btn);
+                renderer.DrawBackground(dc, btnRect);
+            }
+            else
+                base.DrawCloseButton(dc, rect, buttonState);
+        }
+
+        protected override void Draw(Graphics dc, string title, string text, Rectangle rect, Rectangle titleRect, Rectangle bodyRect, Image img, int iconWidth)
+        {
             if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal) && IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
             {
                 VisualStyleRenderer titleRenderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.BalloonTitle.Normal);
@@ -42,174 +74,48 @@ namespace WinFormsPopupAlerts
                     new RectangleF(Padding.Left + iconWidth, Padding.Top + titleRect.Height, bodyRect.Width, bodyRect.Height),
                     new StringFormat());
             }
-            // drawing icon
-            if (img != null)
-                dc.DrawImage(img, new Point(Padding.Left + IconPadding.Left, Padding.Top + (titleRect.Height + bodyRect.Height) / 2 - (img.Height + IconPadding.Vertical) / 2));
         }
 
-        public override Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
+        protected override Rectangle getBodyTextRect(Graphics dc, string text, Rectangle rect)
         {
-            Rectangle ret;
-            if (text == null)
-                ret = new Rectangle(new Point(0, 0), MinSize);
-            else
+            if (IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
             {
-                ret = new Rectangle(new Point(0, 0), MaxSize);
-                ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
-                Rectangle rect;
-                if (IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
-                {
-                    VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.Balloon.Normal);
-                    rect = renderer.GetTextExtent(dc, ret, text, TextFormatFlags.Left | TextFormatFlags.WordBreak | TextFormatFlags.VerticalCenter);
-                }
-                else
-                {
-                    SizeF size = dc.MeasureString(text, SystemFonts.DefaultFont, ret.Size.Width,
-                        new StringFormat());
-                    rect = new Rectangle(new Point(0, 0), Size.Ceiling(size));
-                }
-
-                if (rect.Width + Padding.Horizontal > MaxSize.Width)
-                    ret.Width = MaxSize.Width;
-                else if (rect.Width + Padding.Horizontal < MinSize.Width)
-                    ret.Width = MinSize.Width;
-                else
-                    ret.Width = rect.Width;
-
-                if (rect.Height > MaxSize.Height)
-                    ret.Height = MaxSize.Height;
-                else
-                    ret.Height = rect.Height;
+                VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.Balloon.Normal);
+                return renderer.GetTextExtent(dc, rect, text, TextFormatFlags.Left | TextFormatFlags.WordBreak | TextFormatFlags.VerticalCenter);
             }
-            return ret;
-        }
-
-        private Size GetIconSize(TooltipAlertIcon icon, Image customIcon)
-        {
-            Image img = GetIcon(icon,customIcon);
-            if (img == null)
-                return new Size(0, 0);
             else
-                return new Size(img.Size.Width + IconPadding.Horizontal, img.Height + IconPadding.Vertical);
-        }
-
-        private Image GetIcon(TooltipAlertIcon icon, Image customIcon)
-        {
-            switch (icon)
             {
-                case TooltipAlertIcon.Custom:
-                    return customIcon;
-                case TooltipAlertIcon.None:
-                default:
-                    return null;
+                SizeF size = dc.MeasureString(text, SystemFonts.DefaultFont, rect.Size.Width,
+                    new StringFormat());
+                return new Rectangle(new Point(0, 0), Size.Ceiling(size));
             }
         }
 
-        public override Rectangle GetTitleRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
+        protected override Rectangle getTitleTextRect(Graphics dc, string title, Rectangle rect)
         {
-            Rectangle ret;
-            if (title == null)
-                ret = new Rectangle(new Point(0, 0), MinSize);
+            if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal))
+            {
+                VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.BalloonTitle.Normal);
+                return renderer.GetTextExtent(dc, rect, title, TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.VerticalCenter);
+            }
             else
             {
-                ret = new Rectangle(new Point(0, 0), MaxSize);
-                ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
-                Rectangle rect;
-                if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal))
-                {
-                    VisualStyleRenderer renderer = new VisualStyleRenderer(VisualStyleElement.ToolTip.BalloonTitle.Normal);
-                    rect = renderer.GetTextExtent(dc, ret, title, TextFormatFlags.Left | TextFormatFlags.WordEllipsis | TextFormatFlags.VerticalCenter);
-                }
-                else
-                {
-                    SizeF size = dc.MeasureString(title, new Font(SystemFonts.DefaultFont, FontStyle.Bold), ret.Size.Width,
-                        new StringFormat(StringFormatFlags.NoWrap));
-                    rect = new Rectangle(new Point(0, 0), Size.Ceiling(size));
-                }
-
-                if (rect.Width + Padding.Horizontal > MaxSize.Width)
-                    ret.Width = MaxSize.Width;
-                else if (rect.Width + Padding.Horizontal < MinSize.Width)
-                    ret.Width = MinSize.Width;
-                else
-                    ret.Width = rect.Width;
-
-                if (rect.Height > MaxSize.Height)
-                    ret.Height = MaxSize.Height;
-                else
-                    ret.Height = rect.Height;
-
+                SizeF size = dc.MeasureString(title, new Font(SystemFonts.DefaultFont, FontStyle.Bold), rect.Size.Width,
+                    new StringFormat(StringFormatFlags.NoWrap));
+                return new Rectangle(new Point(0, 0), Size.Ceiling(size));
             }
-            return ret;
         }
 
-        public override Rectangle GetRect(Graphics dc, Rectangle titleRect, Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, Image customIcon = null)
-        {
-            Size iconSize = GetIconSize(icon, customIcon);
-            Rectangle ret = new Rectangle(0, 0, Math.Max(titleRect.Width, bodyRect.Width), titleRect.Height + bodyRect.Height);
-            ret.Width += Padding.Horizontal + iconSize.Width;
-            if (iconSize.Height > ret.Height)
-                ret.Height = iconSize.Height;
-            ret.Height += Padding.Vertical;
-            return ret;
-        }
-
-        public override Rectangle GetCloseButtonRect(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState)
+        protected override Size getCloseButtonSize(Graphics dc, TooltipCloseButtonState buttonState)
         {
             VisualStyleElement btn = GetCloseButtonVS(buttonState);
-            Size btnSize;
             if (IsDefined(btn))
             {
                 VisualStyleRenderer renderer = new VisualStyleRenderer(btn);
-                btnSize = renderer.GetPartSize(dc, ThemeSizeType.True);
+                return renderer.GetPartSize(dc, ThemeSizeType.True);
             }
             else
-                btnSize = new Size(10, 10);
-            Point btnPos = new Point(rect.Right - Padding.Right - btnSize.Width, rect.Top + Padding.Top);
-            Rectangle btnRect = new Rectangle(btnPos, btnSize);
-            return btnRect;
-        }
-
-        public override void DrawCloseButton(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState)
-        {
-            VisualStyleElement btn = GetCloseButtonVS(buttonState);
-            Rectangle btnRect = GetCloseButtonRect(dc, rect, buttonState);
-            if (IsDefined(btn))
-            {
-                VisualStyleRenderer renderer = new VisualStyleRenderer(btn);
-                renderer.DrawBackground(dc, btnRect);
-            }
-            else
-            {
-                dc.DrawRectangle(Pens.Black, btnRect);
-                dc.DrawLine(Pens.Black, btnRect.Location, new Point(btnRect.Right, btnRect.Bottom));
-                dc.DrawLine(Pens.Black, new Point(btnRect.Right, btnRect.Top), new Point(btnRect.Left, btnRect.Bottom));
-            }
-        }
-
-        public static VisualStyleElement GetCloseButtonVS(TooltipCloseButtonState buttonState)
-        {
-            VisualStyleElement btn;
-            switch (buttonState)
-            {
-                case TooltipCloseButtonState.Hot:
-                    btn = VisualStyleElement.ToolTip.Close.Hot;
-                    break;
-                case TooltipCloseButtonState.Pressed:
-                    btn = VisualStyleElement.ToolTip.Close.Pressed;
-                    break;
-                case TooltipCloseButtonState.Normal:
-                default:
-                    btn = VisualStyleElement.ToolTip.Close.Normal;
-                    break;
-            }
-            return btn;
-        }
-
-
-        private static bool IsDefined(VisualStyleElement element)
-        {
-            return Application.RenderWithVisualStyles && SafeNativeMethods.IsThemePartDefined(element.ClassName, element.Part, element.State);
+                return new Size(10, 10);
         }
 
         public override Region GetRegion(Graphics dc, Rectangle rect)

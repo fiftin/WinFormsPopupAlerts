@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.ComponentModel;
+using System.Drawing.Drawing2D;
 
 namespace WinFormsPopupAlerts
 {
@@ -65,11 +66,18 @@ namespace WinFormsPopupAlerts
         private Brush titleForeBrush;
         private Brush foreBrush;
         private Pen borderPen;
+        private int borderThickness = 1;
 
         protected override void Draw(System.Drawing.Graphics dc, string title, string text, Rectangle rect, Rectangle titleRect, Rectangle bodyRect, Image img, int iconWidth)
         {
+            dc.SmoothingMode = SmoothingMode.HighQuality;
             dc.FillRectangle(backBrush, rect);
-            dc.DrawRectangle(borderPen, new Rectangle(0, 0, rect.Width - 1, rect.Height - 1));
+            Rectangle borderRect = new Rectangle(rect.X, rect.Y, rect.Width, rect.Height);
+            Rectangle borderRect2 = new Rectangle(rect.X, rect.Y - 1, rect.Width, rect.Height);
+            Rectangle borderRect3 = new Rectangle(rect.X - 1, rect.Y, rect.Width, rect.Height);
+            dc.DrawPath(borderPen, GetCapsule(borderRect, CornerRadius));
+            dc.DrawPath(borderPen, GetCapsule(borderRect2, CornerRadius));
+            dc.DrawPath(borderPen, GetCapsule(borderRect3, CornerRadius));
             dc.DrawString(title, titleFont, titleForeBrush,
                 new PointF(Padding.Left + iconWidth, Padding.Top), new StringFormat(StringFormatFlags.NoWrap));
             dc.DrawString(text, font, foreBrush,
@@ -94,6 +102,26 @@ namespace WinFormsPopupAlerts
         protected override Size getCloseButtonSize(Graphics dc, TooltipCloseButtonState buttonState)
         {
             return new Size(10, 10);
+        }
+
+        private static GraphicsPath GetCapsule(RectangleF rect, CornerRadius cornerRadius)
+        {
+            GraphicsPath ret = new GraphicsPath();
+            ret.AddArc(rect.X, rect.Y, cornerRadius.TopLeft, cornerRadius.TopLeft, 180, 90);
+            
+            ret.AddArc(rect.X + rect.Width - cornerRadius.TopRight, rect.Y, cornerRadius.TopRight, cornerRadius.TopRight, 270, 90);
+            ret.AddArc(rect.X + rect.Width - cornerRadius.BottomRight, rect.Y + rect.Height - cornerRadius.BottomRight, cornerRadius.BottomRight, cornerRadius.BottomRight, 0, 90);
+            ret.AddArc(rect.X, rect.Y + rect.Height - cornerRadius.BottomLeft, cornerRadius.BottomLeft, cornerRadius.BottomLeft, 90, 90);
+            ret.CloseFigure(); 
+            return ret;
+        } 
+
+        public override Region GetRegion(Graphics dc, Rectangle rect)
+        {
+            if (CornerRadius.BottomLeft == 0 && CornerRadius.TopLeft == 0 && CornerRadius.TopRight == 0 && CornerRadius.BottomRight == 0)
+                return base.GetRegion(dc, rect);
+            return new Region(GetCapsule(rect, CornerRadius));
+
         }
 
         [Editor(typeof(CornerRadiusEditor), typeof(System.Drawing.Design.UITypeEditor))]
@@ -174,7 +202,25 @@ namespace WinFormsPopupAlerts
             set
             {
                 borderColor = value;
-                borderPen = new Pen(borderColor);
+                if (borderPen != null)
+                    borderPen.Dispose();
+                borderPen = new Pen(borderColor, borderThickness);
+            }
+        }
+
+        public int BorderThickness
+        {
+            get
+            {
+                return borderThickness;
+            }
+            set
+            {
+                borderThickness = value;
+                if (borderPen != null)
+                    borderPen.Dispose();
+                borderPen = new Pen(borderColor, borderThickness);
+
             }
         }
 

@@ -124,7 +124,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-
+        /*
         public override Padding Padding
         {
             get
@@ -139,7 +139,7 @@ namespace WinFormsPopupAlerts
                     ResetRegion();
                 }
             }
-        }
+        }*/
 
         public override Size MaximumSize
         {
@@ -192,7 +192,7 @@ namespace WinFormsPopupAlerts
 
             Renderer.MaxSize = MaximumSize;
             Renderer.MinSize = MinimumSize;
-            Renderer.Padding = Padding;
+            //Renderer.Padding = Padding;
             Rectangle rect = new Rectangle(0, 0, MinimumSize.Width, MinimumSize.Height);
             using (Bitmap tempBitmap = new Bitmap(100, 100))
             {

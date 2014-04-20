@@ -108,14 +108,15 @@
             // 
             // customTooltipAlertRenderer1
             // 
-            this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.Black;
+            this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.customTooltipAlertRenderer1.BorderThickness = 5;
             this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.Black;
             this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);
             this.customTooltipAlertRenderer1.MaxSize = new System.Drawing.Size(0, 0);
             this.customTooltipAlertRenderer1.MinSize = new System.Drawing.Size(0, 0);
-            this.customTooltipAlertRenderer1.Padding = new System.Windows.Forms.Padding(5);
+            this.customTooltipAlertRenderer1.Padding = new System.Windows.Forms.Padding(10);
             this.customTooltipAlertRenderer1.TitleBackColor = System.Drawing.Color.Green;
             this.customTooltipAlertRenderer1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.TitleForeColor = System.Drawing.Color.White;

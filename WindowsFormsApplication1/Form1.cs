@@ -15,6 +15,7 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            customTooltipAlertRenderer1.CornerRadius = new CornerRadius(25, 25, 25, 25);
         }
 
         private void button1_Click(object sender, EventArgs e)

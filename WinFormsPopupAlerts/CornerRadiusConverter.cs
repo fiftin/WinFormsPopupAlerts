@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace WinFormsPopupAlerts
 {
-    internal class CornerRadiusConverter : ExpandableObjectConverter
+    public class CornerRadiusConverter : ExpandableObjectConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
@@ -18,7 +18,6 @@ namespace WinFormsPopupAlerts
         {
             if (sourceType == typeof(string))
                 return true;
-
             return base.CanConvertFrom(context, sourceType);
         }
 
@@ -58,8 +57,6 @@ namespace WinFormsPopupAlerts
             if (value != null && !(value is CornerRadius))
                 throw new ArgumentException(
                     "Invalid CornerRadius object", "value");
-
-
             if (destinationType == typeof(string))
             {
                 if (value == null)
@@ -75,7 +72,6 @@ namespace WinFormsPopupAlerts
                     return String.Join(culture.TextInfo.ListSeparator, parts);
                 }
             }
-
             return base.ConvertTo(context, culture, value, destinationType);
         }
     }

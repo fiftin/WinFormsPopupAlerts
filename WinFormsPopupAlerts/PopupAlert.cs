@@ -15,6 +15,7 @@ namespace WinFormsPopupAlerts
         private object tag1;
         private int top;
         private int left;
+        private PopupAlertAlignment align;
 
         /// <summary>
         /// 
@@ -25,16 +26,11 @@ namespace WinFormsPopupAlerts
             set { tag1 = value; }
         }
 
-        public PopupAlert()
+        public PopupAlert(PopupAlertAlignment align)
         {
             InitializeComponent();
+            this.align = align;
         }
-
-        public PopupAlert(object[] args)
-        {
-            InitializeComponent();
-        }
-
 
         /// <summary>
         /// Shows the alert with the specified position.
@@ -62,13 +58,6 @@ namespace WinFormsPopupAlerts
                 BeforeShown();
             }
         }
-
-
-
-        //protected override bool ShowWithoutActivation
-        //{
-        //    get { return true; }
-        //}
 
         protected override void OnShown(EventArgs e)
         {
@@ -182,14 +171,28 @@ namespace WinFormsPopupAlerts
                 {
                     int screenWidth = Screen.PrimaryScreen.Bounds.Width;
                     int startLeft = obj.Left;
-                    float v = (screenWidth - obj.Left) / (float)HiddingDuration;
+                    
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
-                    while (screenWidth - obj.Left > 0)
+                    if (align == PopupAlertAlignment.BottomRight || align == PopupAlertAlignment.TopRight)
                     {
-                        int msec = (int)sw.ElapsedMilliseconds;
-                        obj.Invoke(new MethodInvoker(delegate() { obj.Left = (int)((float)startLeft + v * msec); }));
-                        System.Threading.Thread.Sleep(10);
+                        float v = (screenWidth - obj.Left) / (float)HiddingDuration;
+                        while (screenWidth - obj.Left > 0)
+                        {
+                            int msec = (int)sw.ElapsedMilliseconds;
+                            obj.Invoke(new MethodInvoker(delegate() { obj.Left = (int)((float)startLeft + v * msec); }));
+                            System.Threading.Thread.Sleep(10);
+                        }
+                    }
+                    else
+                    {
+                        float v = (obj.Left + obj.Width) / (float)HiddingDuration;
+                        while (obj.Left + obj.Width > 0)
+                        {
+                            int msec = (int)sw.ElapsedMilliseconds;
+                            obj.Invoke(new MethodInvoker(delegate() { obj.Left = (int)((float)startLeft - v * msec); }));
+                            System.Threading.Thread.Sleep(10);
+                        }
                     }
                     obj.Invoke(new MethodInvoker(delegate() { obj.InternalHide(); }));
                     callback(obj);

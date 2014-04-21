@@ -6,74 +6,48 @@ using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
+    public class TooltipAlertArg
+    {
+        public TooltipAlertArg(string title, string text)
+            : this(title, text, ToolTipIcon.None)
+        {
+        }
+        public TooltipAlertArg(string title, string text, ToolTipIcon icon)
+        {
+            Title = title;
+            Text = text;
+            Icon = icon;
+        }
+        public TooltipAlertArg(string title, string text, Image image)
+        {
+            Title = title;
+            Text = text;
+            CustomImage = image;
+        }
+        public string Title { get; private set; }
+        public string Text { get; private set; }
+        public Image CustomImage { get; private set; }
+        public ToolTipIcon Icon { get; private set; }
+    }
+
     [System.ComponentModel.ToolboxItem(false)]
     public class TooltipAlert : PopupAlert
     {
-        public TooltipAlert()
+        public TooltipAlert(PopupAlertAlignment align)
+            : base(align)
         {
             InitializeComponent();
             ResetRegion();
         }
 
-        private static Bitmap ErrorIcon = SystemIcons.Error.ToBitmap();
-        private static Bitmap WarningIcon = SystemIcons.Warning.ToBitmap();
-        private static Bitmap InformationIcon = SystemIcons.Information.ToBitmap();
-
-        private static Image GetSystemIcon(ToolTipIcon toolTipIcon)
-        {
-            switch (toolTipIcon)
-            {
-                case ToolTipIcon.Error:
-                    return ErrorIcon;
-                case ToolTipIcon.Info:
-                    return InformationIcon;
-                case ToolTipIcon.Warning:
-                    return WarningIcon;
-            }
-            return null;
-        }
-
-        public TooltipAlert(object[] args)
-            : base(args)
+        public TooltipAlert(TooltipAlertArg arg, PopupAlertAlignment align)
+            : base(align)
         {
             InitializeComponent();
-            if (args.Length < 2 || args.Length > 3)
-                throw new ArgumentException("2 or 3 arguments required", "args");
-            //if (args[0] == null)
-            //    throw new ArgumentNullException("args[0]", "Popup alert title can not be null");
-            if (args[1] == null)
-                throw new ArgumentNullException("args[1]", "Popup alert text can not be null");
-            if (args.Length == 3)
-            {
-                if (args[2] == null)
-                    throw new ArgumentNullException("args[2]", "Popup alert icon can not be null");
-                if (args[2].GetType() == typeof(TooltipAlertIcon))
-                    Icon = (TooltipAlertIcon)args[2];
-                else if (args[2].GetType() == typeof(ToolTipIcon))
-                {
-                    Image sysIcon = GetSystemIcon((ToolTipIcon)args[2]);
-                    if (sysIcon != null)
-                    {
-                        Icon = TooltipAlertIcon.Custom;
-                        CustomIcon = sysIcon;
-                    }
-                }
-                else if (args[2] is Image)
-                {
-                    Icon = TooltipAlertIcon.Custom;
-                    CustomIcon = (Image)args[2];
-                }
-                else
-                    throw new ArgumentException("Popup alert icon can be ToolTipIcon or Image", "args[2]");
-                
-                
-            }
-            if (args[0] != null)
-                Title = args[0].ToString();
-            else
-                Title = null;
-            Text = args[1].ToString();
-
+            Title = arg.Title;
+            Text = arg.Text;
+            CustomImage = arg.CustomImage;
+            Icon = arg.Icon;
             ResetRegion();
         }
 
@@ -83,22 +57,22 @@ namespace WinFormsPopupAlerts
 
         private string title;
         private string text;
-        private TooltipAlertIcon icon;
-        private Image customIcon;
+        private ToolTipIcon icon;
+        private Image customImage;
 
-        public Image CustomIcon
+        public Image CustomImage
         {
             get
             {
-                return customIcon;
+                return customImage;
             }
             set
             {
-                customIcon = value;
+                customImage = value;
             }
         }
 
-        public new virtual TooltipAlertIcon Icon
+        public new virtual ToolTipIcon Icon
         {
             get { return icon; }
             set { icon = value; }
@@ -196,7 +170,7 @@ namespace WinFormsPopupAlerts
             {
                 using (Graphics g = Graphics.FromImage(tempBitmap))
                 {
-                    rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
+                    rect = Renderer.GetRect(g, Title, Text, Icon, CustomImage);
                     Region = Renderer.GetRegion(g, rect);
                     if (Renderer.TransparencyKey != Color.Transparent)
                         TransparencyKey = Renderer.TransparencyKey;
@@ -216,8 +190,8 @@ namespace WinFormsPopupAlerts
 
         protected virtual void Draw(Graphics g)
         {
-            Rectangle rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
-            Renderer.Draw(g, Title, Text, Icon, CustomIcon);
+            Rectangle rect = Renderer.GetRect(g, Title, Text, Icon, CustomImage);
+            Renderer.Draw(g, Title, Text, Icon, CustomImage);
             Renderer.DrawCloseButton(g, rect, closeButtonState);
         }
 

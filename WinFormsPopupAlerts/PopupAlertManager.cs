@@ -95,9 +95,9 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        public PopupAlert Alert(params object[] args)
+        public PopupAlert Alert(object arg)
         {
-            PopupAlert alert = AlertFactory.CreateAlert(args);
+            PopupAlert alert = AlertFactory.CreateAlert(arg, AlertAlignment);
             int vOffset = alert.Height + VGap;
             switch (AlertAlignment)
             {

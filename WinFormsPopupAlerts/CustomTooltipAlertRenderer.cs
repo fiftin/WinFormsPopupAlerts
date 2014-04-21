@@ -4,62 +4,17 @@ using System.Text;
 using System.Drawing;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace WinFormsPopupAlerts
 {
-    [TypeConverter(typeof(CornerRadiusConverter))]
-    public struct CornerRadius
-	{
-        public CornerRadius(int topLeft, int topRight, int bottomRight, int bottomLeft)
-            : this()
-        {
-            this.topLeft = topLeft;
-            this.topRight = topRight;
-            this.bottomRight = bottomRight;
-            this.bottomLeft = bottomLeft;
-        }
 
-        public CornerRadius(int radius)
-            : this(radius, radius, radius, radius)
-        {
-        }
-
-        private int bottomLeft;
-        private int bottomRight;
-        private int topLeft;
-        private int topRight;
-
-        public int TopRight
-        {
-            get { return topRight; }
-            set { topRight = value; }
-        }
-
-        public int TopLeft
-        {
-            get { return topLeft; }
-            set { topLeft = value; }
-        }
-
-        public int BottomRight
-        {
-            get { return bottomRight; }
-            set { bottomRight = value; }
-        }
-
-        public int BottomLeft
-        {
-            get { return bottomLeft; }
-            set { bottomLeft = value; }
-        }
-	}
 
     [ToolboxBitmapAttribute(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\CustomTooltipAlertRenderer.bmp")]
     public class CustomTooltipAlertRenderer : CustomTooltipAlertRendererBase
     {
 
         private Color backColor;
-        //private Color titleBackColor;
         private Color titleForeColor;
         private Color foreColor;
         private Color borderColor;
@@ -67,7 +22,6 @@ namespace WinFormsPopupAlerts
         private Font titleFont;
         private CornerRadius cornerRadius;
         private Brush backBrush;
-        //private Brush titleBackBrush;
         private Brush titleForeBrush;
         private Brush foreBrush;
         private Pen borderPen;
@@ -81,7 +35,7 @@ namespace WinFormsPopupAlerts
             StringFormat format = new StringFormat(StringFormatFlags.NoWrap);
             format.Trimming = StringTrimming.EllipsisCharacter;
             dc.DrawString(title, titleFont, titleForeBrush,
-                new RectangleF(Padding.Left + iconWidth, Padding.Top, titleRect.Width, titleRect.Height), format);
+                new RectangleF(Padding.Left + iconWidth, Padding.Top, Math.Min(titleRect.Width, bodyRect.Width), titleRect.Height), format);
             dc.DrawString(text, font, foreBrush,
                 new RectangleF(Padding.Left + iconWidth, Padding.Top + titleRect.Height, bodyRect.Width, bodyRect.Height),
                 new StringFormat());
@@ -127,18 +81,6 @@ namespace WinFormsPopupAlerts
             return rr;
         }
 
-        //private static GraphicsPath GetCapsule(RectangleF rect, CornerRadius cornerRadius)
-        //{
-        //    GraphicsPath ret = new GraphicsPath();
-        //    ret.AddArc(rect.X, rect.Y, cornerRadius.TopLeft, cornerRadius.TopLeft, 180, 90);
-        //    
-        //    ret.AddArc(rect.X + rect.Width - cornerRadius.TopRight, rect.Y, cornerRadius.TopRight, cornerRadius.TopRight, 270, 90);
-        //    ret.AddArc(rect.X + rect.Width - cornerRadius.BottomRight, rect.Y + rect.Height - cornerRadius.BottomRight, cornerRadius.BottomRight, cornerRadius.BottomRight, 0, 90);
-        //    ret.AddArc(rect.X, rect.Y + rect.Height - cornerRadius.BottomLeft, cornerRadius.BottomLeft, cornerRadius.BottomLeft, 90, 90);
-        //    ret.CloseFigure(); 
-        //    return ret;
-        //} 
-
         public override Region GetRegion(Graphics dc, Rectangle rect)
         {
             return new Region(rect);
@@ -175,18 +117,6 @@ namespace WinFormsPopupAlerts
                 titleForeBrush = new SolidBrush(titleForeColor);
             }
         }
-
-        //public Color TitleBackColor
-        //{
-        //    get { return titleBackColor; }
-        //    set
-        //    {
-        //        titleBackColor = value;
-        //        if (titleBackBrush != null)
-        //            titleBackBrush.Dispose();
-        //        titleBackBrush = new SolidBrush(titleBackColor);
-        //    }
-        //}
 
 
         public Color ForeColor

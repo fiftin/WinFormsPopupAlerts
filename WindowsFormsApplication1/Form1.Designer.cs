@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            WinFormsPopupAlerts.CornerRadius cornerRadius1 = new WinFormsPopupAlerts.CornerRadius();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -89,6 +90,7 @@
             // 
             // popupAlertManager1
             // 
+            this.popupAlertManager1.AlertAlignment = WinFormsPopupAlerts.PopupAlertAlignment.BottomLeft;
             this.popupAlertManager1.AlertFactory = this.tooltipAlertFactory1;
             this.popupAlertManager1.AlertsMaxCount = 5;
             this.popupAlertManager1.ContainerControl = this;
@@ -102,7 +104,7 @@
             this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HiddingStyle.Slide;
             this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(300, 300);
             this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(250, 0);
-            this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(50, 15, 15, 50);
+            this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(10);
             this.tooltipAlertFactory1.ShowingDuration = 100;
             // 
             // customTooltipAlertRenderer1
@@ -110,6 +112,11 @@
             this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.Gray;
             this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.Black;
             this.customTooltipAlertRenderer1.BorderThickness = 1;
+            cornerRadius1.BottomLeft = 0;
+            cornerRadius1.BottomRight = 10;
+            cornerRadius1.TopLeft = 10;
+            cornerRadius1.TopRight = 0;
+            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius1;
             this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.White;
             this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);

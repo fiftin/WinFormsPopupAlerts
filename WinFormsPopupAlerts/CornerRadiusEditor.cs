@@ -7,8 +7,9 @@ using System.Windows.Forms.Design;
 
 namespace WinFormsPopupAlerts
 {
-    internal class CornerRadiusEditor : UITypeEditor
+    public class CornerRadiusEditor : UITypeEditor
     {
+
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {
             return UITypeEditorEditStyle.DropDown;
@@ -16,15 +17,14 @@ namespace WinFormsPopupAlerts
 
         public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
         {
+            CornerRadius cr = (CornerRadius)value;
             IWindowsFormsEditorService edSvc = (IWindowsFormsEditorService)provider.GetService(typeof(IWindowsFormsEditorService));
             if (edSvc != null)
             {
-                // Display an angle selection control and retrieve the value.
-                CornerRadiusEditorControl control = new CornerRadiusEditorControl(value);
+                CornerRadiusEditorControl control = new CornerRadiusEditorControl(cr);
                 edSvc.DropDownControl(control);
-                
             }
-            return value;
+            return new CornerRadius(cr.TopLeft, cr.TopRight, cr.BottomLeft, cr.BottomRight);
         }
     }
 }

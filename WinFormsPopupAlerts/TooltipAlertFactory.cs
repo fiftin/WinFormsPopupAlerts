@@ -27,9 +27,9 @@ namespace WinFormsPopupAlerts
                 System.Diagnostics.Trace.WriteLine(s);
         }
 
-        protected override PopupAlert CreateAlertImpl(object[] args)
+        protected override PopupAlert CreateAlertImpl(object arg, PopupAlertAlignment align)
         {
-            TooltipAlert alert = new TooltipAlert(args);
+            TooltipAlert alert = new TooltipAlert((TooltipAlertArg)arg, align);
             switch (AlertStyle)
             {
                 case TooltipAlertStyle.System:

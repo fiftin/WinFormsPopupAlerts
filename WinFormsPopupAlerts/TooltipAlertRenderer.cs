@@ -54,20 +54,20 @@ namespace WinFormsPopupAlerts
         {
         }
 
-        public abstract void Draw(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null);
+        public abstract void Draw(Graphics dc, string title, string text, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null);
 
-        public abstract Rectangle GetBodyRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null);
+        public abstract Rectangle GetBodyRect(Graphics dc, string title, string text, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null);
 
-        public abstract Rectangle GetTitleRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null);
+        public abstract Rectangle GetTitleRect(Graphics dc, string title, string text, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null);
 
-        public Rectangle GetRect(Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
+        public Rectangle GetRect(Graphics dc, string title, string text, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null)
         {
-            Rectangle titleRect = GetTitleRect(dc, title, text, icon, customIcon);
-            Rectangle bodyRect = GetBodyRect(dc, title, text, icon, customIcon);
-            return GetRect(dc, titleRect, bodyRect, icon, customIcon);
+            Rectangle titleRect = GetTitleRect(dc, title, text, icon, customImage);
+            Rectangle bodyRect = GetBodyRect(dc, title, text, icon, customImage);
+            return GetRect(dc, titleRect, bodyRect, icon, customImage);
         }
 
-        public abstract Rectangle GetRect(Graphics dc, Rectangle titleRect, Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null);
+        public abstract Rectangle GetRect(Graphics dc, Rectangle titleRect, Rectangle bodyRect, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null);
 
         public abstract Rectangle GetCloseButtonRect(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState);
 

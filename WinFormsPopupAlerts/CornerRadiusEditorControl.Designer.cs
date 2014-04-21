@@ -46,7 +46,7 @@
             this.numLeftTop.Name = "numLeftTop";
             this.numLeftTop.Size = new System.Drawing.Size(42, 20);
             this.numLeftTop.TabIndex = 0;
-            this.numLeftTop.VisibleChanged += new System.EventHandler(this.num_VisibleChanged);
+            this.numLeftTop.ValueChanged += new System.EventHandler(this.numLeftTop_ValueChanged);
             // 
             // numTopRight
             // 
@@ -55,6 +55,7 @@
             this.numTopRight.Name = "numTopRight";
             this.numTopRight.Size = new System.Drawing.Size(42, 20);
             this.numTopRight.TabIndex = 1;
+            this.numTopRight.ValueChanged += new System.EventHandler(this.numTopRight_ValueChanged);
             // 
             // numBottomLeft
             // 
@@ -63,7 +64,7 @@
             this.numBottomLeft.Name = "numBottomLeft";
             this.numBottomLeft.Size = new System.Drawing.Size(42, 20);
             this.numBottomLeft.TabIndex = 2;
-            this.numBottomLeft.VisibleChanged += new System.EventHandler(this.num_VisibleChanged);
+            this.numBottomLeft.ValueChanged += new System.EventHandler(this.numBottomLeft_ValueChanged);
             // 
             // numBottomRight
             // 
@@ -72,7 +73,7 @@
             this.numBottomRight.Name = "numBottomRight";
             this.numBottomRight.Size = new System.Drawing.Size(42, 20);
             this.numBottomRight.TabIndex = 3;
-            this.numBottomRight.VisibleChanged += new System.EventHandler(this.num_VisibleChanged);
+            this.numBottomRight.ValueChanged += new System.EventHandler(this.numBottomRight_ValueChanged);
             // 
             // numericUpDown1
             // 
@@ -80,6 +81,7 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
             this.numericUpDown1.TabIndex = 4;
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // CornerRadiusEditorControl
             // 
@@ -92,7 +94,6 @@
             this.Controls.Add(this.numLeftTop);
             this.Name = "CornerRadiusEditorControl";
             this.Size = new System.Drawing.Size(172, 133);
-            this.VisibleChanged += new System.EventHandler(this.num_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.numLeftTop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTopRight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBottomLeft)).EndInit();

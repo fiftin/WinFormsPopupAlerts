@@ -38,9 +38,9 @@ namespace WinFormsPopupAlerts
 
         internal const int DefaultHiddingDelay = 5000;
 
-        public PopupAlert CreateAlert(object[] args)
+        public PopupAlert CreateAlert(object arg, PopupAlertAlignment align)
         {
-            PopupAlert alert = CreateAlertImpl(args);
+            PopupAlert alert = CreateAlertImpl(arg, align);
 
             alert.HiddingStyle = HiddingStyle;
 
@@ -69,9 +69,9 @@ namespace WinFormsPopupAlerts
                 AlertMouseDown(sender, e);
         }
 
-        protected virtual PopupAlert CreateAlertImpl(object[] args)
+        protected virtual PopupAlert CreateAlertImpl(object arg, PopupAlertAlignment align)
         {
-            return new PopupAlert(args);
+            return new PopupAlert(align);
         }
 
         private HiddingStyle hiddingStyle = HiddingStyle.Fade;

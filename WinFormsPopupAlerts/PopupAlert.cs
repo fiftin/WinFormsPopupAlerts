@@ -238,7 +238,10 @@ namespace WinFormsPopupAlerts
         public new virtual Padding Padding
         {
             get { return padding; }
-            set { padding = value; }
+            set
+            {
+                padding = value;
+            }
         }
 
         public int HiddingDuration

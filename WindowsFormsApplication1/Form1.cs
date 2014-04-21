@@ -15,13 +15,13 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            customTooltipAlertRenderer1.CornerRadius = new CornerRadius(25, 25, 25, 25);
+            customTooltipAlertRenderer1.CornerRadius = new CornerRadius(15, 15, 15, 15);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ToolTipIcon icon = icons[r.Next(icons.Length)];
-            popupAlertManager1.Alert(null, texts[r.Next(texts.Length)], icon);
+            popupAlertManager1.Alert("Сайт бесплатных объявлений Сайт бесплатных объявлений Сайт бесплатных объявлений", "Or if you prefer to read the file directly as sbytes, you can do something like that:", ToolTipIcon.Error);
         }
 
         private void button2_Click(object sender, EventArgs e)

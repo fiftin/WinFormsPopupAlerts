@@ -76,7 +76,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        protected override Rectangle getBodyTextRect(Graphics dc, string text, Rectangle rect)
+        protected override Rectangle GetBodyTextRect(Graphics dc, string text, Rectangle rect)
         {
             if (IsDefined(VisualStyleElement.ToolTip.Balloon.Normal))
             {
@@ -91,7 +91,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        protected override Rectangle getTitleTextRect(Graphics dc, string title, Rectangle rect)
+        protected override Rectangle GetTitleTextRect(Graphics dc, string title, Rectangle rect)
         {
             if (IsDefined(VisualStyleElement.ToolTip.BalloonTitle.Normal))
             {
@@ -106,7 +106,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        protected override Size getCloseButtonSize(Graphics dc, TooltipCloseButtonState buttonState)
+        protected override Size GetCloseButtonSize(Graphics dc, TooltipCloseButtonState buttonState)
         {
             VisualStyleElement btn = GetCloseButtonVS(buttonState);
             if (IsDefined(btn))
@@ -129,6 +129,11 @@ namespace WinFormsPopupAlerts
             else
                 ret = new Region(rect);
             return ret;
+        }
+
+        public override Color TransparencyKey
+        {
+            get { return Color.Transparent; }
         }
     }
 }

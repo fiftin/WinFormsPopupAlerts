@@ -113,17 +113,17 @@ namespace WinFormsPopupAlerts
                     break;
             }
             PushAlert(alert);
-            ShowAlertNormal(alert);
+            ShowAlert(alert);
             return alert;
         }
 
         private object movingUpLocker = new object();
-        private IAsyncResult movingUpAsyncResult = null;
-        private bool completeForword = false;
+        //private IAsyncResult movingUpAsyncResult = null;
+        //private bool completeForword = false;
         internal delegate void Proc(IAsyncResult prevAsyncRes);
         HiddenAlertCollection hiddenAlerts = new HiddenAlertCollection();
 
-        public void ShowAlertNormal(PopupAlert alert)
+        public void ShowAlert(PopupAlert alert)
         {
             Rectangle workingRect = Screen.PrimaryScreen.WorkingArea;
             switch (AlertAlignment)

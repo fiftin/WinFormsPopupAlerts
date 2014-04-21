@@ -124,7 +124,6 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        /*
         public override Padding Padding
         {
             get
@@ -139,7 +138,7 @@ namespace WinFormsPopupAlerts
                     ResetRegion();
                 }
             }
-        }*/
+        }
 
         public override Size MaximumSize
         {
@@ -188,22 +187,25 @@ namespace WinFormsPopupAlerts
 
         protected virtual void ResetRegion()
         {
-            //return;
-
             Renderer.MaxSize = MaximumSize;
             Renderer.MinSize = MinimumSize;
-            //Renderer.Padding = Padding;
+            Renderer.Padding = Padding;
             Rectangle rect = new Rectangle(0, 0, MinimumSize.Width, MinimumSize.Height);
+            
             using (Bitmap tempBitmap = new Bitmap(100, 100))
             {
                 using (Graphics g = Graphics.FromImage(tempBitmap))
                 {
                     rect = Renderer.GetRect(g, Title, Text, Icon, CustomIcon);
                     Region = Renderer.GetRegion(g, rect);
+                    if (Renderer.TransparencyKey != Color.Transparent)
+                        TransparencyKey = Renderer.TransparencyKey;
                     closeButtonRect = Renderer.GetCloseButtonRect(g, rect, closeButtonState);
                 }
             }
             Size = rect.Size;
+            if (Renderer.TransparencyKey != Color.Transparent)
+                BackColor = Renderer.TransparencyKey;
         }
 
         protected override void OnPaint(PaintEventArgs e)

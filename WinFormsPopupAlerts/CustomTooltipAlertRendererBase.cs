@@ -11,11 +11,11 @@ namespace WinFormsPopupAlerts
         protected abstract void Draw(System.Drawing.Graphics dc, string title, string text, Rectangle rect, Rectangle titleRect, Rectangle bodyRect, 
             Image img, int iconWidth);
 
-        protected abstract Rectangle getBodyTextRect(System.Drawing.Graphics dc, string text, Rectangle rect);
+        protected abstract Rectangle GetBodyTextRect(System.Drawing.Graphics dc, string text, Rectangle rect);
 
-        protected abstract Rectangle getTitleTextRect(System.Drawing.Graphics dc, string text, Rectangle rect);
+        protected abstract Rectangle GetTitleTextRect(System.Drawing.Graphics dc, string text, Rectangle rect);
 
-        protected abstract Size getCloseButtonSize(Graphics dc, TooltipCloseButtonState buttonState);
+        protected abstract Size GetCloseButtonSize(Graphics dc, TooltipCloseButtonState buttonState);
 
         public override void Draw(System.Drawing.Graphics dc, string title, string text, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
         {
@@ -37,11 +37,14 @@ namespace WinFormsPopupAlerts
             else
             {
                 ret = new Rectangle(new Point(0, 0), MaxSize);
-                ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
-                Rectangle rect = getBodyTextRect(dc, text, ret);
-                if (rect.Width + Padding.Horizontal > MaxSize.Width)
+                int iconWidth = GetIconSize(icon, customIcon).Width;
+                int closeButtonWidth = GetCloseButtonSize(dc, TooltipCloseButtonState.Normal).Width;
+                int w = Padding.Horizontal + iconWidth + closeButtonWidth;
+                ret.Width -= w;
+                Rectangle rect = GetBodyTextRect(dc, text, ret);
+                if (rect.Width + w > MaxSize.Width)
                     ret.Width = MaxSize.Width;
-                else if (rect.Width + Padding.Horizontal < MinSize.Width)
+                else if (rect.Width + w < MinSize.Width)
                     ret.Width = MinSize.Width;
                 else
                     ret.Width = rect.Width;
@@ -61,13 +64,15 @@ namespace WinFormsPopupAlerts
                 ret = new Rectangle(new Point(0, 0), MinSize);
             else
             {
+                int iconWidth =  GetIconSize(icon, customIcon).Width;
+                int closeButtonWidth = GetCloseButtonSize(dc, TooltipCloseButtonState.Normal).Width;
+                int w = Padding.Horizontal + iconWidth + closeButtonWidth;
                 ret = new Rectangle(new Point(0, 0), MaxSize);
-                ret.Width -= Padding.Horizontal + GetIconSize(icon, customIcon).Width;
-                Rectangle rect = getTitleTextRect(dc, title, ret);
-
-                if (rect.Width + Padding.Horizontal > MaxSize.Width)
+                ret.Width -= w;
+                Rectangle rect = GetTitleTextRect(dc, title, ret);
+                if (rect.Width + w > MaxSize.Width)
                     ret.Width = MaxSize.Width;
-                else if (rect.Width + Padding.Horizontal < MinSize.Width)
+                else if (rect.Width + w < MinSize.Width)
                     ret.Width = MinSize.Width;
                 else
                     ret.Width = rect.Width;
@@ -107,7 +112,7 @@ namespace WinFormsPopupAlerts
         public override System.Drawing.Rectangle GetRect(System.Drawing.Graphics dc, System.Drawing.Rectangle titleRect, System.Drawing.Rectangle bodyRect, TooltipAlertIcon icon = TooltipAlertIcon.None, System.Drawing.Image customIcon = null)
         {
             Size iconSize = GetIconSize(icon, customIcon);
-            Rectangle ret = new Rectangle(0, 0, Math.Max(titleRect.Width, bodyRect.Width), titleRect.Height + bodyRect.Height);
+            Rectangle ret = new Rectangle(0, 0, bodyRect.Width, titleRect.Height + bodyRect.Height);
             ret.Width += Padding.Horizontal + iconSize.Width;
             if (iconSize.Height > ret.Height)
                 ret.Height = iconSize.Height;
@@ -117,7 +122,7 @@ namespace WinFormsPopupAlerts
 
         public override System.Drawing.Rectangle GetCloseButtonRect(System.Drawing.Graphics dc, System.Drawing.Rectangle rect, TooltipCloseButtonState buttonState)
         {
-            Size btnSize = getCloseButtonSize(dc, buttonState);
+            Size btnSize = GetCloseButtonSize(dc, buttonState);
             Point btnPos = new Point(rect.Right - Padding.Right - btnSize.Width, rect.Top + Padding.Top);
             Rectangle btnRect = new Rectangle(btnPos, btnSize);
             return btnRect;
@@ -129,11 +134,6 @@ namespace WinFormsPopupAlerts
             dc.DrawRectangle(Pens.Black, btnRect);
             dc.DrawLine(Pens.Black, btnRect.Location, new Point(btnRect.Right, btnRect.Bottom));
             dc.DrawLine(Pens.Black, new Point(btnRect.Right, btnRect.Top), new Point(btnRect.Left, btnRect.Bottom));
-        }
-
-        public override System.Drawing.Region GetRegion(System.Drawing.Graphics dc, System.Drawing.Rectangle rect)
-        {
-            return new Region(rect);
         }
     }
 }

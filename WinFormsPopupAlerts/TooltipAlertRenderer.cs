@@ -20,7 +20,7 @@ namespace WinFormsPopupAlerts
             set { iconPadding = value; }
         }
 
-        public Padding Padding
+        internal Padding Padding
         {
             get { return padding; }
             set { padding = value; }
@@ -74,6 +74,8 @@ namespace WinFormsPopupAlerts
         public abstract void DrawCloseButton(Graphics dc, Rectangle rect, TooltipCloseButtonState buttonState);
 
         public abstract Region GetRegion(Graphics dc, Rectangle rect);
+
+        public abstract Color TransparencyKey { get; }
 
     }
 }

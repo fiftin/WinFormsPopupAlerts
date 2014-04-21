@@ -9,7 +9,6 @@ namespace WinFormsPopupAlerts
     /// </summary>
     public enum TooltipAlertStyle
     {
-        Defualt,
         System,
         Custom,
     }

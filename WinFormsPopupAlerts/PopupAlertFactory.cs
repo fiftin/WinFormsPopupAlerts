@@ -60,7 +60,6 @@ namespace WinFormsPopupAlerts
 
             alert.AlertMouseDown += new EventHandler<MouseEventArgs>(alert_AlertMouseDown);
 
-
             return alert;
         }
 
@@ -74,8 +73,6 @@ namespace WinFormsPopupAlerts
         {
             return new PopupAlert(args);
         }
-
-
 
         private HiddingStyle hiddingStyle = HiddingStyle.Fade;
         private ShowingStyle showingStyle = ShowingStyle.Fade;

@@ -14,9 +14,7 @@ namespace WinFormsPopupAlerts
     {
         public TooltipAlertFactory()
         {
-
             string[] sa = this.GetType().Assembly.GetManifestResourceNames();
-
             foreach (string s in sa)
                 System.Diagnostics.Trace.WriteLine(s);
         }
@@ -24,9 +22,7 @@ namespace WinFormsPopupAlerts
         public TooltipAlertFactory(System.ComponentModel.IContainer container)
             : base(container)
         {
-
             string[] sa = this.GetType().Assembly.GetManifestResourceNames();
-
             foreach (string s in sa)
                 System.Diagnostics.Trace.WriteLine(s);
         }
@@ -36,7 +32,6 @@ namespace WinFormsPopupAlerts
             TooltipAlert alert = new TooltipAlert(args);
             switch (AlertStyle)
             {
-                case TooltipAlertStyle.Defualt:
                 case TooltipAlertStyle.System:
                     alert.Renderer = new SystemTooltipAlertRenderer();
                     break;
@@ -44,7 +39,6 @@ namespace WinFormsPopupAlerts
                     alert.Renderer = CustomRenderer;
                     break;
             }
-            
             return alert;
         }
 
@@ -58,7 +52,7 @@ namespace WinFormsPopupAlerts
             set { customRenderer = value; }
         }
 
-        [DefaultValue(TooltipAlertStyle.Defualt)]
+        [DefaultValue(TooltipAlertStyle.System)]
         public TooltipAlertStyle AlertStyle
         {
             get { return alertStyle; }

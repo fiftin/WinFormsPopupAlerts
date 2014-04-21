@@ -44,14 +44,9 @@ E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsAp
 E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.pdb
 E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.resx
 E:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.Designer.cs
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\ResolveAssemblyReference.cache
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource-ResGen.read.1.tlog
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.read.1.tlog
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.read.1.tlog
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource-ResGen.write.1.tlog
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\GenerateResource.write.1.tlog
-E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\ResGen.write.1.tlog
 d:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.resx
 d:\src\winformspopupalerts\WindowsFormsApplication1\bin\Debug\Properties\Resources.Designer.cs
 d:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
 d:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+E:\src\winformspopupalerts\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache

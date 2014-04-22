@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            WinFormsPopupAlerts.CornerRadius cornerRadius2 = new WinFormsPopupAlerts.CornerRadius();
+            WinFormsPopupAlerts.CornerRadius cornerRadius9 = new WinFormsPopupAlerts.CornerRadius();
             this.btnAlert = new System.Windows.Forms.Button();
             this.btnStartAlerts = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -142,7 +142,7 @@
             this.btnStartAlerts.Name = "btnStartAlerts";
             this.btnStartAlerts.Size = new System.Drawing.Size(126, 23);
             this.btnStartAlerts.TabIndex = 2;
-            this.btnStartAlerts.Text = "Start Alerts";
+            this.btnStartAlerts.Text = "Start alerts";
             this.btnStartAlerts.UseVisualStyleBackColor = true;
             this.btnStartAlerts.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -184,7 +184,7 @@
             // 
             // trackBar1
             // 
-            this.trackBar1.Location = new System.Drawing.Point(5, 116);
+            this.trackBar1.Location = new System.Drawing.Point(5, 105);
             this.trackBar1.Maximum = 2000;
             this.trackBar1.Minimum = 100;
             this.trackBar1.Name = "trackBar1";
@@ -372,18 +372,18 @@
             this.label16.AutoSize = true;
             this.label16.Location = new System.Drawing.Point(0, 87);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(62, 13);
+            this.label16.Size = new System.Drawing.Size(61, 13);
             this.label16.TabIndex = 29;
-            this.label16.Text = "Back Color:";
+            this.label16.Text = "Back color:";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(0, 142);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(93, 13);
+            this.label13.Size = new System.Drawing.Size(89, 13);
             this.label13.TabIndex = 28;
-            this.label13.Text = "Border Thickness:";
+            this.label13.Text = "Border thickness:";
             // 
             // numBorderThickenss
             // 
@@ -419,9 +419,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(0, 118);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(68, 13);
+            this.label12.Size = new System.Drawing.Size(67, 13);
             this.label12.TabIndex = 25;
-            this.label12.Text = "Border Color:";
+            this.label12.Text = "Border color:";
             // 
             // cbHiddingStyle
             // 
@@ -603,7 +603,7 @@
             // 
             this.panel2.Controls.Add(this.rbCustomAlert);
             this.panel2.Controls.Add(this.rbRandomAlert);
-            this.panel2.Location = new System.Drawing.Point(12, 148);
+            this.panel2.Location = new System.Drawing.Point(12, 137);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(126, 42);
             this.panel2.TabIndex = 41;
@@ -613,9 +613,9 @@
             this.rbCustomAlert.AutoSize = true;
             this.rbCustomAlert.Location = new System.Drawing.Point(3, 20);
             this.rbCustomAlert.Name = "rbCustomAlert";
-            this.rbCustomAlert.Size = new System.Drawing.Size(84, 17);
+            this.rbCustomAlert.Size = new System.Drawing.Size(83, 17);
             this.rbCustomAlert.TabIndex = 10;
-            this.rbCustomAlert.Text = "Custom Alert";
+            this.rbCustomAlert.Text = "Custom alert";
             this.rbCustomAlert.UseVisualStyleBackColor = true;
             // 
             // rbRandomAlert
@@ -624,10 +624,10 @@
             this.rbRandomAlert.Checked = true;
             this.rbRandomAlert.Location = new System.Drawing.Point(3, 0);
             this.rbRandomAlert.Name = "rbRandomAlert";
-            this.rbRandomAlert.Size = new System.Drawing.Size(89, 17);
+            this.rbRandomAlert.Size = new System.Drawing.Size(88, 17);
             this.rbRandomAlert.TabIndex = 9;
             this.rbRandomAlert.TabStop = true;
-            this.rbRandomAlert.Text = "Random Alert";
+            this.rbRandomAlert.Text = "Random alert";
             this.rbRandomAlert.UseVisualStyleBackColor = true;
             this.rbRandomAlert.CheckedChanged += new System.EventHandler(this.rbRandomAlert_CheckedChanged);
             // 
@@ -639,9 +639,9 @@
             this.panel3.Controls.Add(this.label10);
             this.panel3.Controls.Add(this.txtText);
             this.panel3.Enabled = false;
-            this.panel3.Location = new System.Drawing.Point(3, 196);
+            this.panel3.Location = new System.Drawing.Point(3, 185);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(140, 235);
+            this.panel3.Size = new System.Drawing.Size(140, 221);
             this.panel3.TabIndex = 42;
             // 
             // panel4
@@ -653,7 +653,7 @@
             this.panel4.Controls.Add(this.rbIconNone);
             this.panel4.Location = new System.Drawing.Point(4, 120);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(130, 110);
+            this.panel4.Size = new System.Drawing.Size(130, 95);
             this.panel4.TabIndex = 40;
             // 
             // label11
@@ -710,7 +710,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(9, 101);
+            this.label14.Location = new System.Drawing.Point(9, 90);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(41, 13);
             this.label14.TabIndex = 41;
@@ -859,6 +859,7 @@
             0,
             0,
             0});
+            this.numMinWidth.ValueChanged += new System.EventHandler(this.numMinWidth_ValueChanged);
             // 
             // numMaxWidth
             // 
@@ -881,13 +882,13 @@
             0,
             0,
             0});
+            this.numMaxWidth.ValueChanged += new System.EventHandler(this.numMaxWidth_ValueChanged);
             // 
             // popupAlertManager1
             // 
             this.popupAlertManager1.AlertFactory = this.tooltipAlertFactory1;
             this.popupAlertManager1.AlertsMaxCount = 5;
             this.popupAlertManager1.ContainerControl = this;
-            this.popupAlertManager1.PopupDuration = 100;
             // 
             // tooltipAlertFactory1
             // 
@@ -904,11 +905,11 @@
             this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.Gray;
             this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.Black;
             this.customTooltipAlertRenderer1.BorderThickness = 1;
-            cornerRadius2.BottomLeft = 0;
-            cornerRadius2.BottomRight = 10;
-            cornerRadius2.TopLeft = 10;
-            cornerRadius2.TopRight = 0;
-            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius2;
+            cornerRadius9.BottomLeft = 0;
+            cornerRadius9.BottomRight = 10;
+            cornerRadius9.TopLeft = 10;
+            cornerRadius9.TopRight = 0;
+            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius9;
             this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.White;
             this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);

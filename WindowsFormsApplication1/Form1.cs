@@ -31,6 +31,8 @@ namespace WindowsFormsApplication1
             numTopRight.Value = customTooltipAlertRenderer1.CornerRadius.TopRight;
             numBottomLeft.Value = customTooltipAlertRenderer1.CornerRadius.BottomLeft;
             numBottomRight.Value = customTooltipAlertRenderer1.CornerRadius.BottomRight;
+            numMaxWidth.Value = tooltipAlertFactory1.MaximumSize.Width;
+            numMinWidth.Value = tooltipAlertFactory1.MinimumSize.Width;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,7 +42,16 @@ namespace WindowsFormsApplication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = !timer1.Enabled;
+            if (timer1.Enabled)
+            {
+                timer1.Enabled = false;
+                btnStartAlerts.Text = "Start alerts";
+            }
+            else
+            {
+                timer1.Enabled = true;
+                btnStartAlerts.Text = "Stop alerts";
+            }
         }
 
         Random r = new Random();
@@ -284,6 +295,16 @@ namespace WindowsFormsApplication1
         private void rbRandomAlert_CheckedChanged(object sender, EventArgs e)
         {
             panel3.Enabled = !rbRandomAlert.Checked;
+        }
+
+        private void numMaxWidth_ValueChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.MaximumSize = new Size((int)numMaxWidth.Value, tooltipAlertFactory1.MaximumSize.Height);
+        }
+
+        private void numMinWidth_ValueChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.MinimumSize = new Size((int)numMinWidth.Value, tooltipAlertFactory1.MinimumSize.Height);
         }
 
 

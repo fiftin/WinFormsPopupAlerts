@@ -202,14 +202,6 @@ namespace WinFormsPopupAlerts
             set { alertsMaxCount = value; }
         }
 
-        private int popupDuration = DefualtPopupDuration;
-
-        [DefaultValue(DefualtPopupDuration)]
-        public int PopupDuration
-        {
-            get { return popupDuration; }
-            set { popupDuration = value; }
-        }
         private PopupAlertAlignment alertAlignment = DefaultAlertAlignment;
 
         [DefaultValue(DefaultAlertAlignment)]
@@ -219,7 +211,6 @@ namespace WinFormsPopupAlerts
             set { alertAlignment = value; }
         }
 
-        private const int DefualtPopupDuration = 300;
         private const int DefaultVGap = 5;
         private const int DefaultHGap = 5;
         private const int DefaultAlertsMaxCount = 10;

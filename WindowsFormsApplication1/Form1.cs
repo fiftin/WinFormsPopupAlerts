@@ -15,6 +15,18 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
+            cbHiddingStyle.SelectedIndex = (int)tooltipAlertFactory1.HiddingStyle;
+            cbShowingStyle.SelectedIndex = (int)tooltipAlertFactory1.ShowingStyle;
+            btnTitleFont.Font = customTooltipAlertRenderer1.TitleFont;
+            picTitleColor.BackColor = customTooltipAlertRenderer1.TitleForeColor;
+            btnTextFont.Font = customTooltipAlertRenderer1.Font;
+            picTitleColor.BackColor = customTooltipAlertRenderer1.TitleForeColor;
+            picBackColor.BackColor = customTooltipAlertRenderer1.BackColor;
+            picTextColor.BackColor = customTooltipAlertRenderer1.ForeColor;
+            picBorderColor.BackColor = customTooltipAlertRenderer1.BorderColor;
+            numBorderThickenss.Value = customTooltipAlertRenderer1.BorderThickness;
+            numVGap.Value = popupAlertManager1.VGap;
+            numAlertMaxCount.Value = popupAlertManager1.AlertsMaxCount;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -72,5 +84,157 @@ namespace WindowsFormsApplication1
             ToolTipIcon icon = icons[r.Next(icons.Length)];
             popupAlertManager1.Alert(new TooltipAlertArg(titles[r.Next(titles.Length)], texts[r.Next(texts.Length)], icon));
         }
+
+        private void rbSystemStyle_CheckedChanged(object sender, EventArgs e)
+        {
+            panel1.Enabled = !rbSystemStyle.Checked;
+            tooltipAlertFactory1.AlertStyle = rbSystemStyle.Checked ? TooltipAlertStyle.System : TooltipAlertStyle.Custom;
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(Pens.Gray, 150, 5, 150, Height-35);
+            e.Graphics.DrawLine(Pens.White, 151, 5, 151, Height-35);
+        }
+
+        private void SetAlignButtonColor(Button button)
+        {
+            Button[] alignButtons = { btnTopLeft, btnTopRight, btnBottomLeft, btnBottomRight };
+            foreach (Button x in alignButtons)
+            {
+                if (x == button)
+                    x.BackColor = Color.Red;
+                else
+                    x.BackColor = Color.Transparent;
+            }
+        }
+
+        private void btnTopLeft_Click(object sender, EventArgs e)
+        {
+            SetAlignButtonColor((Button)sender);
+            popupAlertManager1.AlertAlignment = PopupAlertAlignment.TopLeft;
+        }
+
+        private void btnTopRight_Click(object sender, EventArgs e)
+        {
+            SetAlignButtonColor((Button)sender);
+            popupAlertManager1.AlertAlignment = PopupAlertAlignment.TopRight;
+        }
+
+        private void btnBottomLeft_Click(object sender, EventArgs e)
+        {
+            SetAlignButtonColor((Button)sender);
+            popupAlertManager1.AlertAlignment = PopupAlertAlignment.BottomLeft;
+        }
+
+        private void btnBottomRight_Click(object sender, EventArgs e)
+        {
+            SetAlignButtonColor((Button)sender);
+            popupAlertManager1.AlertAlignment = PopupAlertAlignment.BottomRight;
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            timer1.Interval = trackBar1.Value;
+        }
+
+        private void numHiddingDelay_ValueChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.HiddingDelay = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numHiddingDur_ValueChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.HiddingDuration = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numShowingDur_ValueChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.ShowingDuration = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void cbHiddingStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.HiddingStyle = (HiddingStyle)((ComboBox)sender).SelectedIndex;
+        }
+
+        private void cbShowingStyle_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tooltipAlertFactory1.ShowingStyle = (ShowingStyle)((ComboBox)sender).SelectedIndex;
+        }
+
+        private void btnTitleFont_Click(object sender, EventArgs e)
+        {
+            fontDialog1.Font = btnTitleFont.Font;
+            if (fontDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                btnTitleFont.Font = fontDialog1.Font;
+                customTooltipAlertRenderer1.TitleFont = fontDialog1.Font;
+            }
+        }
+
+        private void btnTextFont_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picTitleColor_Click(object sender, EventArgs e)
+        {
+            colorDialog1.Color = customTooltipAlertRenderer1.TitleForeColor;
+            if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                picTitleColor.BackColor = colorDialog1.Color;
+                customTooltipAlertRenderer1.TitleForeColor = colorDialog1.Color;
+            }
+        }
+
+        private void picTextColor_Click(object sender, EventArgs e)
+        {
+            colorDialog1.Color = customTooltipAlertRenderer1.ForeColor;
+            if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                picTextColor.BackColor = colorDialog1.Color;
+                customTooltipAlertRenderer1.ForeColor = colorDialog1.Color;
+            }
+
+        }
+
+        private void picBackColor_Click(object sender, EventArgs e)
+        {
+            colorDialog1.Color = customTooltipAlertRenderer1.BackColor;
+            if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                picBackColor.BackColor = colorDialog1.Color;
+                customTooltipAlertRenderer1.BackColor = colorDialog1.Color;
+            }
+
+        }
+
+        private void picBorderColor_Click(object sender, EventArgs e)
+        {
+            colorDialog1.Color = customTooltipAlertRenderer1.BorderColor;
+            if (colorDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                picBorderColor.BackColor = colorDialog1.Color;
+                customTooltipAlertRenderer1.BorderColor = colorDialog1.Color;
+            }
+        }
+
+        private void numBorderThickenss_ValueChanged(object sender, EventArgs e)
+        {
+            customTooltipAlertRenderer1.BorderThickness = (int)numBorderThickenss.Value;
+        }
+
+        private void numVGap_ValueChanged(object sender, EventArgs e)
+        {
+            popupAlertManager1.VGap = (int)numVGap.Value;
+        }
+
+        private void numAlertMaxCount_ValueChanged(object sender, EventArgs e)
+        {
+            popupAlertManager1.AlertsMaxCount = (int)numAlertMaxCount.Value;
+        }
+
+
     }
 }

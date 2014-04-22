@@ -7,7 +7,7 @@ namespace WinFormsPopupAlerts
     public enum HiddingStyle
     {
         Simple,
-        Fade,
         Slide,
+        Fade,
     }
 }

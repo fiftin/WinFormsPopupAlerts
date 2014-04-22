@@ -27,23 +27,43 @@ namespace WindowsFormsApplication1
             numBorderThickenss.Value = customTooltipAlertRenderer1.BorderThickness;
             numVGap.Value = popupAlertManager1.VGap;
             numAlertMaxCount.Value = popupAlertManager1.AlertsMaxCount;
+            numTopLeft.Value = customTooltipAlertRenderer1.CornerRadius.TopLeft;
+            numTopRight.Value = customTooltipAlertRenderer1.CornerRadius.TopRight;
+            numBottomLeft.Value = customTooltipAlertRenderer1.CornerRadius.BottomLeft;
+            numBottomRight.Value = customTooltipAlertRenderer1.CornerRadius.BottomRight;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ToolTipIcon icon = icons[r.Next(icons.Length)];
-            popupAlertManager1.Alert(new TooltipAlertArg("Сайт бесплатных объявлений Сайт бесплатных объявлений Сайт бесплатных объявлений", "Or if you prefer to read the file directly as sbytes, you can do something like that:", ToolTipIcon.Error));
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            ToolTipIcon icon = icons[r.Next(icons.Length)];
-            notifyIcon1.ShowBalloonTip(10, titles[r.Next(titles.Length)], texts[r.Next(texts.Length)], icon);
+            Alert();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             timer1.Enabled = !timer1.Enabled;
+        }
+
+        Random r = new Random();
+        ToolTipIcon[] icons = (ToolTipIcon[])Enum.GetValues(typeof(ToolTipIcon));
+        private void Alert()
+        {
+            ToolTipIcon icon = icons[r.Next(icons.Length)];
+            if (rbCustomAlert.Checked)
+                popupAlertManager1.Alert(new TooltipAlertArg(txtTitle.Text, txtText.Text, GetCustomIcon()));
+            else
+                popupAlertManager1.Alert(new TooltipAlertArg(titles[r.Next(titles.Length)], texts[r.Next(texts.Length)], icon));
+        }
+
+        private ToolTipIcon GetCustomIcon()
+        {
+            if (rbIconError.Checked)
+                return ToolTipIcon.Error;
+            else if (rbIconWarning.Checked)
+                return ToolTipIcon.Warning;
+            else if (rbIconInfo.Checked)
+                return ToolTipIcon.Info;
+            else
+                return ToolTipIcon.None;
         }
 
         string[] titles = new string[] {
@@ -77,12 +97,9 @@ namespace WindowsFormsApplication1
             "Hey guys, You may have noticed that you've been logged out from the Marketplaces on all devices you used previously. This is a security measure in reaction to an OpenSSL vulnerability. Please take a moment to read through this article via the Notes: http://enva.to/1lQ2myl and if you haven't done so already, be sure to change your account password ASAP. Thank you! ^Contrastblack"
         };
 
-        Random r = new Random();
-        ToolTipIcon[] icons = (ToolTipIcon[])Enum.GetValues(typeof(ToolTipIcon));
         private void timer1_Tick(object sender, EventArgs e)
         {
-            ToolTipIcon icon = icons[r.Next(icons.Length)];
-            popupAlertManager1.Alert(new TooltipAlertArg(titles[r.Next(titles.Length)], texts[r.Next(texts.Length)], icon));
+            Alert();
         }
 
         private void rbSystemStyle_CheckedChanged(object sender, EventArgs e)
@@ -233,6 +250,40 @@ namespace WindowsFormsApplication1
         private void numAlertMaxCount_ValueChanged(object sender, EventArgs e)
         {
             popupAlertManager1.AlertsMaxCount = (int)numAlertMaxCount.Value;
+        }
+
+        private void numAll_ValueChanged(object sender, EventArgs e)
+        {
+            numTopLeft.Value = numAll.Value;
+            numTopRight.Value = numAll.Value;
+            numBottomLeft.Value = numAll.Value;
+            numBottomRight.Value = numAll.Value;
+        }
+
+        private void numTopLeft_ValueChanged(object sender, EventArgs e)
+        {
+            customTooltipAlertRenderer1.CornerRadius.TopLeft = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numTopRight_ValueChanged(object sender, EventArgs e)
+        {
+
+            customTooltipAlertRenderer1.CornerRadius.TopRight = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numBottomLeft_ValueChanged(object sender, EventArgs e)
+        {
+            customTooltipAlertRenderer1.CornerRadius.BottomLeft = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void numBottomRight_ValueChanged(object sender, EventArgs e)
+        {
+            customTooltipAlertRenderer1.CornerRadius.BottomRight = (int)((NumericUpDown)sender).Value;
+        }
+
+        private void rbRandomAlert_CheckedChanged(object sender, EventArgs e)
+        {
+            panel3.Enabled = !rbRandomAlert.Checked;
         }
 
 

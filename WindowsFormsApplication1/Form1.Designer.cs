@@ -29,23 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             WinFormsPopupAlerts.CornerRadius cornerRadius2 = new WinFormsPopupAlerts.CornerRadius();
             this.btnAlert = new System.Windows.Forms.Button();
-            this.btnBalloonTip = new System.Windows.Forms.Button();
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.btnStartAlerts = new System.Windows.Forms.Button();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.rbSystemStyle = new System.Windows.Forms.RadioButton();
             this.rbCustomStyle = new System.Windows.Forms.RadioButton();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.numTopLeft = new System.Windows.Forms.NumericUpDown();
+            this.numTopRight = new System.Windows.Forms.NumericUpDown();
+            this.numBottomLeft = new System.Windows.Forms.NumericUpDown();
+            this.numBottomRight = new System.Windows.Forms.NumericUpDown();
+            this.numAll = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -90,9 +86,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.numHiddingDelay = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
-            this.popupAlertManager1 = new WinFormsPopupAlerts.PopupAlertManager(this.components);
-            this.tooltipAlertFactory1 = new WinFormsPopupAlerts.TooltipAlertFactory(this.components);
-            this.customTooltipAlertRenderer1 = new WinFormsPopupAlerts.CustomTooltipAlertRenderer();
             this.numAlertMaxCount = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
             this.numVGap = new System.Windows.Forms.NumericUpDown();
@@ -105,12 +98,15 @@
             this.numMaxWidth = new System.Windows.Forms.NumericUpDown();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.popupAlertManager1 = new WinFormsPopupAlerts.PopupAlertManager(this.components);
+            this.tooltipAlertFactory1 = new WinFormsPopupAlerts.TooltipAlertFactory(this.components);
+            this.customTooltipAlertRenderer1 = new WinFormsPopupAlerts.CustomTooltipAlertRenderer();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTopLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTopRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBottomLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBottomRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTitleColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).BeginInit();
             this.panel1.SuspendLayout();
@@ -140,37 +136,15 @@
             this.btnAlert.UseVisualStyleBackColor = true;
             this.btnAlert.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnBalloonTip
-            // 
-            this.btnBalloonTip.Location = new System.Drawing.Point(12, 35);
-            this.btnBalloonTip.Name = "btnBalloonTip";
-            this.btnBalloonTip.Size = new System.Drawing.Size(126, 23);
-            this.btnBalloonTip.TabIndex = 1;
-            this.btnBalloonTip.Text = "Balloon Tip";
-            this.btnBalloonTip.UseVisualStyleBackColor = true;
-            this.btnBalloonTip.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // notifyIcon1
-            // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
-            // 
             // btnStartAlerts
             // 
-            this.btnStartAlerts.Location = new System.Drawing.Point(12, 70);
+            this.btnStartAlerts.Location = new System.Drawing.Point(11, 36);
             this.btnStartAlerts.Name = "btnStartAlerts";
             this.btnStartAlerts.Size = new System.Drawing.Size(126, 23);
             this.btnStartAlerts.TabIndex = 2;
             this.btnStartAlerts.Text = "Start Alerts";
             this.btnStartAlerts.UseVisualStyleBackColor = true;
             this.btnStartAlerts.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.IsBalloon = true;
-            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Warning;
-            this.toolTip1.ToolTipTitle = "TEstTest";
             // 
             // timer1
             // 
@@ -220,40 +194,55 @@
             this.trackBar1.Value = 100;
             this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
             // 
-            // numericUpDown1
+            // numTopLeft
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(255, 81);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown1.TabIndex = 10;
+            this.numTopLeft.Location = new System.Drawing.Point(255, 81);
+            this.numTopLeft.Name = "numTopLeft";
+            this.numTopLeft.Size = new System.Drawing.Size(41, 20);
+            this.numTopLeft.TabIndex = 10;
+            this.numTopLeft.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numTopLeft.ValueChanged += new System.EventHandler(this.numTopLeft_ValueChanged);
             // 
-            // numericUpDown2
+            // numTopRight
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(334, 81);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown2.TabIndex = 11;
+            this.numTopRight.Location = new System.Drawing.Point(334, 81);
+            this.numTopRight.Name = "numTopRight";
+            this.numTopRight.Size = new System.Drawing.Size(41, 20);
+            this.numTopRight.TabIndex = 11;
+            this.numTopRight.ValueChanged += new System.EventHandler(this.numTopRight_ValueChanged);
             // 
-            // numericUpDown3
+            // numBottomLeft
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(255, 125);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown3.TabIndex = 12;
+            this.numBottomLeft.Location = new System.Drawing.Point(255, 125);
+            this.numBottomLeft.Name = "numBottomLeft";
+            this.numBottomLeft.Size = new System.Drawing.Size(41, 20);
+            this.numBottomLeft.TabIndex = 12;
+            this.numBottomLeft.ValueChanged += new System.EventHandler(this.numBottomLeft_ValueChanged);
             // 
-            // numericUpDown4
+            // numBottomRight
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(334, 125);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown4.TabIndex = 13;
+            this.numBottomRight.Location = new System.Drawing.Point(334, 125);
+            this.numBottomRight.Name = "numBottomRight";
+            this.numBottomRight.Size = new System.Drawing.Size(41, 20);
+            this.numBottomRight.TabIndex = 13;
+            this.numBottomRight.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numBottomRight.ValueChanged += new System.EventHandler(this.numBottomRight_ValueChanged);
             // 
-            // numericUpDown5
+            // numAll
             // 
-            this.numericUpDown5.Location = new System.Drawing.Point(296, 104);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(41, 20);
-            this.numericUpDown5.TabIndex = 14;
+            this.numAll.Location = new System.Drawing.Point(296, 104);
+            this.numAll.Name = "numAll";
+            this.numAll.Size = new System.Drawing.Size(41, 20);
+            this.numAll.TabIndex = 14;
+            this.numAll.ValueChanged += new System.EventHandler(this.numAll_ValueChanged);
             // 
             // label2
             // 
@@ -350,15 +339,15 @@
             this.panel1.Controls.Add(this.label12);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.picTextColor);
-            this.panel1.Controls.Add(this.numericUpDown1);
+            this.panel1.Controls.Add(this.numTopLeft);
             this.panel1.Controls.Add(this.btnTextFont);
-            this.panel1.Controls.Add(this.numericUpDown2);
+            this.panel1.Controls.Add(this.numTopRight);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.numericUpDown3);
+            this.panel1.Controls.Add(this.numBottomLeft);
             this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.numericUpDown4);
+            this.panel1.Controls.Add(this.numBottomRight);
             this.panel1.Controls.Add(this.picTitleColor);
-            this.panel1.Controls.Add(this.numericUpDown5);
+            this.panel1.Controls.Add(this.numAll);
             this.panel1.Controls.Add(this.btnTitleFont);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label5);
@@ -640,6 +629,7 @@
             this.rbRandomAlert.TabStop = true;
             this.rbRandomAlert.Text = "Random Alert";
             this.rbRandomAlert.UseVisualStyleBackColor = true;
+            this.rbRandomAlert.CheckedChanged += new System.EventHandler(this.rbRandomAlert_CheckedChanged);
             // 
             // panel3
             // 
@@ -757,41 +747,6 @@
             this.label15.Size = new System.Drawing.Size(74, 13);
             this.label15.TabIndex = 44;
             this.label15.Text = "Hidding delay:";
-            // 
-            // popupAlertManager1
-            // 
-            this.popupAlertManager1.AlertFactory = this.tooltipAlertFactory1;
-            this.popupAlertManager1.AlertsMaxCount = 5;
-            this.popupAlertManager1.ContainerControl = this;
-            this.popupAlertManager1.PopupDuration = 100;
-            // 
-            // tooltipAlertFactory1
-            // 
-            this.tooltipAlertFactory1.CustomRenderer = this.customTooltipAlertRenderer1;
-            this.tooltipAlertFactory1.HiddingDuration = 100;
-            this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HiddingStyle.Slide;
-            this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(300, 300);
-            this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(250, 0);
-            this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(10);
-            this.tooltipAlertFactory1.ShowingDuration = 100;
-            // 
-            // customTooltipAlertRenderer1
-            // 
-            this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.Gray;
-            this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.Black;
-            this.customTooltipAlertRenderer1.BorderThickness = 1;
-            cornerRadius2.BottomLeft = 0;
-            cornerRadius2.BottomRight = 10;
-            cornerRadius2.TopLeft = 10;
-            cornerRadius2.TopRight = 0;
-            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius2;
-            this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.White;
-            this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);
-            this.customTooltipAlertRenderer1.MaxSize = new System.Drawing.Size(0, 0);
-            this.customTooltipAlertRenderer1.MinSize = new System.Drawing.Size(0, 0);
-            this.customTooltipAlertRenderer1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.customTooltipAlertRenderer1.TitleForeColor = System.Drawing.Color.White;
             // 
             // numAlertMaxCount
             // 
@@ -927,6 +882,41 @@
             0,
             0});
             // 
+            // popupAlertManager1
+            // 
+            this.popupAlertManager1.AlertFactory = this.tooltipAlertFactory1;
+            this.popupAlertManager1.AlertsMaxCount = 5;
+            this.popupAlertManager1.ContainerControl = this;
+            this.popupAlertManager1.PopupDuration = 100;
+            // 
+            // tooltipAlertFactory1
+            // 
+            this.tooltipAlertFactory1.CustomRenderer = this.customTooltipAlertRenderer1;
+            this.tooltipAlertFactory1.HiddingDuration = 100;
+            this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HiddingStyle.Slide;
+            this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(300, 300);
+            this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(250, 0);
+            this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(10);
+            this.tooltipAlertFactory1.ShowingDuration = 100;
+            // 
+            // customTooltipAlertRenderer1
+            // 
+            this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.Gray;
+            this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.Black;
+            this.customTooltipAlertRenderer1.BorderThickness = 1;
+            cornerRadius2.BottomLeft = 0;
+            cornerRadius2.BottomRight = 10;
+            cornerRadius2.TopLeft = 10;
+            cornerRadius2.TopRight = 0;
+            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius2;
+            this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.White;
+            this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);
+            this.customTooltipAlertRenderer1.MaxSize = new System.Drawing.Size(0, 0);
+            this.customTooltipAlertRenderer1.MinSize = new System.Drawing.Size(0, 0);
+            this.customTooltipAlertRenderer1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.customTooltipAlertRenderer1.TitleForeColor = System.Drawing.Color.White;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -960,22 +950,18 @@
             this.Controls.Add(this.rbSystemStyle);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStartAlerts);
-            this.Controls.Add(this.btnBalloonTip);
             this.Controls.Add(this.btnAlert);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
             this.Text = "WinFormsPopupAlert";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTopLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTopRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBottomLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numBottomRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTitleColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picTextColor)).EndInit();
             this.panel1.ResumeLayout(false);
@@ -1005,23 +991,20 @@
         #endregion
 
         private System.Windows.Forms.Button btnAlert;
-        private System.Windows.Forms.Button btnBalloonTip;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
         private WinFormsPopupAlerts.PopupAlertManager popupAlertManager1;
         private WinFormsPopupAlerts.TooltipAlertFactory tooltipAlertFactory1;
         private System.Windows.Forms.Button btnStartAlerts;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Timer timer1;
         private WinFormsPopupAlerts.CustomTooltipAlertRenderer customTooltipAlertRenderer1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RadioButton rbSystemStyle;
         private System.Windows.Forms.RadioButton rbCustomStyle;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numAll;
+        private System.Windows.Forms.NumericUpDown numBottomRight;
+        private System.Windows.Forms.NumericUpDown numBottomLeft;
+        private System.Windows.Forms.NumericUpDown numTopRight;
+        private System.Windows.Forms.NumericUpDown numTopLeft;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;

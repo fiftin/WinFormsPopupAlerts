@@ -36,21 +36,21 @@ namespace WinFormsPopupAlerts
 
         public override System.Drawing.Rectangle GetBodyRect(System.Drawing.Graphics dc, string title, string text, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null)
         {
+            int iconWidth = GetIconSize(icon, customImage).Width;
+            int closeButtonWidth = GetCloseButtonSize(dc, TooltipCloseButtonState.Normal).Width;
+            int w = Padding.Horizontal + iconWidth + closeButtonWidth;
             Rectangle ret;
-            if (text == null)
-                ret = new Rectangle(new Point(0, 0), MinSize);
+            if (string.IsNullOrEmpty(text))
+                ret = new Rectangle(new Point(0, 0), new Size(MinSize.Width - w, MinSize.Height));
             else
             {
                 ret = new Rectangle(new Point(0, 0), MaxSize);
-                int iconWidth = GetIconSize(icon, customImage).Width;
-                int closeButtonWidth = GetCloseButtonSize(dc, TooltipCloseButtonState.Normal).Width;
-                int w = Padding.Horizontal + iconWidth + closeButtonWidth;
                 ret.Width -= w;
                 Rectangle rect = GetBodyTextRect(dc, text, ret);
                 if (rect.Width + w > MaxSize.Width)
-                    ret.Width = MaxSize.Width;
+                    ret.Width = MaxSize.Width - w;
                 else if (rect.Width + w < MinSize.Width)
-                    ret.Width = MinSize.Width;
+                    ret.Width = MinSize.Width - w;
                 else
                     ret.Width = rect.Width;
 
@@ -65,7 +65,7 @@ namespace WinFormsPopupAlerts
         public override System.Drawing.Rectangle GetTitleRect(System.Drawing.Graphics dc, string title, string text, ToolTipIcon icon = ToolTipIcon.None, System.Drawing.Image customImage = null)
         {
             Rectangle ret;
-            if (title == null)
+            if (string.IsNullOrEmpty(title))
                 ret = new Rectangle(new Point(0, 0), MinSize);
             else
             {
@@ -76,9 +76,9 @@ namespace WinFormsPopupAlerts
                 ret.Width -= w;
                 Rectangle rect = GetTitleTextRect(dc, title, ret);
                 if (rect.Width + w > MaxSize.Width)
-                    ret.Width = MaxSize.Width;
+                    ret.Width = MaxSize.Width - w;
                 else if (rect.Width + w < MinSize.Width)
-                    ret.Width = MinSize.Width;
+                    ret.Width = MinSize.Width - w;
                 else
                     ret.Width = rect.Width;
 

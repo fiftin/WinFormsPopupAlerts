@@ -8,9 +8,7 @@ using System.Windows.Forms;
 
 namespace WinFormsPopupAlerts
 {
-
-
-    [ToolboxBitmapAttribute(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\CustomTooltipAlertRenderer.bmp")]
+    [ToolboxBitmapAttribute(typeof(CustomTooltipAlertRenderer))]
     public class CustomTooltipAlertRenderer : CustomTooltipAlertRendererBase
     {
 

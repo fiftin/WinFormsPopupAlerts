@@ -5,6 +5,9 @@ using System.ComponentModel;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// Represents the radii of a rectangle's corners.
+    /// </summary>
     [TypeConverter(typeof(CornerRadiusConverter))]
     public class CornerRadius
     {
@@ -31,54 +34,46 @@ namespace WinFormsPopupAlerts
         private int topLeft;
         private int topRight;
 
+        /// <summary>
+        /// Gets or sets the radius of the top-right corner. 
+        /// </summary>
         public int TopRight
         {
             get { return topRight; }
             set { topRight = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the radius of the top-left corner. 
+        /// </summary>
         public int TopLeft
         {
             get { return topLeft; }
             set { topLeft = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the radius of the bottom-right corner. 
+        /// </summary>
         public int BottomRight
         {
             get { return bottomRight; }
             set { bottomRight = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the radius of the bottom-left corner. 
+        /// </summary>
         public int BottomLeft
         {
             get { return bottomLeft; }
             set { bottomLeft = value; }
         }
+
+
         public bool Equals(int r)
         {
             return r == TopLeft && r == TopRight && r == BottomLeft && r == BottomRight;
         }
-        //public override bool Equals(object obj)
-        //{
-        //    if (obj is CornerRadius)
-        //    {
-        //        CornerRadius other = (CornerRadius)obj;
-        //        return other.TopLeft == TopLeft && other.TopRight == TopRight && other.BottomLeft == BottomLeft && other.BottomRight == BottomRight;
-        //    }
-        //    else if (obj is int)
-        //    {
-        //        int r = (int)obj;
-        //        return r == TopLeft && r == TopRight && r == BottomLeft && r == BottomRight;
-        //    }
-        //    throw new ArgumentException();
-        //}
-        //
-        //public override int GetHashCode()
-        //{
-        //    string s = string.Format("{0:00}{1:00}{2:00}{3:00}", TopLeft, TopRight, BottomLeft, BottomRight);
-        //    if (s.Length > 8)
-        //        s = s.Substring(1, 8);
-        //    return int.Parse(s);
-        //}
     }
 }

@@ -86,7 +86,6 @@
     <Compile Include="PopupAlertManager.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PopupStyle.cs" />
     <Compile Include="ShowingStyle.cs" />
     <Compile Include="TooltipAlertStyle.cs" />
     <Compile Include="TooltipAlert.cs">
@@ -124,13 +123,16 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PopupAlertManager.bmp" />
+    <EmbeddedResource Include="PopupAlertManager.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PopupAlertFactory.bmp" />
+    <EmbeddedResource Include="PopupAlertFactory.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="TooltipAlertFactory.bmp" />
+    <EmbeddedResource Include="TooltipAlertFactory.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomTooltipAlertRenderer.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

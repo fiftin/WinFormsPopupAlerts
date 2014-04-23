@@ -8,7 +8,7 @@ using System.ComponentModel.Design;
 
 namespace WinFormsPopupAlerts
 {
-    [ToolboxBitmapAttribute(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\PopupAlertManager.bmp")]
+    [ToolboxBitmapAttribute(typeof(PopupAlertManager))]
     public class PopupAlertManager : Component
     {
         private class HiddenAlertCollection

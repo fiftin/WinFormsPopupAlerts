@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.Drawing;
 using WinFormsPopupAlerts.Properties;
 
+
+
 namespace WinFormsPopupAlerts
 {
-    internal class resfinder { }
-    [ToolboxBitmap(@"e:\src\winformspopupalerts\WinFormsPopupAlerts\TooltipAlertFactory.bmp")]
+    [ToolboxBitmap(typeof(TooltipAlertFactory))]
     [ToolboxItem(true)]
     public class TooltipAlertFactory : PopupAlertFactory
     {

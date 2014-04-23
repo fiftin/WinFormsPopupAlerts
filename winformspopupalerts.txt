@@ -1,24 +1,67 @@
-Если ваше приложение должно работать в фоновом режиме и информировать пользователя о происхождении каких-либо событий (например мессенджер, то этот компонент будет вам очень полезен. Windows.Forms для таких целей предоставляет компонент NotifyIcon, который позволяет выводить всплывающие подсказки. Но он имеет очень ограниченные возможности. В отличие от него, WinFormsPopupAlerts выстраивает в очередь выводимые сообщения, позволяет настраивать их цвет, форму, размеры, шрифты, эффекты появления новых и скрытия старых сообщений.
-
-В отличае от него, WinFormsPopupAlerts позволяет выводить
-всплывающее сообщение нужного вам вида, с различными эффектами появления и скрытия, в любом из углов экрана.
+Если ваше приложение (например мессенджер) должно работать в фоновом режиме и информировать пользователя о происхождении каких-либо событий, то WinFormsPopupAlerts будет вам очень полезен. Windows.Forms для таких целей предоставляет компонент NotifyIcon. Но он имеет очень ограниченные возможности - позволяет только выводить всплывающие подсказки. В отличие от него, WinFormsPopupAlerts позволяет:
+выстроить выводимые сообщения в очередь;
+настраивать цвета, формы, размеры, шрифты сообщений;
+задавать эффекты появления и скрытия сообщений.
+Также, на основе WinFormsPopupAlerts, путем наследования и переопределения методов, вы можете добавить нужное вам поведение, которое не реализовано в текущей версии компонента.
 -------------------------------------------
 WinFormsPopupAlerts включает 3 главных компонета:
 PopupAlertManager
 TooltipAlertFactory
 CustomTooltimAlertRenderer.
-PopupAlertManager обеспечивает управление очередью сообщений:
+---------- PopupAlertManager ----------
+Обеспечивает управление очередью сообщений:
 задает расстояние между соседними сообщениями,
 расстояние от сообщения до края экрана,
-угол в котором будут появляться новые сообщения,
+угол экрана в котором будут появляться новые сообщения,
 максимальное число отображаемых сообщений,
 ссылка на объект класса PopupAlertFactory, который будет использоваться для создания новых сообщений.
---------------------
-TooltipAlertFactory - наследуется от класса PopupAlertFactory. Отвечает за создание новых сообщений. Омеет следующие свойства:
+---------- TooltipAlertFactory ----------
+Наследуется от класса PopupAlertFactory. Отвечает за создание новых сообщений. Омеет следующие свойства:
 AlertStyle - стиль отображаемых сообщений. Может принимать значение System - в этом случае создаваемые сообщения, выгледят как системные всплывающие подсказки.
 Custom - для отрисовки сообщения будет использоваться указанный пользователем в свойстве CustomRenderer объект класса CustomTooltipAlertRenderer, который будет описан ниже.
 HiddingDelay - время, в миллисекундах, через которое после создания сообщение будет скрыто.
 HiddingStyle - стиль скрытия сообщения. Может быть Simple - без эффекта, Slide - эффект уезжания сообщения за пределы экрана, Fade - эффект затухания.
 HiddingDuration - продолжительность эффкта скрытия, в миллисекундах.
---------------------
-CustomTooltipAlertRenderer - используется для задания стиля сообщений компонентом TooltipAlertFactory, если вы указали его в качестве значения свойства CustomRenderer и установили значение свойтва AlertStyle равным Custom. Позваляет задать следующие свойва:
+---------- CustomTooltipAlertRenderer ----------
+Используется для задания стиля сообщений компонентом TooltipAlertFactory, если вы указали его в качестве значения свойства CustomRenderer и установили значение свойтва AlertStyle равным Custom. Позваляет задать следующие свойва:
+-------------------------------------------
+Помимо этих трех компонентов сущетсвутю следующие вспомогательные компоненты и классы, которые вы можете использовать для расширения возможностей компонента:
+
+TooltipAlertRenderer
+CustomTooltipAlertRendererBase
+SystemTooltipAlertRenderer
+PopupAlertFactory
+
+TooltipAlert
+PopupAlert
+TopFormBase
+
+
+
+
+CornerRadius
+CornerRadiusConverter, CornerRadiusEditor, CornerRadiusEditorControl
+
+
+popupAlertManager1.Alert(new TooltipAlertArg("Title", "Text text text", ToolTipIcon.Info));
+
+
+
+If your application (e.g. messenger) should run in the background and inform users about of any events, in this case WinFormsPopupAlerts will be very useful for you. Windows.Forms for such purposes provides NotifyIcon component. But he has very limited possibilities - only allows display tooltips. In contrast, WinFormsPopupAlerts allows:
+- form messages in queue;
+- customize the colors, shapes, sizes, fonts of messages;
+- customize effects of appearance and hide of messages.
+Also, on the basis WinFormsPopupAlerts, through inheritance and overriding methods, you can add the desired behaviour that is not implemented in the current version of the component.
+
+
+
+Documentation
+Add basic documentation needed to understand the general flows through the code, including class, method and parameters documentation.
+
+You can use existing documentation from the source files, if relevant.
+
+Setup / installation
+Describe how to setup / integrate your project into an existing one. What configuration options can / should be set? how can the project be customized and where?
+
+Walk through the initial process of setting up and using the project.
+Example usage

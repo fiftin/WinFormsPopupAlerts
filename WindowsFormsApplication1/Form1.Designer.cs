@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            WinFormsPopupAlerts.CornerRadius cornerRadius9 = new WinFormsPopupAlerts.CornerRadius();
+            WinFormsPopupAlerts.CornerRadius cornerRadius2 = new WinFormsPopupAlerts.CornerRadius();
             this.btnAlert = new System.Windows.Forms.Button();
             this.btnStartAlerts = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -905,11 +905,11 @@
             this.customTooltipAlertRenderer1.BackColor = System.Drawing.Color.Gray;
             this.customTooltipAlertRenderer1.BorderColor = System.Drawing.Color.Black;
             this.customTooltipAlertRenderer1.BorderThickness = 1;
-            cornerRadius9.BottomLeft = 0;
-            cornerRadius9.BottomRight = 10;
-            cornerRadius9.TopLeft = 10;
-            cornerRadius9.TopRight = 0;
-            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius9;
+            cornerRadius2.BottomLeft = 0;
+            cornerRadius2.BottomRight = 10;
+            cornerRadius2.TopLeft = 10;
+            cornerRadius2.TopRight = 0;
+            this.customTooltipAlertRenderer1.CornerRadius = cornerRadius2;
             this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.White;
             this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);

@@ -8,6 +8,7 @@ using System.Windows.Forms;
 
 namespace WinFormsPopupAlerts
 {
+    [ToolboxItem(false)]
     public partial class CornerRadiusEditorControl : UserControl
     {
         private CornerRadius crc;

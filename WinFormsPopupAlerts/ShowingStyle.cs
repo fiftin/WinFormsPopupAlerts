@@ -4,6 +4,9 @@ using System.Text;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public enum ShowingStyle
     {
         Simple,

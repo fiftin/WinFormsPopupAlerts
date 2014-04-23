@@ -7,6 +7,9 @@ using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
     public class TopFormBase : Form
     {

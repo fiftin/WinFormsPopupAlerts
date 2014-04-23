@@ -9,7 +9,7 @@ using System.Drawing;
 namespace WinFormsPopupAlerts
 {
     [System.ComponentModel.ToolboxItem(false)]
-    public class SystemTooltipAlertRenderer : CustomTooltipAlertRendererBase
+    public class SystemTooltipAlertRenderer : TooltipAlertRenderer
     {
         private static bool IsDefined(VisualStyleElement element)
         {

@@ -895,8 +895,8 @@
             // tooltipAlertFactory1
             // 
             this.tooltipAlertFactory1.CustomRenderer = this.customTooltipAlertRenderer2;
-            this.tooltipAlertFactory1.HiddingDuration = 100;
-            this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HidingStyle.Slide;
+            this.tooltipAlertFactory1.HidingDuration = 100;
+            this.tooltipAlertFactory1.HidingStyle = WinFormsPopupAlerts.HidingStyle.Slide;
             this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(300, 300);
             this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(250, 0);
             this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(10);
@@ -915,8 +915,6 @@
             this.customTooltipAlertRenderer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.ForeColor = System.Drawing.Color.White;
             this.customTooltipAlertRenderer1.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);
-            this.customTooltipAlertRenderer1.MaxSize = new System.Drawing.Size(0, 0);
-            this.customTooltipAlertRenderer1.MinSize = new System.Drawing.Size(0, 0);
             this.customTooltipAlertRenderer1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.TitleForeColor = System.Drawing.Color.White;
             // 
@@ -933,8 +931,6 @@
             this.customTooltipAlertRenderer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer2.ForeColor = System.Drawing.Color.White;
             this.customTooltipAlertRenderer2.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);
-            this.customTooltipAlertRenderer2.MaxSize = new System.Drawing.Size(0, 0);
-            this.customTooltipAlertRenderer2.MinSize = new System.Drawing.Size(0, 0);
             this.customTooltipAlertRenderer2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.customTooltipAlertRenderer2.TitleForeColor = System.Drawing.Color.White;
             // 

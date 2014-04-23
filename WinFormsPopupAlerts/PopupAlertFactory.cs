@@ -11,6 +11,20 @@ namespace WinFormsPopupAlerts
     [System.ComponentModel.ToolboxItem(false)]
     public class PopupAlertFactory : Component
     {
+        private HidingStyle hidingStyle = HidingStyle.Fade;
+        private ShowingStyle showingStyle = ShowingStyle.Fade;
+
+        private int showingDuration = 300;
+        private int hidingDuration = 300;
+        private Size maximumSize = new Size(500, 300);
+        private Size minimumSize = new Size(150, 0);
+        private Padding padding = new Padding(5, 5, 5, 5);
+
+        internal const int DefaultHiddingDelay = 5000;
+
+        private int hiddingDelay = DefaultHiddingDelay;
+
+
         public PopupAlertFactory()
         {
             InitializeComponent();
@@ -27,8 +41,6 @@ namespace WinFormsPopupAlerts
         }
 
 
-        private int hiddingDelay = DefaultHiddingDelay;
-
         [DefaultValue(DefaultHiddingDelay)]
         public int HiddingDelay
         {
@@ -36,13 +48,17 @@ namespace WinFormsPopupAlerts
             set { hiddingDelay = value; }
         }
 
-        internal const int DefaultHiddingDelay = 5000;
-
+        /// <summary>
+        /// Creates a new alert window.
+        /// </summary>
+        /// <param name="arg">Object passed to method CreateAlertImpl().</param>
+        /// <param name="align">screen position where alert windows appear.</param>
+        /// <returns></returns>
         public PopupAlert CreateAlert(object arg, PopupAlertAlignment align)
         {
             PopupAlert alert = CreateAlertImpl(arg, align);
 
-            alert.HiddingStyle = HiddingStyle;
+            alert.HiddingStyle = HidingStyle;
 
             alert.ShowingStyle = ShowingStyle;
 
@@ -50,7 +66,7 @@ namespace WinFormsPopupAlerts
 
             alert.ShowingDuration = ShowingDuration;
 
-            alert.HiddingDuration = HiddingDuration;
+            alert.HiddingDuration = HidingDuration;
 
             alert.MaximumSize = MaximumSize;
 
@@ -69,20 +85,16 @@ namespace WinFormsPopupAlerts
                 AlertMouseDown(sender, e);
         }
 
+        /// <summary>
+        /// Creates a new alert window. Needs for overriding.
+        /// </summary>
+        /// <param name="arg">Object passed to method CreateAlertImpl().</param>
+        /// <param name="align">screen position where alert windows appear.</param>
+        /// <returns></returns>
         protected virtual PopupAlert CreateAlertImpl(object arg, PopupAlertAlignment align)
         {
             return new PopupAlert(align);
         }
-
-        private HidingStyle hiddingStyle = HidingStyle.Fade;
-        private ShowingStyle showingStyle = ShowingStyle.Fade;
-
-        private int roundedCornerRadius = 5;
-        private int showingDuration = 300;
-        private int hiddingDuration = 300;
-        private Size maximumSize = new Size(500, 300);
-        private Size minimumSize = new Size(150, 0);
-        private Padding padding = new Padding(5, 5, 5, 5);
 
         public Padding Padding
         {
@@ -90,12 +102,18 @@ namespace WinFormsPopupAlerts
             set { padding = value; }
         }
 
+        /// <summary>
+        /// Min size of created alert window
+        /// </summary>
         public Size MinimumSize
         {
             get { return minimumSize; }
             set { minimumSize = value; }
         }
 
+        /// <summary>
+        /// Max size of created alert window
+        /// </summary>
         public Size MaximumSize
         {
             get { return maximumSize; }
@@ -103,10 +121,10 @@ namespace WinFormsPopupAlerts
         }
 
         [DefaultValue(300)]
-        public int HiddingDuration
+        public int HidingDuration
         {
-            get { return hiddingDuration; }
-            set { hiddingDuration = value; }
+            get { return hidingDuration; }
+            set { hidingDuration = value; }
         }
 
         [DefaultValue(300)]
@@ -116,17 +134,6 @@ namespace WinFormsPopupAlerts
             set { showingDuration = value; }
         }
 
-        [DefaultValue(5)]
-        public int RoundedCornerRadius
-        {
-            get { return roundedCornerRadius; }
-            set
-            {
-                roundedCornerRadius = value;
-            }
-        }
-
-
         [DefaultValue(ShowingStyle.Fade)]
         public ShowingStyle ShowingStyle
         {
@@ -135,12 +142,11 @@ namespace WinFormsPopupAlerts
         }
 
         [DefaultValue(HidingStyle.Fade)]
-        public HidingStyle HiddingStyle
+        public HidingStyle HidingStyle
         {
-            get { return hiddingStyle; }
-            set { hiddingStyle = value; }
+            get { return hidingStyle; }
+            set { hidingStyle = value; }
         }
-
 
         public event EventHandler<System.Windows.Forms.MouseEventArgs> AlertMouseDown;
     }

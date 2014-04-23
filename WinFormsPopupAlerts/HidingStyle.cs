@@ -5,7 +5,7 @@ using System.Text;
 namespace WinFormsPopupAlerts
 {
     /// <summary>
-    /// Specifies the hidding styles of alert.
+    /// Specifies the hidding effects of alert.
     /// </summary>
     public enum HidingStyle
     {

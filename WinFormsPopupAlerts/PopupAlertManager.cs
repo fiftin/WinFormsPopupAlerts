@@ -8,6 +8,9 @@ using System.ComponentModel.Design;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// The component that provide control of alert windows queue.
+    /// </summary>
     [ToolboxBitmapAttribute(typeof(PopupAlertManager))]
     public class PopupAlertManager : Component
     {
@@ -48,22 +51,32 @@ namespace WinFormsPopupAlerts
         }
 
 
+        internal delegate void Proc(IAsyncResult prevAsyncRes);
+
+        private const int DefaultVGap = 5;
+        private const int DefaultHGap = 5;
+        private const int DefaultAlertsMaxCount = 10;
+        private const PopupAlertAlignment DefaultAlertAlignment = PopupAlertAlignment.BottomRight;
+
+        private ContainerControl containerControl = null;
+        private PopupAlertAlignment alertAlignment = DefaultAlertAlignment;
+        private object movingUpLocker = new object();
+        private HiddenAlertCollection hiddenAlerts = new HiddenAlertCollection();
+        private PopupAlertFactory alertFactory;
+        private List<PopupAlert> alerts = new List<PopupAlert>();
+        private int alertsMaxCount = DefaultAlertsMaxCount;
+        private int vGap = DefaultVGap;
+        private int hGap = DefaultHGap;
+
+
         public PopupAlertManager()
         {
-            InitializeComponent();
         }
 
         public PopupAlertManager(IContainer container)
         {
             container.Add(this);
-            InitializeComponent();
         }
-
-        private void InitializeComponent()
-        {
-        }
-
-        private ContainerControl containerControl = null;
 
         [Browsable(false)]
         public ContainerControl ContainerControl
@@ -95,6 +108,11 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        /// Create and display new alert window.
+        /// </summary>
+        /// <param name="arg">Object passed to alert window factory.</param>
+        /// <returns>New alert window</returns>
         public PopupAlert Alert(object arg)
         {
             PopupAlert alert = AlertFactory.CreateAlert(arg, AlertAlignment);
@@ -117,12 +135,9 @@ namespace WinFormsPopupAlerts
             return alert;
         }
 
-        private object movingUpLocker = new object();
-        //private IAsyncResult movingUpAsyncResult = null;
-        //private bool completeForword = false;
-        internal delegate void Proc(IAsyncResult prevAsyncRes);
-        HiddenAlertCollection hiddenAlerts = new HiddenAlertCollection();
-
+        /// <summary>
+        /// Display window alert <paramref name="alert"/> on the screen.
+        /// </summary>
         public void ShowAlert(PopupAlert alert)
         {
             Rectangle workingRect = Screen.PrimaryScreen.WorkingArea;
@@ -143,6 +158,10 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        /// Push alert window to queue.
+        /// </summary>
+        /// <param name="alert"></param>
         private void PushAlert(PopupAlert alert)
         {
             if (alerts.Count >= AlertsMaxCount)
@@ -166,10 +185,6 @@ namespace WinFormsPopupAlerts
             alerts.Add(alert);
         }
 
-        private PopupAlertFactory alertFactory;
-
-        private List<PopupAlert> alerts = new List<PopupAlert>();
-
         public PopupAlertFactory AlertFactory
         {
             get { return alertFactory; }
@@ -177,10 +192,9 @@ namespace WinFormsPopupAlerts
         }
 
 
-        private int alertsMaxCount = DefaultAlertsMaxCount;
-        private int vGap = DefaultVGap;
-        private int hGap = DefaultHGap;
-
+        /// <summary>
+        /// Gap between alert windows and display edge.
+        /// </summary>
         [DefaultValue(DefaultHGap)]
         public int HGap
         {
@@ -188,6 +202,9 @@ namespace WinFormsPopupAlerts
             set { hGap = value; }
         }
 
+        /// <summary>
+        /// Gap between nearest alert windows.
+        /// </summary>
         [DefaultValue(DefaultVGap)]
         public int VGap
         {
@@ -195,6 +212,9 @@ namespace WinFormsPopupAlerts
             set { vGap = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the maximum number of simultaneously displayed alert windows.
+        /// </summary>
         [DefaultValue(DefaultAlertsMaxCount)]
         public int AlertsMaxCount
         {
@@ -202,8 +222,10 @@ namespace WinFormsPopupAlerts
             set { alertsMaxCount = value; }
         }
 
-        private PopupAlertAlignment alertAlignment = DefaultAlertAlignment;
 
+        /// <summary>
+        /// Gets or sets the maximum number of simultaneously displayed alert windows.
+        /// </summary>
         [DefaultValue(DefaultAlertAlignment)]
         public PopupAlertAlignment AlertAlignment
         {
@@ -211,9 +233,5 @@ namespace WinFormsPopupAlerts
             set { alertAlignment = value; }
         }
 
-        private const int DefaultVGap = 5;
-        private const int DefaultHGap = 5;
-        private const int DefaultAlertsMaxCount = 10;
-        private const PopupAlertAlignment DefaultAlertAlignment = PopupAlertAlignment.BottomRight;
     }
 }

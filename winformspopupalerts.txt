@@ -20,26 +20,40 @@ Also, on the basis WinFormsPopupAlerts, through inheritance and overriding metho
 *************************************************************************
 Documentation
 *************************************************************************
-WinFormsPopupAlerts включает 3 главных компонета:
+WinFormsPopupAlerts includes 3 main components:
+
+- PopupAlertManager
+- TooltipAlertFactory
+- CustomTooltimAlertRenderer.
+
+PopupAlertManager
+The component that provide control of alert windows queue.
+Main properties:
+
+- AlertAlignment - screen position where alert windows appear. 
+- AlertsMaxCount - maximum number of simultaneously displayed alert windows.
+- AlertFactory - 
+
+WinFormsPopupAlerts включает 3 компонета которые отображаются на панеле Toolbox:
 PopupAlertManager
 TooltipAlertFactory
 CustomTooltimAlertRenderer.
 ---------- PopupAlertManager ----------
-Обеспечивает управление очередью сообщений:
-задает расстояние между соседними сообщениями,
-расстояние от сообщения до края экрана,
-угол экрана в котором будут появляться новые сообщения,
-максимальное число отображаемых сообщений,
-ссылка на объект класса PopupAlertFactory, который будет использоваться для создания новых сообщений.
+Обеспечивает управление очередью alert-окон:
+задает расстояние между соседними alert-окнами,
+расстояние от alert-окона до края экрана,
+угол экрана в котором будут появляться новые alert-окна,
+максимальное число отображаемых alert-окон,
+ссылка на объект класса PopupAlertFactory, который будет использоваться для создания новых alert-окон.
 ---------- TooltipAlertFactory ----------
-Наследуется от класса PopupAlertFactory. Отвечает за создание новых сообщений. Омеет следующие свойства:
-AlertStyle - стиль отображаемых сообщений. Может принимать значение System - в этом случае создаваемые сообщения, выгледят как системные всплывающие подсказки.
-Custom - для отрисовки сообщения будет использоваться указанный пользователем в свойстве CustomRenderer объект класса CustomTooltipAlertRenderer, который будет описан ниже.
-HiddingDelay - время, в миллисекундах, через которое после создания сообщение будет скрыто.
-HiddingStyle - стиль скрытия сообщения. Может быть Simple - без эффекта, Slide - эффект уезжания сообщения за пределы экрана, Fade - эффект затухания.
-HiddingDuration - продолжительность эффкта скрытия, в миллисекундах.
+Наследуется от класса PopupAlertFactory. Отвечает за alert-окон. Омеет следующие свойства:
+AlertStyle - стиль отображаемых alert-окон. Может принимать значение System - в этом случае создаваемые alert-окна, выгледят как системные всплывающие подсказки.
+Custom - для отрисовки alert-окон будет использоваться указанный пользователем в свойстве CustomRenderer объект класса CustomTooltipAlertRenderer, который будет описан ниже.
+HidingDelay - время, в миллисекундах, через которое после создания alert-окно будет скрыто.
+HidingStyle - стиль скрытия alert-окон. Может быть Simple - без эффекта, Slide - эффект уезжания окна за пределы экрана, Fade - эффект затухания.
+HidingDuration - продолжительность эффкта скрытия, в миллисекундах.
 ---------- CustomTooltipAlertRenderer ----------
-Используется для задания стиля сообщений компонентом TooltipAlertFactory, если вы указали его в качестве значения свойства CustomRenderer и установили значение свойтва AlertStyle равным Custom. Позваляет задать следующие свойва:
+Используется для задания стиля alert-окон компонентом TooltipAlertFactory, если вы указали его в качестве значения свойства CustomRenderer и установили значение свойтва AlertStyle равным Custom. Позваляет задать следующие свойва:
 -------------------------------------------
 Помимо этих трех компонентов сущетсвутю следующие вспомогательные компоненты и классы, которые вы можете использовать для расширения возможностей компонента:
 

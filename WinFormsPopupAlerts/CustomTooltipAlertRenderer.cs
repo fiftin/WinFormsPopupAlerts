@@ -12,9 +12,8 @@ namespace WinFormsPopupAlerts
     /// 
     /// </summary>
     [ToolboxBitmapAttribute(typeof(CustomTooltipAlertRenderer))]
-    public class CustomTooltipAlertRenderer : CustomTooltipAlertRendererBase
+    public class CustomTooltipAlertRenderer : TooltipAlertRenderer
     {
-
         private Color backColor;
         private Color titleForeColor;
         private Color foreColor;
@@ -98,6 +97,9 @@ namespace WinFormsPopupAlerts
             return new Region(rect);
         }
 
+        /// <summary>
+        ///   Get or set degree to which the corners of a alert window are rounded.
+        /// </summary>
         [Editor(typeof(CornerRadiusEditor), typeof(System.Drawing.Design.UITypeEditor))]
         public CornerRadius CornerRadius
         {
@@ -105,18 +107,27 @@ namespace WinFormsPopupAlerts
             set { cornerRadius = value; }
         }
 
+        /// <summary>
+        ///   Get or set font to use for the title of an alert window.
+        /// </summary>
         public Font TitleFont
         {
             get { return titleFont; }
             set { titleFont = value; }
         }
 
+        /// <summary>
+        ///   Get or set font to use for the text of an alert window.
+        /// </summary>
         public Font Font
         {
             get { return font; }
             set { font = value; }
         }
 
+        /// <summary>
+        ///   Get or set color of title of an alert window.
+        /// </summary>
         public Color TitleForeColor
         {
             get { return titleForeColor; }
@@ -130,6 +141,9 @@ namespace WinFormsPopupAlerts
         }
 
 
+        /// <summary>
+        ///  Get or set color of text of an alert window.
+        /// </summary>
         public Color ForeColor
         {
             get { return foreColor; }
@@ -142,6 +156,9 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        ///  Get or set background color of the alert window.
+        /// </summary>
         public Color BackColor
         {
             get { return backColor; }
@@ -154,6 +171,9 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        ///  Get or set color of the border around the alert window.
+        /// </summary>
         public Color BorderColor
         {
             get
@@ -169,6 +189,9 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        ///   Get or set thickness of the border around the alert window.
+        /// </summary>
         public int BorderThickness
         {
             get

@@ -7,62 +7,32 @@ using System.Runtime.InteropServices;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// Imports native API functions for works with Windows Themes on low level.
+    /// </summary>
     public static class SafeNativeMethods
     {
-        public const int SPI_GETWORKAREA = 0x0030;
 
-        /*
-        [DllImport("Gdi32.dll")]
-        private static extern IntPtr CreateRoundRectRgn
-        (
-            int nLeftRect, // x-coordinate of upper-left corner
-            int nTopRect, // y-coordinate of upper-left corner
-            int nRightRect, // x-coordinate of lower-right corner
-            int nBottomRect, // y-coordinate of lower-right corner
-            int nWidthEllipse, // height of ellipse
-            int nHeightEllipse // width of ellipse
-        );
-
-        public static Region GetRoundRectRegion(
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse)
-        {
-            return System.Drawing.Region.FromHrgn(CreateRoundRectRgn(nLeftRect,
-                nTopRect, nRightRect, nBottomRect, nWidthEllipse, nHeightEllipse));
-        }
-         */
-
-        [DllImport("user32.dll", SetLastError = true)]
-        public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
-
-        [DllImport("Kernel32.dll", SetLastError = true)]
-        public extern static int GetLastError();
-
-        [DllImport("User32.dll", SetLastError = true)]
-        public extern static bool SystemParametersInfo(uint uiAction, uint uiParam, ref Rectangle pvParam, uint fWinIni);
-
-        //public static Rectangle GetWorkArea()
-        //{
-        //    Rectangle rect = new Rectangle();
-        //    if (!SystemParametersInfo(SPI_GETWORKAREA, 0, ref rect, 0))
-        //    {
-        //        throw new Win32Exception(GetLastError());
-        //    }
-        //    return rect;
-        //}
-
-
+        /// <summary>
+        /// Opens the theme data for a window and its associated class.
+        /// </summary>
+        /// <param name="hwnd">Handle of the window for which theme data is required.</param>
+        /// <param name="pszClassList">Pointer to a string that contains a semicolon-separated list of classes.</param>
+        /// <returns>OpenThemeData tries to match each class, one at a time, to a class data section in the active theme. If a match is found, an associated HTHEME handle is returned. If no match is found NULL is returned.</returns>
         [DllImport("uxtheme.dll", CharSet = CharSet.Auto)]
         private extern static IntPtr OpenThemeData(HandleRef hwnd, [MarshalAs(UnmanagedType.LPWStr)] string pszClassList);
 
-        [DllImport("uxtheme.dll", CharSet = CharSet.Auto)]
-        public extern static int CloseThemeData(HandleRef hTheme);
-
-
+        /// <summary>
+        /// Retrieves whether a visual style has defined parameters for the specified part and state.
+        /// </summary>
+        /// <param name="hTheme">Handle to a window's specified theme data. Use OpenThemeData to create an HTHEME.</param>
+        /// <param name="iPartId">Value of type int that specifies the part. </param>
+        /// <param name="iStateId">Currently unused. The value should be 0.</param>
+        /// <returns>
+        /// Returns one of the following values:
+        /// true - the theme has defined parameters for the specified iPartId and iStateId,
+        /// false - he theme does not have defined parameters for the specified iPartId and iStateId.
+        /// </returns>
         [DllImport("uxtheme.dll", CharSet = CharSet.Auto)]
         private extern static bool IsThemePartDefined(HandleRef hTheme, int iPartId, int iStateId);
 
@@ -77,47 +47,7 @@ namespace WinFormsPopupAlerts
 
         private static IntPtr GetThemeHandle(string className)
         {
-            return SafeNativeMethods.OpenThemeData(new HandleRef((object)null, IntPtr.Zero), className);
-        }
-
-        public static bool IsThemeDefined(string className)
-        {
-            try
-            {
-                IntPtr hTheme = GetThemeHandle(className);
-                return hTheme != IntPtr.Zero;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-
-
-        private const int SW_SHOWNOACTIVATE = 4;
-        private const int HWND_TOPMOST = -1;
-        private const uint SWP_NOACTIVATE = 0x0010;
-
-        [DllImport("user32.dll", EntryPoint = "SetWindowPos")]
-        static extern bool SetWindowPos(
-             int hWnd,           // window handle
-             int hWndInsertAfter,    // placement-order handle
-             int X,          // horizontal position
-             int Y,          // vertical position
-             int cx,         // width
-             int cy,         // height
-             uint uFlags);       // window positioning flags
-
-        [DllImport("user32.dll")]
-        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        public static void ShowInactiveTopmost(System.Windows.Forms.Form frm)
-        {
-            ShowWindow(frm.Handle, SW_SHOWNOACTIVATE);
-            SetWindowPos(frm.Handle.ToInt32(), HWND_TOPMOST,
-            frm.Left, frm.Top, frm.Width, frm.Height,
-            SWP_NOACTIVATE);
+            return OpenThemeData(new HandleRef((object)null, IntPtr.Zero), className);
         }
 
     }

@@ -15,6 +15,7 @@ namespace WinFormsPopupAlerts
         public CornerRadius()
         {
         }
+
         public CornerRadius(int topLeft, int topRight, int bottomLeft, int bottomRight)
             : this()
         {

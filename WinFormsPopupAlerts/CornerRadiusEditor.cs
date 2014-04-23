@@ -7,6 +7,9 @@ using System.Windows.Forms.Design;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// Provide a user interface for representing and editing the value of objects of CornerRadius class.
+    /// </summary>
     public class CornerRadiusEditor : UITypeEditor
     {
 

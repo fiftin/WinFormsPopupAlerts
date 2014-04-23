@@ -7,6 +7,9 @@ using System.Windows.Forms;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class CustomTooltipAlertRendererBase : TooltipAlertRenderer
     {
         protected abstract void Draw(System.Drawing.Graphics dc, string title, string text, Rectangle rect, Rectangle titleRect, Rectangle bodyRect, 
@@ -90,6 +93,12 @@ namespace WinFormsPopupAlerts
             return ret;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="icon"></param>
+        /// <param name="customImage"></param>
+        /// <returns></returns>
         private Size GetIconSize(ToolTipIcon icon, Image customImage)
         {
             Image img = GetIcon(icon, customImage);
@@ -101,6 +110,12 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="icon">Standardized icon.</param>
+        /// <param name="customImage"></param>
+        /// <returns></returns>
         private Image GetIcon(ToolTipIcon icon, Image customImage)
         {
             switch (icon)

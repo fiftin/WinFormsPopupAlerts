@@ -5,6 +5,9 @@ using System.ComponentModel;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// Provides a type converter to convert CornerRadiusConverter to and from string.
+    /// </summary>
     public class CornerRadiusConverter : ExpandableObjectConverter
     {
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)

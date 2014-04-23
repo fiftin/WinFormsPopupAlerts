@@ -4,6 +4,22 @@
 задавать эффекты появления и скрытия сообщений.
 Также, на основе WinFormsPopupAlerts, путем наследования и переопределения методов, вы можете добавить нужное вам поведение, которое не реализовано в текущей версии компонента.
 -------------------------------------------
+
+popupAlertManager1.Alert(new TooltipAlertArg("Title", "Text text text", ToolTipIcon.Info));
+
+
+
+If your application (e.g. messenger) should run in the background and inform users about of any events, in this case WinFormsPopupAlerts will be very useful for you. Windows.Forms for such purposes provides NotifyIcon component. But he has very limited possibilities - only allows display tooltips. In contrast, WinFormsPopupAlerts allows:
+- form messages in queue;
+- customize the colors, shapes, sizes, fonts of messages;
+- customize effects of appearance and hide of messages.
+Also, on the basis WinFormsPopupAlerts, through inheritance and overriding methods, you can add the desired behaviour that is not implemented in the current version of the component.
+
+
+
+*************************************************************************
+Documentation
+*************************************************************************
 WinFormsPopupAlerts включает 3 главных компонета:
 PopupAlertManager
 TooltipAlertFactory
@@ -37,30 +53,40 @@ PopupAlert
 TopFormBase
 
 
-
-
 CornerRadius
 CornerRadiusConverter, CornerRadiusEditor, CornerRadiusEditorControl
 
 
-popupAlertManager1.Alert(new TooltipAlertArg("Title", "Text text text", ToolTipIcon.Info));
 
-
-
-If your application (e.g. messenger) should run in the background and inform users about of any events, in this case WinFormsPopupAlerts will be very useful for you. Windows.Forms for such purposes provides NotifyIcon component. But he has very limited possibilities - only allows display tooltips. In contrast, WinFormsPopupAlerts allows:
-- form messages in queue;
-- customize the colors, shapes, sizes, fonts of messages;
-- customize effects of appearance and hide of messages.
-Also, on the basis WinFormsPopupAlerts, through inheritance and overriding methods, you can add the desired behaviour that is not implemented in the current version of the component.
-
-
-
-Documentation
 Add basic documentation needed to understand the general flows through the code, including class, method and parameters documentation.
 
 You can use existing documentation from the source files, if relevant.
 
+
+
+*************************************************************************
 Setup / installation
+*************************************************************************
+Солюшин включает 2 проекта:
+WindowsFormsApplication1 - приложение, на примере которого вы можете научиться настраивать компоненты WinFormsPopupAlerts.
+WinFormsPopupAlerts - библиотека .NET содержащая классы и компоненты.
+Для начала вам необходимо собрать проект.
+1) Откройте WinFormsPopupAlerts.sln в Visual Studio 2010 и выше. Если вы используете Visual Studio 2012 и выже, то она предложит выполнить конвертацию прокетов. 
+2) F6 для выполнения сборки проекта.
+Интегрировать WinFormsPopupAlerts в существующее приложение или библиотеку можно двумя способами.
+Добавить в solution приложения проект WinFormsPopupAlerts.csproj.
+Добавить компоненты на Toolbox. Для этого:
+1) на Toolbox нажать правой клавишей мыши и в выпадающем меню выбрать пункт Choose Items...
+2) В появившемся окне на вкладке .NET Framework Components нажать кнопку Browse...
+3) Найти место расположения WinFormsPopupAlerts\bin\Debug\WinFormsPopupAlerts.dll и нажать OK.
+4) После этого компонеты PopupAlertManager, TooltipAlertFactory, CustomTooltimAlertRenderer появятся в спике .NET Framework Components помечеными галочками.
+
+5) Нажать OK.
+После этого вы увидите компонеты WinFormsPopupAlerts на панеле Toolbox.
+
+
+
+
 Describe how to setup / integrate your project into an existing one. What configuration options can / should be set? how can the project be customized and where?
 
 Walk through the initial process of setting up and using the project.

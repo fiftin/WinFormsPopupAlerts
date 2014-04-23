@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ToolboxBitmapAttribute(typeof(CustomTooltipAlertRenderer))]
     public class CustomTooltipAlertRenderer : CustomTooltipAlertRendererBase
     {
@@ -24,6 +27,17 @@ namespace WinFormsPopupAlerts
         private Brush foreBrush;
         private Pen borderPen;
         private int borderThickness = 1;
+
+        public CustomTooltipAlertRenderer()
+        {
+            BackColor = Color.Gray;
+            TitleForeColor = Color.White;
+            ForeColor = Color.White;
+            BorderColor = Color.Black;
+            TitleFont = new Font(SystemFonts.DefaultFont, FontStyle.Bold);
+            Font = SystemFonts.DefaultFont;
+            CornerRadius = new CornerRadius(15, 0, 0, 15);
+        }
 
         protected override void Draw(System.Drawing.Graphics dc, string title, string text, Rectangle rect, Rectangle titleRect, Rectangle bodyRect, Image img, int iconWidth)
         {
@@ -102,7 +116,6 @@ namespace WinFormsPopupAlerts
             get { return font; }
             set { font = value; }
         }
-
 
         public Color TitleForeColor
         {

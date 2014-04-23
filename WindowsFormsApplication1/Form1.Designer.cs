@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             WinFormsPopupAlerts.CornerRadius cornerRadius2 = new WinFormsPopupAlerts.CornerRadius();
+            WinFormsPopupAlerts.CornerRadius cornerRadius1 = new WinFormsPopupAlerts.CornerRadius();
             this.btnAlert = new System.Windows.Forms.Button();
             this.btnStartAlerts = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -101,6 +102,7 @@
             this.popupAlertManager1 = new WinFormsPopupAlerts.PopupAlertManager(this.components);
             this.tooltipAlertFactory1 = new WinFormsPopupAlerts.TooltipAlertFactory(this.components);
             this.customTooltipAlertRenderer1 = new WinFormsPopupAlerts.CustomTooltipAlertRenderer();
+            this.customTooltipAlertRenderer2 = new WinFormsPopupAlerts.CustomTooltipAlertRenderer();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTopLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTopRight)).BeginInit();
@@ -445,7 +447,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 13);
             this.label7.TabIndex = 26;
-            this.label7.Text = "Hidding style:";
+            this.label7.Text = "Hiding style:";
             // 
             // cbShowingStyle
             // 
@@ -746,7 +748,7 @@
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(74, 13);
             this.label15.TabIndex = 44;
-            this.label15.Text = "Hidding delay:";
+            this.label15.Text = "Hiding delay:";
             // 
             // numAlertMaxCount
             // 
@@ -818,7 +820,7 @@
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(87, 13);
             this.label20.TabIndex = 49;
-            this.label20.Text = "Hidding duration:";
+            this.label20.Text = "Hiding duration:";
             // 
             // label21
             // 
@@ -892,9 +894,9 @@
             // 
             // tooltipAlertFactory1
             // 
-            this.tooltipAlertFactory1.CustomRenderer = this.customTooltipAlertRenderer1;
+            this.tooltipAlertFactory1.CustomRenderer = this.customTooltipAlertRenderer2;
             this.tooltipAlertFactory1.HiddingDuration = 100;
-            this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HiddingStyle.Slide;
+            this.tooltipAlertFactory1.HiddingStyle = WinFormsPopupAlerts.HidingStyle.Slide;
             this.tooltipAlertFactory1.MaximumSize = new System.Drawing.Size(300, 300);
             this.tooltipAlertFactory1.MinimumSize = new System.Drawing.Size(250, 0);
             this.tooltipAlertFactory1.Padding = new System.Windows.Forms.Padding(10);
@@ -917,6 +919,24 @@
             this.customTooltipAlertRenderer1.MinSize = new System.Drawing.Size(0, 0);
             this.customTooltipAlertRenderer1.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.customTooltipAlertRenderer1.TitleForeColor = System.Drawing.Color.White;
+            // 
+            // customTooltipAlertRenderer2
+            // 
+            this.customTooltipAlertRenderer2.BackColor = System.Drawing.Color.Gray;
+            this.customTooltipAlertRenderer2.BorderColor = System.Drawing.Color.Black;
+            this.customTooltipAlertRenderer2.BorderThickness = 1;
+            cornerRadius1.BottomLeft = 15;
+            cornerRadius1.BottomRight = 0;
+            cornerRadius1.TopLeft = 15;
+            cornerRadius1.TopRight = 0;
+            this.customTooltipAlertRenderer2.CornerRadius = cornerRadius1;
+            this.customTooltipAlertRenderer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.customTooltipAlertRenderer2.ForeColor = System.Drawing.Color.White;
+            this.customTooltipAlertRenderer2.IconPadding = new System.Windows.Forms.Padding(3, 4, 5, 4);
+            this.customTooltipAlertRenderer2.MaxSize = new System.Drawing.Size(0, 0);
+            this.customTooltipAlertRenderer2.MinSize = new System.Drawing.Size(0, 0);
+            this.customTooltipAlertRenderer2.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.customTooltipAlertRenderer2.TitleForeColor = System.Drawing.Color.White;
             // 
             // Form1
             // 
@@ -1062,6 +1082,7 @@
         private System.Windows.Forms.NumericUpDown numMaxWidth;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private WinFormsPopupAlerts.CustomTooltipAlertRenderer customTooltipAlertRenderer2;
     }
 }
 

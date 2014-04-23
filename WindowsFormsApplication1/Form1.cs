@@ -183,7 +183,7 @@ namespace WindowsFormsApplication1
 
         private void cbHiddingStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tooltipAlertFactory1.HiddingStyle = (HiddingStyle)((ComboBox)sender).SelectedIndex;
+            tooltipAlertFactory1.HiddingStyle = (HidingStyle)((ComboBox)sender).SelectedIndex;
         }
 
         private void cbShowingStyle_SelectedIndexChanged(object sender, EventArgs e)

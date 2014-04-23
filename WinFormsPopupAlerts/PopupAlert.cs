@@ -147,7 +147,7 @@ namespace WinFormsPopupAlerts
 
         public virtual void Hide(Action<PopupAlert> callback)
         {
-            if (HiddingStyle == HiddingStyle.Fade)
+            if (HiddingStyle == HidingStyle.Fade)
             {
                 Action<PopupAlert> hidding = new Action<PopupAlert>(delegate(PopupAlert obj)
                 {
@@ -165,7 +165,7 @@ namespace WinFormsPopupAlerts
                 });
                 hidding.BeginInvoke(this, null, null);
             }
-            else if (HiddingStyle == WinFormsPopupAlerts.HiddingStyle.Slide)
+            else if (HiddingStyle == WinFormsPopupAlerts.HidingStyle.Slide)
             {
                 Action<PopupAlert> hidding = new Action<PopupAlert>(delegate(PopupAlert obj)
                 {
@@ -199,7 +199,7 @@ namespace WinFormsPopupAlerts
                 });
                 hidding.BeginInvoke(this, null, null);
             }
-            else if (HiddingStyle == HiddingStyle.Simple)
+            else if (HiddingStyle == HidingStyle.Simple)
             {
                 this.InternalHide();
             }
@@ -232,7 +232,7 @@ namespace WinFormsPopupAlerts
 
         }
 
-        private HiddingStyle hiddingStyle = HiddingStyle.Fade;
+        private HidingStyle hiddingStyle = HidingStyle.Fade;
         private ShowingStyle showingStyle = ShowingStyle.Fade;
         private int showingDuration = 300;
         private int hiddingDuration = 300;
@@ -271,7 +271,7 @@ namespace WinFormsPopupAlerts
         /// <summary>
         /// 
         /// </summary>
-        public HiddingStyle HiddingStyle
+        public HidingStyle HiddingStyle
         {
             get { return hiddingStyle; }
             set { hiddingStyle = value; }

@@ -8,31 +8,11 @@ using System.Drawing;
 namespace WinFormsPopupAlerts
 {
     /// <summary>
-    /// 
+    /// Represents a always top window.
     /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
     public class TopFormBase : Form
     {
-        private const int WS_EX_TOOLWINDOW = 128;
-        protected const int MA_NOACTIVATE = 3;
-        internal const int SWP_NOSIZE = 1;
-        internal const int SWP_NOMOVE = 2;
-        internal const int SWP_NOACTIVATE = 16;
-        internal const int SWP_SHOWWINDOW = 64;
-        internal const int HWND_TOP = 0;
-        internal const int HWND_TOPMOST = -1;
-
-        public virtual bool ICapture
-        {
-            get
-            {
-                return this.Capture;
-            }
-            set
-            {
-                this.Capture = value;
-            }
-        }
 
         public virtual Rectangle RealBounds
         {
@@ -161,10 +141,6 @@ namespace WinFormsPopupAlerts
         private void WMGetMinMazInfo(ref Message m)
         {
             base.WndProc(ref m);
-            //DevExpress.Utils.Drawing.Helpers.NativeMethods.MINMAXINFO from = DevExpress.Utils.Drawing.Helpers.NativeMethods.MINMAXINFO.GetFrom(m.LParam);
-            //from.ptMinTrackSize = new DevExpress.Utils.Drawing.Helpers.NativeMethods.POINT(1, 1);
-            //Marshal.StructureToPtr((object)from, m.LParam, true);
-            //m.Result = IntPtr.Zero;
         }
 
         protected virtual void OnLostCapture()
@@ -174,9 +150,6 @@ namespace WinFormsPopupAlerts
         protected virtual void OnGotCapture()
         {
         }
-
-        [DllImport("USER32.dll")]
-        private extern static bool ShowWindow(IntPtr hWnd, int cmdShow);
 
         [DllImport("USER32.dll")]
         internal extern static bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);

@@ -7,7 +7,7 @@ namespace WinFormsPopupAlerts
     /// <summary>
     /// Specifies the hidding styles of alert.
     /// </summary>
-    public enum HiddingStyle
+    public enum HidingStyle
     {
         /// <summary>
         /// Hide without effect.

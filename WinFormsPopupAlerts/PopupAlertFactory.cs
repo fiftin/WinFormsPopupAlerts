@@ -74,7 +74,7 @@ namespace WinFormsPopupAlerts
             return new PopupAlert(align);
         }
 
-        private HiddingStyle hiddingStyle = HiddingStyle.Fade;
+        private HidingStyle hiddingStyle = HidingStyle.Fade;
         private ShowingStyle showingStyle = ShowingStyle.Fade;
 
         private int roundedCornerRadius = 5;
@@ -134,8 +134,8 @@ namespace WinFormsPopupAlerts
             set { showingStyle = value; }
         }
 
-        [DefaultValue(HiddingStyle.Fade)]
-        public HiddingStyle HiddingStyle
+        [DefaultValue(HidingStyle.Fade)]
+        public HidingStyle HiddingStyle
         {
             get { return hiddingStyle; }
             set { hiddingStyle = value; }

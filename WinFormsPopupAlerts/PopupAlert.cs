@@ -15,19 +15,14 @@ namespace WinFormsPopupAlerts
     [System.ComponentModel.ToolboxItem(false)]
     public partial class PopupAlert : TopFormBase
     {
-        private object tag1;
         private int top;
         private int left;
         private PopupAlertAlignment align;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal object Tag1
-        {
-            get { return tag1; }
-            set { tag1 = value; }
-        }
+        private HidingStyle hidingStyle = HidingStyle.Fade;
+        private ShowingStyle showingStyle = ShowingStyle.Fade;
+        private int showingDuration = 300;
+        private int hidingDuration = 300;
+        private Padding padding = new Padding(5, 5, 5, 5);
 
         public PopupAlert(PopupAlertAlignment align)
         {
@@ -74,21 +69,6 @@ namespace WinFormsPopupAlerts
         private void timer1_Tick(object sender, EventArgs e)
         {
             Hide(delegate(PopupAlert alert) { });
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public int HiddingDelay
-        {
-            get
-            {
-                return timer1.Interval;
-            }
-            set
-            {
-                timer1.Interval = value;
-            }
         }
 
 
@@ -148,13 +128,17 @@ namespace WinFormsPopupAlerts
         /// </summary>
         public virtual event EventHandler<MouseEventArgs> AlertMouseDown;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="callback"></param>
         public virtual void Hide(Action<PopupAlert> callback)
         {
-            if (HiddingStyle == HidingStyle.Fade)
+            if (HidingStyle == HidingStyle.Fade)
             {
-                Action<PopupAlert> hidding = new Action<PopupAlert>(delegate(PopupAlert obj)
+                Action<PopupAlert> hiding = new Action<PopupAlert>(delegate(PopupAlert obj)
                 {
-                    float v = 1f / (float)HiddingDuration;
+                    float v = 1f / (float)HidingDuration;
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
                     while (obj.Opacity > 0)
@@ -166,11 +150,11 @@ namespace WinFormsPopupAlerts
                     obj.Invoke(new MethodInvoker(delegate() { obj.InternalHide(); }));
                     callback(obj);
                 });
-                hidding.BeginInvoke(this, null, null);
+                hiding.BeginInvoke(this, null, null);
             }
-            else if (HiddingStyle == WinFormsPopupAlerts.HidingStyle.Slide)
+            else if (HidingStyle == WinFormsPopupAlerts.HidingStyle.Slide)
             {
-                Action<PopupAlert> hidding = new Action<PopupAlert>(delegate(PopupAlert obj)
+                Action<PopupAlert> hiding = new Action<PopupAlert>(delegate(PopupAlert obj)
                 {
                     int screenWidth = Screen.PrimaryScreen.Bounds.Width;
                     int startLeft = obj.Left;
@@ -179,7 +163,7 @@ namespace WinFormsPopupAlerts
                     sw.Start();
                     if (align == PopupAlertAlignment.BottomRight || align == PopupAlertAlignment.TopRight)
                     {
-                        float v = (screenWidth - obj.Left) / (float)HiddingDuration;
+                        float v = (screenWidth - obj.Left) / (float)HidingDuration;
                         while (screenWidth - obj.Left > 0)
                         {
                             int msec = (int)sw.ElapsedMilliseconds;
@@ -189,7 +173,7 @@ namespace WinFormsPopupAlerts
                     }
                     else
                     {
-                        float v = (obj.Left + obj.Width) / (float)HiddingDuration;
+                        float v = (obj.Left + obj.Width) / (float)HidingDuration;
                         while (obj.Left + obj.Width > 0)
                         {
                             int msec = (int)sw.ElapsedMilliseconds;
@@ -200,15 +184,15 @@ namespace WinFormsPopupAlerts
                     obj.Invoke(new MethodInvoker(delegate() { obj.InternalHide(); }));
                     callback(obj);
                 });
-                hidding.BeginInvoke(this, null, null);
+                hiding.BeginInvoke(this, null, null);
             }
-            else if (HiddingStyle == HidingStyle.Simple)
+            else if (HidingStyle == HidingStyle.Simple)
             {
                 this.InternalHide();
             }
             else
             {
-                throw new Exception("Unknown HiddingStyle");
+                throw new Exception("Unknown HidingStyle");
             }
 
         }
@@ -235,11 +219,20 @@ namespace WinFormsPopupAlerts
 
         }
 
-        private HidingStyle hiddingStyle = HidingStyle.Fade;
-        private ShowingStyle showingStyle = ShowingStyle.Fade;
-        private int showingDuration = 300;
-        private int hiddingDuration = 300;
-        private Padding padding = new Padding(5, 5, 5, 5);
+        /// <summary>
+        /// 
+        /// </summary>
+        public int HidingDelay
+        {
+            get
+            {
+                return timer1.Interval;
+            }
+            set
+            {
+                timer1.Interval = value;
+            }
+        }
 
         public new virtual Padding Padding
         {
@@ -250,10 +243,10 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        public int HiddingDuration
+        public int HidingDuration
         {
-            get { return hiddingDuration; }
-            set { hiddingDuration = value; }
+            get { return hidingDuration; }
+            set { hidingDuration = value; }
         }
 
         public int ShowingDuration
@@ -274,10 +267,10 @@ namespace WinFormsPopupAlerts
         /// <summary>
         /// 
         /// </summary>
-        public HidingStyle HiddingStyle
+        public HidingStyle HidingStyle
         {
-            get { return hiddingStyle; }
-            set { hiddingStyle = value; }
+            get { return hidingStyle; }
+            set { hidingStyle = value; }
         }
 
     }

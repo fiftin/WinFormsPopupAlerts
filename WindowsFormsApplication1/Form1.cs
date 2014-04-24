@@ -15,7 +15,7 @@ namespace WindowsFormsApplication1
         public Form1()
         {
             InitializeComponent();
-            cbHiddingStyle.SelectedIndex = (int)tooltipAlertFactory1.HidingStyle;
+            cbHidingStyle.SelectedIndex = (int)tooltipAlertFactory1.HidingStyle;
             cbShowingStyle.SelectedIndex = (int)tooltipAlertFactory1.ShowingStyle;
             btnTitleFont.Font = customTooltipAlertRenderer1.TitleFont;
             picTitleColor.BackColor = customTooltipAlertRenderer1.TitleForeColor;
@@ -166,12 +166,12 @@ namespace WindowsFormsApplication1
             timer1.Interval = trackBar1.Value;
         }
 
-        private void numHiddingDelay_ValueChanged(object sender, EventArgs e)
+        private void numHidingDelay_ValueChanged(object sender, EventArgs e)
         {
-            tooltipAlertFactory1.HiddingDelay = (int)((NumericUpDown)sender).Value;
+            tooltipAlertFactory1.HidingDelay = (int)((NumericUpDown)sender).Value;
         }
 
-        private void numHiddingDur_ValueChanged(object sender, EventArgs e)
+        private void numHidingDur_ValueChanged(object sender, EventArgs e)
         {
             tooltipAlertFactory1.HidingDuration = (int)((NumericUpDown)sender).Value;
         }
@@ -181,7 +181,7 @@ namespace WindowsFormsApplication1
             tooltipAlertFactory1.ShowingDuration = (int)((NumericUpDown)sender).Value;
         }
 
-        private void cbHiddingStyle_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbHidingStyle_SelectedIndexChanged(object sender, EventArgs e)
         {
             tooltipAlertFactory1.HidingStyle = (HidingStyle)((ComboBox)sender).SelectedIndex;
         }

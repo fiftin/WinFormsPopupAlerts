@@ -59,11 +59,11 @@
             this.numBorderThickenss = new System.Windows.Forms.NumericUpDown();
             this.picBorderColor = new System.Windows.Forms.PictureBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.cbHiddingStyle = new System.Windows.Forms.ComboBox();
+            this.cbHidingStyle = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbShowingStyle = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.numHiddingDur = new System.Windows.Forms.NumericUpDown();
+            this.numHidingDur = new System.Windows.Forms.NumericUpDown();
             this.numShowingDur = new System.Windows.Forms.NumericUpDown();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnBottomRight = new System.Windows.Forms.Button();
@@ -85,7 +85,7 @@
             this.rbIconError = new System.Windows.Forms.RadioButton();
             this.rbIconNone = new System.Windows.Forms.RadioButton();
             this.label14 = new System.Windows.Forms.Label();
-            this.numHiddingDelay = new System.Windows.Forms.NumericUpDown();
+            this.numHidingDelay = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.numAlertMaxCount = new System.Windows.Forms.NumericUpDown();
             this.label17 = new System.Windows.Forms.Label();
@@ -115,13 +115,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBackColor)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBorderThickenss)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBorderColor)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHiddingDur)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHidingDur)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowingDur)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numHiddingDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHidingDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAlertMaxCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVGap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinWidth)).BeginInit();
@@ -425,20 +425,20 @@
             this.label12.TabIndex = 25;
             this.label12.Text = "Border color:";
             // 
-            // cbHiddingStyle
+            // cbHidingStyle
             // 
-            this.cbHiddingStyle.DisplayMember = "0";
-            this.cbHiddingStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbHiddingStyle.FormattingEnabled = true;
-            this.cbHiddingStyle.Items.AddRange(new object[] {
+            this.cbHidingStyle.DisplayMember = "0";
+            this.cbHidingStyle.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbHidingStyle.FormattingEnabled = true;
+            this.cbHidingStyle.Items.AddRange(new object[] {
             "Simple",
             "Slide",
             "Fade"});
-            this.cbHiddingStyle.Location = new System.Drawing.Point(267, 7);
-            this.cbHiddingStyle.Name = "cbHiddingStyle";
-            this.cbHiddingStyle.Size = new System.Drawing.Size(72, 21);
-            this.cbHiddingStyle.TabIndex = 27;
-            this.cbHiddingStyle.SelectedIndexChanged += new System.EventHandler(this.cbHiddingStyle_SelectedIndexChanged);
+            this.cbHidingStyle.Location = new System.Drawing.Point(267, 7);
+            this.cbHidingStyle.Name = "cbHidingStyle";
+            this.cbHidingStyle.Size = new System.Drawing.Size(72, 21);
+            this.cbHidingStyle.TabIndex = 27;
+            this.cbHidingStyle.SelectedIndexChanged += new System.EventHandler(this.cbHidingStyle_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -472,28 +472,28 @@
             this.label8.TabIndex = 28;
             this.label8.Text = "Showing style:";
             // 
-            // numHiddingDur
+            // numHidingDur
             // 
-            this.numHiddingDur.Location = new System.Drawing.Point(493, 7);
-            this.numHiddingDur.Maximum = new decimal(new int[] {
+            this.numHidingDur.Location = new System.Drawing.Point(493, 7);
+            this.numHidingDur.Maximum = new decimal(new int[] {
             5000,
             0,
             0,
             0});
-            this.numHiddingDur.Minimum = new decimal(new int[] {
+            this.numHidingDur.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numHiddingDur.Name = "numHiddingDur";
-            this.numHiddingDur.Size = new System.Drawing.Size(49, 20);
-            this.numHiddingDur.TabIndex = 25;
-            this.numHiddingDur.Value = new decimal(new int[] {
+            this.numHidingDur.Name = "numHidingDur";
+            this.numHidingDur.Size = new System.Drawing.Size(49, 20);
+            this.numHidingDur.TabIndex = 25;
+            this.numHidingDur.Value = new decimal(new int[] {
             100,
             0,
             0,
             0});
-            this.numHiddingDur.ValueChanged += new System.EventHandler(this.numHiddingDur_ValueChanged);
+            this.numHidingDur.ValueChanged += new System.EventHandler(this.numHidingDur_ValueChanged);
             // 
             // numShowingDur
             // 
@@ -718,28 +718,28 @@
             this.label14.TabIndex = 41;
             this.label14.Text = "Speed:";
             // 
-            // numHiddingDelay
+            // numHidingDelay
             // 
-            this.numHiddingDelay.Location = new System.Drawing.Point(493, 64);
-            this.numHiddingDelay.Maximum = new decimal(new int[] {
+            this.numHidingDelay.Location = new System.Drawing.Point(493, 64);
+            this.numHidingDelay.Maximum = new decimal(new int[] {
             20000,
             0,
             0,
             0});
-            this.numHiddingDelay.Minimum = new decimal(new int[] {
+            this.numHidingDelay.Minimum = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.numHiddingDelay.Name = "numHiddingDelay";
-            this.numHiddingDelay.Size = new System.Drawing.Size(49, 20);
-            this.numHiddingDelay.TabIndex = 43;
-            this.numHiddingDelay.Value = new decimal(new int[] {
+            this.numHidingDelay.Name = "numHidingDelay";
+            this.numHidingDelay.Size = new System.Drawing.Size(49, 20);
+            this.numHidingDelay.TabIndex = 43;
+            this.numHidingDelay.Value = new decimal(new int[] {
             5000,
             0,
             0,
             0});
-            this.numHiddingDelay.ValueChanged += new System.EventHandler(this.numHiddingDelay_ValueChanged);
+            this.numHidingDelay.ValueChanged += new System.EventHandler(this.numHidingDelay_ValueChanged);
             // 
             // label15
             // 
@@ -950,16 +950,16 @@
             this.Controls.Add(this.label18);
             this.Controls.Add(this.numAlertMaxCount);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.numHiddingDelay);
+            this.Controls.Add(this.numHidingDelay);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.numShowingDur);
-            this.Controls.Add(this.numHiddingDur);
+            this.Controls.Add(this.numHidingDur);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.cbHiddingStyle);
+            this.Controls.Add(this.cbHidingStyle);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.trackBar1);
@@ -986,7 +986,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picBackColor)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBorderThickenss)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBorderColor)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numHiddingDur)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHidingDur)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numShowingDur)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
@@ -995,7 +995,7 @@
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numHiddingDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numHidingDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAlertMaxCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVGap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMinWidth)).EndInit();
@@ -1033,10 +1033,10 @@
         private System.Windows.Forms.PictureBox picTitleColor;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.NumericUpDown numShowingDur;
-        private System.Windows.Forms.NumericUpDown numHiddingDur;
+        private System.Windows.Forms.NumericUpDown numHidingDur;
         private System.Windows.Forms.ComboBox cbShowingStyle;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ComboBox cbHiddingStyle;
+        private System.Windows.Forms.ComboBox cbHidingStyle;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnBottomRight;
@@ -1062,7 +1062,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown numBorderThickenss;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.NumericUpDown numHiddingDelay;
+        private System.Windows.Forms.NumericUpDown numHidingDelay;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.PictureBox picBackColor;
         private System.Windows.Forms.Label label16;

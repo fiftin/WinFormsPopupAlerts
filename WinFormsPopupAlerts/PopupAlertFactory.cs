@@ -20,9 +20,9 @@ namespace WinFormsPopupAlerts
         private Size minimumSize = new Size(150, 0);
         private Padding padding = new Padding(5, 5, 5, 5);
 
-        internal const int DefaultHiddingDelay = 5000;
+        internal const int DefaultHidingDelay = 5000;
 
-        private int hiddingDelay = DefaultHiddingDelay;
+        private int hidingDelay = DefaultHidingDelay;
 
 
         public PopupAlertFactory()
@@ -41,11 +41,11 @@ namespace WinFormsPopupAlerts
         }
 
 
-        [DefaultValue(DefaultHiddingDelay)]
-        public int HiddingDelay
+        [DefaultValue(DefaultHidingDelay)]
+        public int HidingDelay
         {
-            get { return hiddingDelay; }
-            set { hiddingDelay = value; }
+            get { return hidingDelay; }
+            set { hidingDelay = value; }
         }
 
         /// <summary>
@@ -58,15 +58,15 @@ namespace WinFormsPopupAlerts
         {
             PopupAlert alert = CreateAlertImpl(arg, align);
 
-            alert.HiddingStyle = HidingStyle;
+            alert.HidingStyle = HidingStyle;
 
             alert.ShowingStyle = ShowingStyle;
 
-            alert.HiddingDelay = HiddingDelay;
+            alert.HidingDelay = HidingDelay;
 
             alert.ShowingDuration = ShowingDuration;
 
-            alert.HiddingDuration = HidingDuration;
+            alert.HidingDuration = HidingDuration;
 
             alert.MaximumSize = MaximumSize;
 

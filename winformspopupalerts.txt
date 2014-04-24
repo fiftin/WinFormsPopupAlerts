@@ -32,7 +32,13 @@ Main properties:
 
 - AlertAlignment - screen position where alert windows appear. 
 - AlertsMaxCount - maximum number of simultaneously displayed alert windows.
-- AlertFactory - 
+- AlertFactory - object of PopupAlertFactory class and its descendant used for creating new alert windows.
+- VGap - distance between nearest alert windows.
+- HGap - distance between  alert windows and right or left edge of screen.
+
+Main methods:
+
+- Alert - Create and display new alert window.
 
 WinFormsPopupAlerts включает 3 компонета которые отображаются на панеле Toolbox:
 PopupAlertManager

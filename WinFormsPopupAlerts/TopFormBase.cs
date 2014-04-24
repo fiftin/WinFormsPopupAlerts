@@ -8,7 +8,7 @@ using System.Drawing;
 namespace WinFormsPopupAlerts
 {
     /// <summary>
-    /// Represents a always top window.
+    /// Represents an always top window.
     /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
     public class TopFormBase : Form

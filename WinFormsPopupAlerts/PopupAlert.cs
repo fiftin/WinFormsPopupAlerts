@@ -10,7 +10,7 @@ using System.Drawing.Drawing2D;
 namespace WinFormsPopupAlerts
 {
     /// <summary>
-    /// Base class for alert
+    /// Base class for each alert window.
     /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
     public partial class PopupAlert : TopFormBase

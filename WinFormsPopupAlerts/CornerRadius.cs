@@ -11,6 +11,10 @@ namespace WinFormsPopupAlerts
     [TypeConverter(typeof(CornerRadiusConverter))]
     public class CornerRadius
     {
+        private int bottomLeft;
+        private int bottomRight;
+        private int topLeft;
+        private int topRight;
 
         public CornerRadius()
         {
@@ -29,11 +33,6 @@ namespace WinFormsPopupAlerts
             : this(radius, radius, radius, radius)
         {
         }
-
-        private int bottomLeft;
-        private int bottomRight;
-        private int topLeft;
-        private int topRight;
 
         /// <summary>
         /// Gets or sets the radius of the top-right corner. 
@@ -70,7 +69,6 @@ namespace WinFormsPopupAlerts
             get { return bottomLeft; }
             set { bottomLeft = value; }
         }
-
 
         public bool Equals(int r)
         {

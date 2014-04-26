@@ -31,16 +31,16 @@ namespace WinFormsPopupAlerts
     }
 
     [System.ComponentModel.ToolboxItem(false)]
-    public class TooltipAlert : PopupAlert
+    public class TooltipAlert : Alert
     {
-        public TooltipAlert(PopupAlertAlignment align)
+        public TooltipAlert(AlertAlignment align)
             : base(align)
         {
             InitializeComponent();
             ResetRegion();
         }
 
-        public TooltipAlert(TooltipAlertArg arg, PopupAlertAlignment align)
+        public TooltipAlert(TooltipAlertArg arg, AlertAlignment align)
             : base(align)
         {
             InitializeComponent();

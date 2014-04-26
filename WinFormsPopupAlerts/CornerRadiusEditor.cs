@@ -10,7 +10,7 @@ namespace WinFormsPopupAlerts
     /// <summary>
     /// Provide a user interface for representing and editing the value of objects of CornerRadius class.
     /// </summary>
-    public class CornerRadiusEditor : UITypeEditor
+    internal class CornerRadiusEditor : UITypeEditor
     {
 
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)

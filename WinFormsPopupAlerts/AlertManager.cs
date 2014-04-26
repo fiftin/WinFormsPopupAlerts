@@ -11,19 +11,19 @@ namespace WinFormsPopupAlerts
     /// <summary>
     /// The component that provide control of alert windows queue.
     /// </summary>
-    [ToolboxBitmapAttribute(typeof(PopupAlertManager))]
-    public class PopupAlertManager : Component
+    [ToolboxBitmapAttribute(typeof(AlertManager))]
+    public class AlertManager : Component
     {
         private class HiddenAlertCollection
         {
 
             public const int MaxCount = 50;
 
-            public void Add(PopupAlert alert)
+            public void Add(Alert alert)
             {
                 if (items.Count > MaxCount)
                 {
-                    PopupAlert first = items.First.Value;
+                    Alert first = items.First.Value;
                     first.Invoke(new CloseAlertDelegate(CloseAlert), first);
                     first.Close();
                     items.RemoveFirst();
@@ -35,19 +35,19 @@ namespace WinFormsPopupAlerts
 
             private static void CloseAlert(object obj)
             {
-                PopupAlert alert = (PopupAlert)obj;
+                Alert alert = (Alert)obj;
                 if (!alert.IsDisposed)
                 {
                     alert.Close();
                 }
             }
 
-            public bool Contains(PopupAlert alert)
+            public bool Contains(Alert alert)
             {
                 return items.Contains(alert);
             }
 
-            LinkedList<PopupAlert> items = new LinkedList<PopupAlert>();
+            LinkedList<Alert> items = new LinkedList<Alert>();
         }
 
 
@@ -56,24 +56,24 @@ namespace WinFormsPopupAlerts
         private const int DefaultVGap = 5;
         private const int DefaultHGap = 5;
         private const int DefaultAlertsMaxCount = 10;
-        private const PopupAlertAlignment DefaultAlertAlignment = PopupAlertAlignment.BottomRight;
+        private const AlertAlignment DefaultAlertAlignment = AlertAlignment.BottomRight;
 
         private ContainerControl containerControl = null;
-        private PopupAlertAlignment alertAlignment = DefaultAlertAlignment;
+        private AlertAlignment alertAlignment = DefaultAlertAlignment;
         private object movingUpLocker = new object();
         private HiddenAlertCollection hiddenAlerts = new HiddenAlertCollection();
-        private PopupAlertFactory alertFactory;
-        private List<PopupAlert> alerts = new List<PopupAlert>();
+        private AlertFactory alertFactory;
+        private List<Alert> alerts = new List<Alert>();
         private int alertsMaxCount = DefaultAlertsMaxCount;
         private int vGap = DefaultVGap;
         private int hGap = DefaultHGap;
 
 
-        public PopupAlertManager()
+        public AlertManager()
         {
         }
 
-        public PopupAlertManager(IContainer container)
+        public AlertManager(IContainer container)
         {
             container.Add(this);
         }
@@ -113,20 +113,20 @@ namespace WinFormsPopupAlerts
         /// </summary>
         /// <param name="arg">Object passed to alert window factory.</param>
         /// <returns>New alert window</returns>
-        public PopupAlert Alert(object arg)
+        public Alert Alert(object arg)
         {
-            PopupAlert alert = AlertFactory.CreateAlert(arg, AlertAlignment);
+            Alert alert = AlertFactory.CreateAlert(arg, AlertAlignment);
             int vOffset = alert.Height + VGap;
             switch (AlertAlignment)
             {
-                case PopupAlertAlignment.BottomRight:
-                case PopupAlertAlignment.BottomLeft:
-                    foreach (PopupAlert x in alerts.ToArray())
+                case AlertAlignment.BottomRight:
+                case AlertAlignment.BottomLeft:
+                    foreach (Alert x in alerts.ToArray())
                         x.Top -= vOffset;
                     break;
-                case PopupAlertAlignment.TopLeft:
-                case PopupAlertAlignment.TopRight:
-                    foreach (PopupAlert x in alerts.ToArray())
+                case AlertAlignment.TopLeft:
+                case AlertAlignment.TopRight:
+                    foreach (Alert x in alerts.ToArray())
                         x.Top += vOffset;
                     break;
             }
@@ -138,21 +138,21 @@ namespace WinFormsPopupAlerts
         /// <summary>
         /// Display window alert <paramref name="alert"/> on the screen.
         /// </summary>
-        public void ShowAlert(PopupAlert alert)
+        public void ShowAlert(Alert alert)
         {
             Rectangle workingRect = Screen.PrimaryScreen.WorkingArea;
             switch (AlertAlignment)
             {
-                case PopupAlertAlignment.BottomRight:
+                case AlertAlignment.BottomRight:
                     alert.Show(workingRect.Bottom - (alert.Height + VGap), workingRect.Right - (alert.Width + HGap));
                     break;
-                case PopupAlertAlignment.BottomLeft:
+                case AlertAlignment.BottomLeft:
                     alert.Show(workingRect.Bottom - (alert.Height + VGap), workingRect.Left + HGap);
                     break;
-                case PopupAlertAlignment.TopLeft:
+                case AlertAlignment.TopLeft:
                     alert.Show(workingRect.Top + VGap, workingRect.Left + HGap);
                     break;
-                case PopupAlertAlignment.TopRight:
+                case AlertAlignment.TopRight:
                     alert.Show(workingRect.Top + VGap, workingRect.Right - (alert.Width + HGap));
                     break;
             }
@@ -162,18 +162,18 @@ namespace WinFormsPopupAlerts
         /// Push alert window to queue.
         /// </summary>
         /// <param name="alert"></param>
-        private void PushAlert(PopupAlert alert)
+        private void PushAlert(Alert alert)
         {
             if (alerts.Count >= AlertsMaxCount)
             {
                 for (int i = 0; i < alerts.Count - AlertsMaxCount + 1; i++)
                 {
-                    PopupAlert firstAlert = alerts[i];
+                    Alert firstAlert = alerts[i];
                     if (!hiddenAlerts.Contains(firstAlert))
                     {
                         firstAlert.Invoke(new MethodInvoker(delegate()
                         {
-                            firstAlert.Hide(delegate(PopupAlert al)
+                            firstAlert.Hide(delegate(Alert al)
                             {
                                 alerts.Remove(al);
                             });
@@ -185,7 +185,7 @@ namespace WinFormsPopupAlerts
             alerts.Add(alert);
         }
 
-        public PopupAlertFactory AlertFactory
+        public AlertFactory AlertFactory
         {
             get { return alertFactory; }
             set { alertFactory = value; }
@@ -227,7 +227,7 @@ namespace WinFormsPopupAlerts
         /// Gets or sets the maximum number of simultaneously displayed alert windows.
         /// </summary>
         [DefaultValue(DefaultAlertAlignment)]
-        public PopupAlertAlignment AlertAlignment
+        public AlertAlignment AlertAlignment
         {
             get { return alertAlignment; }
             set { alertAlignment = value; }

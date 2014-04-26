@@ -7,40 +7,34 @@ using System.Drawing;
 
 namespace WinFormsPopupAlerts
 {
-    //[ToolboxBitmapAttribute(typeof(PopupAlertFactory), @"PopupAlertFactory.bmp")]
+    /// <summary>
+    /// Represents a set of methods for creating instances of PopupAlert class inheritors.
+    /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
-    public class PopupAlertFactory : Component
+    public abstract class AlertFactory : Component
     {
         private HidingStyle hidingStyle = HidingStyle.Fade;
         private ShowingStyle showingStyle = ShowingStyle.Fade;
-
         private int showingDuration = 300;
         private int hidingDuration = 300;
         private Size maximumSize = new Size(500, 300);
         private Size minimumSize = new Size(150, 0);
         private Padding padding = new Padding(5, 5, 5, 5);
-
         internal const int DefaultHidingDelay = 5000;
-
         private int hidingDelay = DefaultHidingDelay;
 
-
-        public PopupAlertFactory()
+        public AlertFactory()
         {
-            InitializeComponent();
         }
 
-        public PopupAlertFactory(IContainer container)
+        public AlertFactory(IContainer container)
         {
             container.Add(this);
-            InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-        }
-
-
+        /// <summary>
+        /// Gets or sets an alert window's delay, in milliseconds.
+        /// </summary>
         [DefaultValue(DefaultHidingDelay)]
         public int HidingDelay
         {
@@ -54,9 +48,9 @@ namespace WinFormsPopupAlerts
         /// <param name="arg">Object passed to method CreateAlertImpl().</param>
         /// <param name="align">screen position where alert windows appear.</param>
         /// <returns></returns>
-        public PopupAlert CreateAlert(object arg, PopupAlertAlignment align)
+        public Alert CreateAlert(object arg, AlertAlignment align)
         {
-            PopupAlert alert = CreateAlertImpl(arg, align);
+            Alert alert = CreateAlertImpl(arg, align);
 
             alert.HidingStyle = HidingStyle;
 
@@ -91,11 +85,11 @@ namespace WinFormsPopupAlerts
         /// <param name="arg">Object passed to method CreateAlertImpl().</param>
         /// <param name="align">screen position where alert windows appear.</param>
         /// <returns></returns>
-        protected virtual PopupAlert CreateAlertImpl(object arg, PopupAlertAlignment align)
-        {
-            return new PopupAlert(align);
-        }
+        protected abstract Alert CreateAlertImpl(object arg, AlertAlignment align);
 
+        /// <summary>
+        /// Gets or sets padding within the alert window.
+        /// </summary>
         public Padding Padding
         {
             get { return padding; }
@@ -120,6 +114,9 @@ namespace WinFormsPopupAlerts
             set { maximumSize = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the duration of the hiding of an alert window.
+        /// </summary>
         [DefaultValue(300)]
         public int HidingDuration
         {
@@ -127,6 +124,9 @@ namespace WinFormsPopupAlerts
             set { hidingDuration = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the duration of the appearance of an alert window.
+        /// </summary>
         [DefaultValue(300)]
         public int ShowingDuration
         {
@@ -134,6 +134,9 @@ namespace WinFormsPopupAlerts
             set { showingDuration = value; }
         }
 
+        /// <summary>
+        /// Gets or sets an animation effect applied when displaying an alert window.
+        /// </summary>
         [DefaultValue(ShowingStyle.Fade)]
         public ShowingStyle ShowingStyle
         {
@@ -141,6 +144,9 @@ namespace WinFormsPopupAlerts
             set { showingStyle = value; }
         }
 
+        /// <summary>
+        /// Gets or sets an animation effect applied when displaying an alert window.
+        /// </summary>
         [DefaultValue(HidingStyle.Fade)]
         public HidingStyle HidingStyle
         {
@@ -148,6 +154,9 @@ namespace WinFormsPopupAlerts
             set { hidingStyle = value; }
         }
 
+        /// <summary>
+        /// Occurs when the user presses a mouse button while the mouse pointer is within the boundaries of a alert window.
+        /// </summary>
         public event EventHandler<System.Windows.Forms.MouseEventArgs> AlertMouseDown;
     }
 }

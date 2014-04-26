@@ -11,7 +11,7 @@ namespace WinFormsPopupAlerts
     /// Represents an always top window.
     /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
-    public class TopFormBase : Form
+    public abstract class TopFormBase : Form
     {
 
         public virtual Rectangle RealBounds
@@ -67,7 +67,7 @@ namespace WinFormsPopupAlerts
             }
         }
 
-        public TopFormBase()
+        protected TopFormBase()
         {
             this.Parent = (Control)null;
             this.TopLevel = true;

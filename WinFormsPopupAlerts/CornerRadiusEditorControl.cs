@@ -12,7 +12,7 @@ namespace WinFormsPopupAlerts
     /// Control for editing the value of objects of CornerRadius class.
     /// </summary>
     [ToolboxItem(false)]
-    public partial class CornerRadiusEditorControl : UserControl
+    internal partial class CornerRadiusEditorControl : UserControl
     {
         private CornerRadius crc;
         private bool initialized;

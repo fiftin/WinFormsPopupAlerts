@@ -13,28 +13,26 @@ namespace WinFormsPopupAlerts
     /// Base class for each alert window.
     /// </summary>
     [System.ComponentModel.ToolboxItem(false)]
-    public partial class PopupAlert : TopFormBase
+    public abstract partial class Alert : TopFormBase
     {
         private int top;
         private int left;
-        private PopupAlertAlignment align;
+        private AlertAlignment align;
         private HidingStyle hidingStyle = HidingStyle.Fade;
         private ShowingStyle showingStyle = ShowingStyle.Fade;
         private int showingDuration = 300;
         private int hidingDuration = 300;
         private Padding padding = new Padding(5, 5, 5, 5);
 
-        public PopupAlert(PopupAlertAlignment align)
+        protected Alert(AlertAlignment align)
         {
             InitializeComponent();
             this.align = align;
         }
 
         /// <summary>
-        /// Shows the alert with the specified position.
+        /// Shows the alert in specified position.
         /// </summary>
-        /// <param name="top"></param>
-        /// <param name="left"></param>
         public void Show(int top, int left)
         {
             this.top = top;
@@ -68,21 +66,23 @@ namespace WinFormsPopupAlerts
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Hide(delegate(PopupAlert alert) { });
+            Hide(delegate(Alert alert) { });
         }
 
 
         /// <summary>
-        /// 
+        /// Executes the specified delegate on the thread that owns the control's underlying
+        /// window handle.
         /// </summary>
-        /// <param name="method"></param>
-        /// <returns></returns>
+        /// <param name="method">A delegate that contains a method to be called in the control's thread context.</param>
+        /// <returns>
+        /// The return value from the delegate being invoked, or null if the delegate
+        /// has no return value.
+        /// </returns>
         public new object Invoke(Delegate method)
         {
             if (IsDisposed)
-            {
                 return null;
-            }
             try
             {
                 return base.Invoke(method);
@@ -96,9 +96,7 @@ namespace WinFormsPopupAlerts
         public new object Invoke(Delegate method, params object[] args)
         {
             if (IsDisposed)
-            {
                 return null;
-            }
             try
             {
                 return base.Invoke(method, args);
@@ -124,19 +122,19 @@ namespace WinFormsPopupAlerts
         }
 
         /// <summary>
-        /// 
+        /// Occurs when the user presses a mouse button while the mouse pointer is within the boundaries of a alert window.
         /// </summary>
         public virtual event EventHandler<MouseEventArgs> AlertMouseDown;
 
         /// <summary>
-        /// 
+        /// Hide alert window and call callback delegate after that.
         /// </summary>
         /// <param name="callback"></param>
-        public virtual void Hide(Action<PopupAlert> callback)
+        public virtual void Hide(Action<Alert> callback)
         {
             if (HidingStyle == HidingStyle.Fade)
             {
-                Action<PopupAlert> hiding = new Action<PopupAlert>(delegate(PopupAlert obj)
+                Action<Alert> hiding = new Action<Alert>(delegate(Alert obj)
                 {
                     float v = 1f / (float)HidingDuration;
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -154,14 +152,14 @@ namespace WinFormsPopupAlerts
             }
             else if (HidingStyle == WinFormsPopupAlerts.HidingStyle.Slide)
             {
-                Action<PopupAlert> hiding = new Action<PopupAlert>(delegate(PopupAlert obj)
+                Action<Alert> hiding = new Action<Alert>(delegate(Alert obj)
                 {
                     int screenWidth = Screen.PrimaryScreen.Bounds.Width;
                     int startLeft = obj.Left;
                     
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
                     sw.Start();
-                    if (align == PopupAlertAlignment.BottomRight || align == PopupAlertAlignment.TopRight)
+                    if (align == AlertAlignment.BottomRight || align == AlertAlignment.TopRight)
                     {
                         float v = (screenWidth - obj.Left) / (float)HidingDuration;
                         while (screenWidth - obj.Left > 0)
@@ -187,22 +185,20 @@ namespace WinFormsPopupAlerts
                 hiding.BeginInvoke(this, null, null);
             }
             else if (HidingStyle == HidingStyle.Simple)
-            {
                 this.InternalHide();
-            }
             else
-            {
                 throw new Exception("Unknown HidingStyle");
-            }
-
         }
 
+        /// <summary>
+        /// Starts showing effect.
+        /// </summary>
         protected virtual void BeforeShown()
         {
             if (ShowingStyle == WinFormsPopupAlerts.ShowingStyle.Fade)
             {
                 this.Opacity = 0;
-                Action<PopupAlert> showing = new Action<PopupAlert>(delegate(PopupAlert obj)
+                Action<Alert> showing = new Action<Alert>(delegate(Alert obj)
                 {
                     float v = 1f / (float)ShowingDuration;
                     System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
@@ -216,11 +212,10 @@ namespace WinFormsPopupAlerts
                 });
                 showing.BeginInvoke(this, null, null);
             }
-
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets an alert window's delay, in milliseconds.
         /// </summary>
         public int HidingDelay
         {
@@ -234,6 +229,9 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        /// Gets or sets padding within the alert window.
+        /// </summary>
         public new virtual Padding Padding
         {
             get { return padding; }
@@ -243,12 +241,18 @@ namespace WinFormsPopupAlerts
             }
         }
 
+        /// <summary>
+        /// Gets or sets the duration of the hiding of an alert window.
+        /// </summary>
         public int HidingDuration
         {
             get { return hidingDuration; }
             set { hidingDuration = value; }
         }
 
+        /// <summary>
+        /// Gets or sets the duration of the appearance of an alert window.
+        /// </summary>
         public int ShowingDuration
         {
             get { return showingDuration; }
@@ -256,7 +260,7 @@ namespace WinFormsPopupAlerts
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets an animation effect applied when displaying an alert window.
         /// </summary>
         public ShowingStyle ShowingStyle
         {
@@ -265,13 +269,12 @@ namespace WinFormsPopupAlerts
         }
 
         /// <summary>
-        /// 
+        /// Gets or sets an animation effect applied when displaying an alert window.
         /// </summary>
         public HidingStyle HidingStyle
         {
             get { return hidingStyle; }
             set { hidingStyle = value; }
         }
-
     }
 }

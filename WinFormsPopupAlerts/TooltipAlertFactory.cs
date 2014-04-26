@@ -9,10 +9,16 @@ using WinFormsPopupAlerts.Properties;
 
 namespace WinFormsPopupAlerts
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [ToolboxBitmap(typeof(TooltipAlertFactory))]
     [ToolboxItem(true)]
-    public class TooltipAlertFactory : PopupAlertFactory
+    public class TooltipAlertFactory : AlertFactory
     {
+        private TooltipAlertStyle alertStyle;
+        private TooltipAlertRenderer customRenderer;
+
         public TooltipAlertFactory()
         {
             string[] sa = this.GetType().Assembly.GetManifestResourceNames();
@@ -28,7 +34,7 @@ namespace WinFormsPopupAlerts
                 System.Diagnostics.Trace.WriteLine(s);
         }
 
-        protected override PopupAlert CreateAlertImpl(object arg, PopupAlertAlignment align)
+        protected override Alert CreateAlertImpl(object arg, AlertAlignment align)
         {
             TooltipAlert alert = new TooltipAlert((TooltipAlertArg)arg, align);
             switch (AlertStyle)
@@ -42,9 +48,6 @@ namespace WinFormsPopupAlerts
             }
             return alert;
         }
-
-        private TooltipAlertStyle alertStyle;
-        private TooltipAlertRenderer customRenderer;
 
         [DefaultValue(null)]
         public TooltipAlertRenderer CustomRenderer

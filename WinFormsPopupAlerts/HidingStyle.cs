@@ -9,17 +9,8 @@ namespace WinFormsPopupAlerts
     /// </summary>
     public enum HidingStyle
     {
-        /// <summary>
-        /// Hide without effect.
-        /// </summary>
         Simple,
-        /// <summary>
-        /// Slide alert outside of screen.
-        /// </summary>
         Slide,
-        /// <summary>
-        /// 
-        /// </summary>
         Fade,
     }
 }

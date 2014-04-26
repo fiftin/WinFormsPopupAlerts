@@ -1,6 +1,6 @@
 ﻿namespace WinFormsPopupAlerts
 {
-    partial class PopupAlert
+    partial class Alert
     {
         /// <summary>
         /// Required designer variable.
